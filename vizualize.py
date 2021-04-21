@@ -1,10 +1,16 @@
 #!/bin/python
+import sys
 import numpy as np
 from matplotlib import pyplot as plt
 
+if len(sys.argv) > 0:
+    finput = str(sys.argv[1])
+else:
+    finput = 'input.data'
+
 
 def raw_to_csv():
-    with open('data.csv', 'w') as csv_file, open('input.data', 'r') as raw_file:
+    with open('data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
         for line in raw_file:
             csv_file.write(line.replace(" ", ""))
 
