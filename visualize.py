@@ -3,19 +3,22 @@ import sys
 import numpy as np
 from matplotlib import pyplot as plt
 
+ipath = 'data/'
+opath = 'output/'
+
 if len(sys.argv) > 0:
     finput = str(sys.argv[1])
 else:
-    finput = 'input.data'
+    finput = ipath+'data.raw'
 
 
 def raw_to_csv():
-    with open('data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
+    with open(opath+'data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
         for line in raw_file:
             csv_file.write(line.replace(" ", ""))
 
 def plot_csv():
-    csv = np.genfromtxt('data.csv', delimiter=",", skip_header=1)
+    csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
 
     # Loading part
     x       = np.arange(0,len(csv))
