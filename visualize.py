@@ -3,20 +3,54 @@ import sys
 import numpy as np
 from matplotlib import pyplot as plt
 
-ipath = 'data/'
-opath = 'output/'
+ipath          = 'data/'
+opath          = 'output/'
+decode_from_ss = False
 
 if len(sys.argv) > 0:
     finput = str(sys.argv[1])
+    if len(sys.argv) > 2 and str(sys.argv[2]) == "ss":
+        decode_from_ss = True
+        
 else:
     finput = ipath+'data.raw'
+
 
 
 def raw_to_csv():
     with open(opath+'data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
         for line in raw_file:
-            csv_file.write(line.replace(" ", ""))
+            if decode_from_ss:
+                # 10=mss 14=cwnd
+                csv_file.write(line.split()[14].split(":")[1]+","+line.split()[10].split(":")[1]+",\n")
+            else:
+                csv_file.write(line.replace(" ", ""))
 
+def plot_ss():
+    csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
+    
+    # Loading part
+    x       = np.arange(0,len(csv))
+    cwnd_CC = csv[:,0]
+    MSS_CC  = csv[:,1]
+    cwnd_C  = np.multiply(cwnd_CC, MSS_CC)
+    
+    # Statistics part
+    cwnd_CC_mean = sum(cwnd_CC)/len(cwnd_CC)
+    MSS_CC_mean  = sum(MSS_CC)/len(MSS_CC)
+    cwnd_C_mean  = sum(cwnd_C)/len(cwnd_C)
+    
+    #Visualization part
+    r=1
+    c=1
+    plt.subplot(r, c, 1)
+    plt.xlabel("time (in RTT)")
+    plt.ylabel("cwnd CC mean: "+"{:.2f}".format(cwnd_CC_mean))
+    plt.plot(x, cwnd_CC)
+    
+    plt.suptitle("Visualisation des résultats")
+    plt.show()
+    
 def plot_csv():
     csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
 
@@ -101,4 +135,8 @@ def plot_csv():
 
 
 raw_to_csv()
-plot_csv()
+
+if decode_from_ss:
+    plot_ss()
+else:
+    plot_csv()
