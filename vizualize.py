@@ -29,8 +29,8 @@ def plot_csv():
     MSS_LS  = csv[:,7]
     droprate= csv[:,8]
     markrate= csv[:,9]
-    qlen_L  = csv[:,10]
     qlen_C  = csv[:,11]
+    qlen_L  = csv[:,10]
 
     r=4
     c=2
@@ -66,13 +66,13 @@ def plot_csv():
 
     plt.subplot(r, c, 7)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("qlen_L")
-    plt.plot(x, qlen_L)
+    plt.ylabel("qlen_C")
+    plt.plot(x, qlen_C)
 
     plt.subplot(r, c, 8)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("qlen_C")
-    plt.plot(x, qlen_C)
+    plt.ylabel("qlen_L")
+    plt.plot(x, qlen_L)
 
     plt.suptitle("Visualisation des résultats")
     plt.show()
