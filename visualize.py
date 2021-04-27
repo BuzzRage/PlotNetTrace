@@ -21,6 +21,7 @@ else:
 
 def raw_to_csv():
     with open(opath+'data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
+        raw_file.readline()
         for line in raw_file:
             if decode_from_ss:
                 csv_file.write(line.split()[cwnd].split(":")[1]+","+line.split()[mss].split(":")[1]+",\n")
