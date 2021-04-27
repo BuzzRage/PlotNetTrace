@@ -11,6 +11,8 @@ if len(sys.argv) > 0:
     finput = str(sys.argv[1])
     if len(sys.argv) > 2 and str(sys.argv[2]) == "ss":
         decode_from_ss = True
+        cwnd = 8
+        mss = 4
         
 else:
     finput = ipath+'data.raw'
@@ -21,8 +23,7 @@ def raw_to_csv():
     with open(opath+'data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
         for line in raw_file:
             if decode_from_ss:
-                # 10=mss 14=cwnd
-                csv_file.write(line.split()[14].split(":")[1]+","+line.split()[10].split(":")[1]+",\n")
+                csv_file.write(line.split()[cwnd].split(":")[1]+","+line.split()[mss].split(":")[1]+",\n")
             else:
                 csv_file.write(line.replace(" ", ""))
 
