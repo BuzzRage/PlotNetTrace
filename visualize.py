@@ -19,12 +19,14 @@ else:
 
 class Measure:
     def __init__(self):
-        self.x           = list()
-        self.cwnd        = list()
-        self.mss         = list()
-        self.rtt         = list()
-        self.bytes_acked = list()
-        self.pacing_rate = list()
+        self.x             = list()
+        self.cwnd          = list()
+        self.mss           = list()
+        self.rtt           = list()
+        self.bytes_acked   = list()
+        self.pacing_rate   = list()
+        self.delivery_rate = list()
+        self.delivered     = list()
         
     def cwnd_mean(self):
         return sum(self.cwnd)/len(self.cwnd)
@@ -44,7 +46,7 @@ class Measure:
     def load_from_csv(self,input_csv = opath+'data.csv'):        
         # Loading part. 
         # See https://www.man7.org/linux/man-pages/man8/ss.8.html for details
-        # See /usr/include/linux/tcp.h for further details
+        # See `struct tcp_info` in /usr/include/linux/tcp.h for further details
         csv_cca            = 0  # Constant
         csv_wscale1        = 1  # <snd_wscale>
         csv_wscale2        = 2  # <rcv_wscale>
@@ -68,7 +70,7 @@ class Measure:
         csv_pacing_rate    = 20 
         csv_delivery_rate  = 21
         csv_delivered      = 22
-        csv_busy           = 23
+        csv_busy           = 23 # Time (µs) busy sending data
         #csv_unacked        =  # not parsed
         csv_rcv_space      = 24
         csv_rcv_thresh     = 25
@@ -76,12 +78,40 @@ class Measure:
         csv_minrtt         = 27
         
         csv = np.genfromtxt(input_csv, delimiter=",", skip_header=1)
-        self.x           = np.arange(0,len(csv))
-        self.cwnd        = csv[:,csv_cwnd]
-        self.mss         = csv[:,csv_mss]
-        self.rtt         = csv[:,csv_rtt]
-        self.bytes_acked = csv[:,csv_bytes_acked]
-        self.pacing_rate = csv[:,csv_pacing_rate]
+        self.x             = np.arange(0,len(csv))
+        self.cwnd          = csv[:,csv_cwnd]
+        self.mss           = csv[:,csv_mss]
+        self.rtt           = csv[:,csv_rtt]
+        self.bytes_acked   = csv[:,csv_bytes_acked]
+        self.pacing_rate   = csv[:,csv_pacing_rate]
+        self.delivery_rate = csv[:,csv_delivery_rate]
+        self.delivered     = csv[:,csv_delivered]
+        
+    def plot_ss(self):
+        plt.figure()
+        r=2
+        c=2
+        plt.subplot(r, c, 1)
+        plt.xlabel("time (in RTT)")
+        plt.ylabel("cwnd mean: "+"{:.2f}".format(self.cwnd_mean()))
+        plt.plot(self.x, self.cwnd)
+        
+        plt.subplot(r, c, 2)
+        plt.xlabel("time (in RTT)")
+        plt.ylabel("Average RTT mean: "+"{:.2f}".format(self.rtt_mean()))
+        plt.plot(self.x, self.rtt)
+        
+        plt.subplot(r, c, 3)
+        plt.xlabel("time (in RTT)")
+        plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(self.bytes_acked_mean()))
+        plt.plot(self.x, self.bytes_acked)
+        
+        plt.subplot(r, c, 4)
+        plt.xlabel("time (in RTT)")
+        plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
+        plt.plot(self.x, self.pacing_rate)    
+        
+        plt.suptitle("Visualisation des résultats")
         
 def add_matched_field(field,line):
     return "NaN," if not search(field,line) else search(field,line)[0]+","
@@ -132,31 +162,25 @@ def plot_ss():
     
     measure1 = Measure()
     measure1.load_from_csv()
+    measure1.plot_ss()
    
     #Visualization part
-    r=2
+    plt.figure()
+    r=1
     c=2
     plt.subplot(r, c, 1)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd mean: "+"{:.2f}".format(measure1.cwnd_mean()))
-    plt.plot(measure1.x, measure1.cwnd)
+    plt.ylabel("delivery rate (Gbps): ")
+    plt.plot(measure1.x, measure1.delivery_rate)
     
     plt.subplot(r, c, 2)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("Average RTT mean: "+"{:.2f}".format(measure1.rtt_mean()))
-    plt.plot(measure1.x, measure1.rtt)
-    
-    plt.subplot(r, c, 3)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(measure1.bytes_acked_mean()))
-    plt.plot(measure1.x, measure1.bytes_acked)
-    
-    plt.subplot(r, c, 4)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("Pacing rate mean: "+"{:.2f}".format(measure1.pacing_rate_mean()))
-    plt.plot(measure1.x, measure1.pacing_rate)    
+    plt.ylabel("delivered: ")
+    plt.plot(measure1.x, measure1.delivered)
     
     plt.suptitle("Visualisation des résultats")
+    
+    
     plt.show()
     
     
@@ -165,30 +189,28 @@ def plot_csv():
 
     # Loading part
     x       = np.arange(0,len(csv))
-    cwnd_CC = csv[:,0]
-    MSS_CC  = csv[:,1]
-    cwnd_C  = np.multiply(cwnd_CC, MSS_CC)
-    cwnd_LC = csv[:,2]
-    MSS_LC  = csv[:,3]
-    cwnd_CS = csv[:,4]
-    MSS_CS  = csv[:,5]
-    cwnd_LS = csv[:,6]
-    MSS_LS  = csv[:,7]
+
     droprate= csv[:,8]
     markrate= csv[:,9]
     qlen_C  = csv[:,11]
     qlen_L  = csv[:,10]
+    
+    CC = Measure()
+    LC = Measure()
+    CS = Measure()
+    LS = Measure()
+    
+    CC.cwnd = csv[:,0]
+    CC.mss  = csv[:,1]
+    #cwnd_C  = np.multiply(CC.cwnd, CC.mss)
+    LC.cwnd = csv[:,2]
+    LC.mss  = csv[:,3]
+    CS.cwnd = csv[:,4]
+    CS.mss  = csv[:,5]
+    LS.cwnd = csv[:,6]
+    LS.mss  = csv[:,7]
 
     # Statistics part
-    cwnd_CC_mean = sum(cwnd_CC)/len(cwnd_CC)
-    MSS_CC_mean  = sum(MSS_CC)/len(MSS_CC)
-    cwnd_C_mean  = sum(cwnd_C)/len(cwnd_C)
-    cwnd_LC_mean = sum(cwnd_LC)/len(cwnd_LC)
-    MSS_LC_mean  = sum(MSS_LC)/len(MSS_LC)
-    cwnd_CS_mean = sum(cwnd_CS)/len(cwnd_CS)
-    MSS_CS_mean  = sum(MSS_CS)/len(MSS_CS)
-    cwnd_LS_mean = sum(cwnd_LS)/len(cwnd_LS)
-    MSS_LS_mean  = sum(MSS_LS)/len(MSS_LS)
     droprate_mean= sum(droprate)/len(droprate)
     markrate_mean= sum(markrate)/len(markrate)
     qlen_C_mean  = sum(qlen_C)/len(qlen_C)
@@ -199,23 +221,23 @@ def plot_csv():
     c=2
     plt.subplot(r, c, 1)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd CC mean: "+"{:.2f}".format(cwnd_CC_mean))
-    plt.plot(x, cwnd_CC)
+    plt.ylabel("cwnd CC mean: "+"{:.2f}".format(CC.cwnd_mean()))
+    plt.plot(x, CC.cwnd)
 
     plt.subplot(r, c, 2)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd LC mean: "+"{:.2f}".format(cwnd_LC_mean))
-    plt.plot(x, cwnd_LC)
+    plt.ylabel("cwnd LC mean: "+"{:.2f}".format(LC.cwnd_mean()))
+    plt.plot(x, LC.cwnd)
 
     plt.subplot(r, c, 3)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd CS mean: "+"{:.2f}".format(cwnd_CS_mean))
-    plt.plot(x, cwnd_CS)
+    plt.ylabel("cwnd CS mean: "+"{:.2f}".format(CS.cwnd_mean()))
+    plt.plot(x, CS.cwnd)
 
     plt.subplot(r, c, 4)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd LS mean: "+"{:.2f}".format(cwnd_LS_mean))
-    plt.plot(x, cwnd_LS)
+    plt.ylabel("cwnd LS mean: "+"{:.2f}".format(LS.cwnd_mean()))
+    plt.plot(x, LS.cwnd)
 
     plt.subplot(r, c, 5)
     plt.xlabel("time (in RTT)")
