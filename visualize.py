@@ -42,17 +42,19 @@ class Measure:
         return sum(self.pacing_rate)/len(self.pacing_rate)    
     
     def load_from_csv(self,input_csv = opath+'data.csv'):        
-        # Loading part
-        csv_cca            = 0 # Constant
-        csv_wscale1        = 1 # <snd_wscale>
-        csv_wscale2        = 2 # <rcv_wscale>
+        # Loading part. 
+        # See https://www.man7.org/linux/man-pages/man8/ss.8.html for details
+        # See /usr/include/linux/tcp.h for further details
+        csv_cca            = 0  # Constant
+        csv_wscale1        = 1  # <snd_wscale>
+        csv_wscale2        = 2  # <rcv_wscale>
         csv_rto            = 3
-        csv_rtt            = 4 # average RTT / mean RTTVAR
-        csv_rttvar         = 5 # mean RTTVAR
+        csv_rtt            = 4  # average RTT (ms)
+        csv_rttvar         = 5  # mean deviation of RTT (RTTVAR) (ms)
         csv_mss            = 6
-        csv_pmtu           = 7
+        csv_pmtu           = 7  # path MTU value
         csv_rcvmss         = 8
-        csv_advmss         = 9
+        csv_advmss         = 9  # Advertised MSS
         csv_cwnd           = 10
         csv_ssthresh       = 11
         csv_bytes_sent     = 12
@@ -60,14 +62,14 @@ class Measure:
         csv_segs_out       = 14
         csv_segs_in        = 15
         csv_data_segs_out  = 16
-        csv_send           = 17
-        csv_lastsnd        = 18
-        csv_lastrcv        = 19
+        csv_send           = 17 # egress bps
+        csv_lastsnd        = 18 # time (ms) since the last packet sent
+        csv_lastrcv        = 19 # time (ms) since the last packet received
         csv_pacing_rate    = 20 
         csv_delivery_rate  = 21
         csv_delivered      = 22
         csv_busy           = 23
-        #csv_unacked        =  # non parsé
+        #csv_unacked        =  # not parsed
         csv_rcv_space      = 24
         csv_rcv_thresh     = 25
         csv_notsent        = 26
@@ -87,7 +89,7 @@ def add_matched_field(field,line):
 def decode_ss_line(line):
     decoded_line  = ""
     decoded_line += line.split()[cca]+","
-    decoded_line += add_matched_field('wscale:{} ',line)  # génère deux champs !
+    decoded_line += add_matched_field('wscale:{} ',line)  # generate two fields !
     decoded_line += add_matched_field('rto:{} ',line)
     rtt_temp = add_matched_field('rtt:{} ',line)
     decoded_line += rtt_temp.split("/")[0] + "," + rtt_temp.split("/")[1] if not rtt_temp == "NaN" else "NaN"
