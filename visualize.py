@@ -12,100 +12,108 @@ if len(sys.argv) > 0:
     finput = str(sys.argv[1])
     if len(sys.argv) > 2 and str(sys.argv[2]) == "ss":
         decode_from_ss = True
-        # à revoir: les données changent
-        cca            = 0 # Constant
-        # wscale         = 1 # <snd_wscale>:<rcv_wscale>
-        # rto            = 2
-        # rtt            = 3 # Gives average RTT / mean RTTVAR
-        # mss            = 4 
-        # pmtu           = 5
-        # rcvmss         = 6
-        # advmss         = 7
-        # cwnd           = 8
-        # ssthresh       = 9
-        # bytes_sent     = 10
-        # bytes_acked    = 11
-        # segs_out       = 12
-        # segs_in        = 13
-        # data_segs_out  = 14
-        # send           = 16 # 15 string ; 16 value
-        # lastsnd        = 17
-        # lastrcv        = 18
-        # pacing_rate    = 20 # 19 string ; 20 value
-        # delivery_rate  = 22 # 21 string ; 22 value
-        # delivered      = 23
-        # busy           = 24
-        # unacked        = 24
-        # rcv_space      = 25
-        # rcv_thresh     = 26
-        # notsent        = 27
-        # minrtt         = 28
-        
-        
-        
+        cca = 0
 else:
     finput = ipath+'data.raw'
 
-def add_matched_filed(field,line):
+
+class Measure:
+    def __init__(self):
+        self.x           = list()
+        self.cwnd        = list()
+        self.mss         = list()
+        self.rtt         = list()
+        self.bytes_acked = list()
+        self.pacing_rate = list()
+        
+    def cwnd_mean(self):
+        return sum(self.cwnd)/len(self.cwnd)
+    
+    def mss_mean(self):
+        return sum(self.mss)/len(self.mss)
+    
+    def rtt_mean(self):
+        return sum(self.rtt)/len(self.rtt)   
+    
+    def bytes_acked_mean(self):
+        return sum(self.bytes_acked)/len(self.bytes_acked)
+    
+    def pacing_rate_mean(self):
+        return sum(self.pacing_rate)/len(self.pacing_rate)    
+    
+    def load_from_csv(self,input_csv = opath+'data.csv'):        
+        # Loading part
+        csv_cca            = 0 # Constant
+        csv_wscale1        = 1 # <snd_wscale>
+        csv_wscale2        = 2 # <rcv_wscale>
+        csv_rto            = 3
+        csv_rtt            = 4 # average RTT / mean RTTVAR
+        csv_rttvar         = 5 # mean RTTVAR
+        csv_mss            = 6
+        csv_pmtu           = 7
+        csv_rcvmss         = 8
+        csv_advmss         = 9
+        csv_cwnd           = 10
+        csv_ssthresh       = 11
+        csv_bytes_sent     = 12
+        csv_bytes_acked    = 13
+        csv_segs_out       = 14
+        csv_segs_in        = 15
+        csv_data_segs_out  = 16
+        csv_send           = 17
+        csv_lastsnd        = 18
+        csv_lastrcv        = 19
+        csv_pacing_rate    = 20 
+        csv_delivery_rate  = 21
+        csv_delivered      = 22
+        csv_busy           = 23
+        #csv_unacked        =  # non parsé
+        csv_rcv_space      = 24
+        csv_rcv_thresh     = 25
+        csv_notsent        = 26
+        csv_minrtt         = 27
+        
+        csv = np.genfromtxt(input_csv, delimiter=",", skip_header=1)
+        self.x           = np.arange(0,len(csv))
+        self.cwnd        = csv[:,csv_cwnd]
+        self.mss         = csv[:,csv_mss]
+        self.rtt         = csv[:,csv_rtt]
+        self.bytes_acked = csv[:,csv_bytes_acked]
+        self.pacing_rate = csv[:,csv_pacing_rate]
+        
+def add_matched_field(field,line):
     return "NaN," if not search(field,line) else search(field,line)[0]+","
 
 def decode_ss_line(line):
-    #print(line)
     decoded_line  = ""
     decoded_line += line.split()[cca]+","
-    decoded_line += add_matched_filed('wscale:{} ',line)  # génère deux champs !
-    decoded_line += add_matched_filed('rto:{} ',line)
-    rtt_temp = add_matched_filed('rtt:{} ',line)
+    decoded_line += add_matched_field('wscale:{} ',line)  # génère deux champs !
+    decoded_line += add_matched_field('rto:{} ',line)
+    rtt_temp = add_matched_field('rtt:{} ',line)
     decoded_line += rtt_temp.split("/")[0] + "," + rtt_temp.split("/")[1] if not rtt_temp == "NaN" else "NaN"
-    decoded_line += add_matched_filed('mss:{} ',line)
-    decoded_line += add_matched_filed('pmtu:{} ',line)
-    decoded_line += add_matched_filed('rcvmss:{} ',line)
-    decoded_line += add_matched_filed('advmss:{} ',line)
-    decoded_line += add_matched_filed('cwnd:{} ',line)
-    decoded_line += add_matched_filed('ssthresh:{} ',line)
-    decoded_line += add_matched_filed('bytes_sent:{} ',line)
-    decoded_line += add_matched_filed('bytes_acked:{} ',line)
-    decoded_line += add_matched_filed('segs_out:{} ',line)
-    decoded_line += add_matched_filed('segs_in:{} ',line)
-    decoded_line += add_matched_filed('data_segs_out:{} ',line)
-    decoded_line += add_matched_filed('send {}Gbps ',line)
-    decoded_line += add_matched_filed('lastsnd:{} ',line)
-    decoded_line += add_matched_filed('lastrcv:{} ',line)
-    decoded_line += add_matched_filed('pacing_rate {}Gbps ',line)
-    decoded_line += add_matched_filed('delivery_rate {}Gbps ',line)
-    decoded_line += add_matched_filed('delivered:{} ',line)
-    decoded_line += add_matched_filed('busy:{}ms ',line)
-    decoded_line += add_matched_filed('rcv_space:{} ',line)
-    decoded_line += add_matched_filed('rcv_ssthresh:{} ',line)
-    decoded_line += add_matched_filed('notsend:{} ',line) 
-    decoded_line += add_matched_filed('minrtt:{}',line)
+    decoded_line += add_matched_field('mss:{} ',line)
+    decoded_line += add_matched_field('pmtu:{} ',line)
+    decoded_line += add_matched_field('rcvmss:{} ',line)
+    decoded_line += add_matched_field('advmss:{} ',line)
+    decoded_line += add_matched_field('cwnd:{} ',line)
+    decoded_line += add_matched_field('ssthresh:{} ',line)
+    decoded_line += add_matched_field('bytes_sent:{} ',line)
+    decoded_line += add_matched_field('bytes_acked:{} ',line)
+    decoded_line += add_matched_field('segs_out:{} ',line)
+    decoded_line += add_matched_field('segs_in:{} ',line)
+    decoded_line += add_matched_field('data_segs_out:{} ',line)
+    decoded_line += add_matched_field('send {}Gbps ',line)
+    decoded_line += add_matched_field('lastsnd:{} ',line)
+    decoded_line += add_matched_field('lastrcv:{} ',line)
+    decoded_line += add_matched_field('pacing_rate {}Gbps ',line)
+    decoded_line += add_matched_field('delivery_rate {}Gbps ',line)
+    decoded_line += add_matched_field('delivered:{} ',line)
+    decoded_line += add_matched_field('busy:{}ms ',line)
+    decoded_line += add_matched_field('rcv_space:{} ',line)
+    decoded_line += add_matched_field('rcv_ssthresh:{} ',line)
+    decoded_line += add_matched_field('notsend:{} ',line) 
+    decoded_line += add_matched_field('minrtt:{}',line)
     
-    # decoded_line += line.split()[wscale].split(":")[1].split(",")[0]+","+line.split()[wscale].split(":")[1].split(",")[1]+","
-    # decoded_line += line.split()[rto].split(":")[1]+","
-    # decoded_line += line.split()[rtt].split(":")[1].split("/")[0]+","+line.split()[rtt].split(":")[1].split("/")[1]+","
-    # decoded_line += line.split()[mss].split(":")[1]+","
-    # decoded_line += line.split()[pmtu].split(":")[1]+","
-    # decoded_line += line.split()[rcvmss].split(":")[1]+","
-    # decoded_line += line.split()[advmss].split(":")[1]+","
-    # decoded_line += line.split()[cwnd].split(":")[1]+","
-    # decoded_line += line.split()[ssthresh].split(":")[1]+","
-    # decoded_line += line.split()[bytes_sent].split(":")[1]+","
-    # decoded_line += line.split()[bytes_acked].split(":")[1]+","
-    # decoded_line += line.split()[segs_out].split(":")[1]+","
-    # decoded_line += line.split()[segs_in].split(":")[1]+","
-    # decoded_line += line.split()[data_segs_out].split(":")[1]+","
-    # decoded_line += line.split()[send].split("G")[0]+","
-    # decoded_line += line.split()[lastrcv].split(":")[1]+","
-    # decoded_line += line.split()[pacing_rate].split("G")[0]+","
-    # decoded_line += line.split()[delivery_rate].split("G")[0]+","
-    # decoded_line += line.split()[delivered].split(":")[1]+","
-    # decoded_line += line.split()[busy].split(":")[1].split("m")[0]+","
-    # decoded_line += line.split()[unacked].split(":")[1]+","
-    # decoded_line += line.split()[rcv_space].split(":")[1]+","
-    # decoded_line += line.split()[rcv_thresh].split(":")[1]+","
-    # decoded_line += line.split()[notsent].split(":")[1]+","
-    # decoded_line += line.split()[minrtt].split(":")[1]+","
-    #print(decoded_line)
     return str(decoded_line)+"\n"
 
 def raw_to_csv():
@@ -119,79 +127,36 @@ def raw_to_csv():
                 csv_file.write(line.replace(" ", ""))
 
 def plot_ss():
-    csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
     
-    # Loading part
-    csv_cca            = 0 # Constant
-    csv_wscale1        = 1 # <snd_wscale>
-    csv_wscale2        = 2 # <rcv_wscale>
-    csv_rto            = 3
-    csv_rtt            = 4 # average RTT / mean RTTVAR
-    csv_rttvar         = 5 # mean RTTVAR
-    csv_mss            = 6
-    csv_pmtu           = 7
-    csv_rcvmss         = 8
-    csv_advmss         = 9
-    csv_cwnd           = 10
-    csv_ssthresh       = 11
-    csv_bytes_sent     = 12
-    csv_bytes_acked    = 13
-    csv_segs_out       = 14
-    csv_segs_in        = 15
-    csv_data_segs_out  = 16
-    csv_send           = 17
-    csv_lastsnd        = 18
-    csv_lastrcv        = 19
-    csv_pacing_rate    = 20 
-    csv_delivery_rate  = 21
-    csv_delivered      = 22
-    csv_busy           = 23
-    csv_unacked        = 23 # non parsé
-    csv_rcv_space      = 24
-    csv_rcv_thresh     = 25
-    csv_notsent        = 26
-    csv_minrtt         = 27
-    
-    x           = np.arange(0,len(csv))
-    cwnd_CC     = csv[:,csv_cwnd]
-    MSS_CC      = csv[:,csv_mss]
-    RTT         = csv[:,csv_rtt]
-    cwnd_C      = np.multiply(cwnd_CC, MSS_CC)
-    bytes_acked = csv[:,csv_bytes_acked]
-    pacing_rate = csv[:,csv_pacing_rate]
-    
-    # Statistics part
-    cwnd_CC_mean     = sum(cwnd_CC)/len(cwnd_CC)
-    MSS_CC_mean      = sum(MSS_CC)/len(MSS_CC)
-    RTT_mean         = sum(RTT)/len(RTT)
-    bytes_acked_mean = sum(bytes_acked)/len(bytes_acked)
-    pacing_rate_mean = sum(pacing_rate)/len(pacing_rate)
-    
+    measure1 = Measure()
+    measure1.load_from_csv()
+   
     #Visualization part
     r=2
     c=2
     plt.subplot(r, c, 1)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd CC mean: "+"{:.2f}".format(cwnd_CC_mean))
-    plt.plot(x, cwnd_CC)
+    plt.ylabel("cwnd mean: "+"{:.2f}".format(measure1.cwnd_mean()))
+    plt.plot(measure1.x, measure1.cwnd)
     
     plt.subplot(r, c, 2)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("Average RTT mean: "+"{:.2f}".format(RTT_mean))
-    plt.plot(x, RTT)
+    plt.ylabel("Average RTT mean: "+"{:.2f}".format(measure1.rtt_mean()))
+    plt.plot(measure1.x, measure1.rtt)
     
     plt.subplot(r, c, 3)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(bytes_acked_mean))
-    plt.plot(x, bytes_acked)
+    plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(measure1.bytes_acked_mean()))
+    plt.plot(measure1.x, measure1.bytes_acked)
     
     plt.subplot(r, c, 4)
     plt.xlabel("time (in RTT)")
-    plt.ylabel("Pacing rate mean: "+"{:.2f}".format(pacing_rate_mean))
-    plt.plot(x, pacing_rate)    
+    plt.ylabel("Pacing rate mean: "+"{:.2f}".format(measure1.pacing_rate_mean()))
+    plt.plot(measure1.x, measure1.pacing_rate)    
     
     plt.suptitle("Visualisation des résultats")
     plt.show()
+    
     
 def plot_csv():
     csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
