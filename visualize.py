@@ -148,22 +148,23 @@ def decode_ss_line(line):
     
     return str(decoded_line)+"\n"
 
-def raw_to_csv():
-    with open(opath+'data.csv', 'w') as csv_file, open(finput, 'r') as raw_file:
+def raw_to_csv(file_in):
+    with open(opath+'data.csv', 'w') as csv_file, open(file_in, 'r') as raw_file:
         raw_file.readline()
-        for line in raw_file:
+        lines = filter(None, (line.rstrip() for line in raw_file))
+        for l in lines:
             if decode_from_ss:
-                csv_file.write(decode_ss_line(line))
+                csv_file.write(decode_ss_line(l))
                 #csv_file.write(line.split()[cwnd].split(":")[1]+","+line.split()[mss].split(":")[1]+",\n")
             else:
                 csv_file.write(line.replace(" ", ""))
 
 def plot_ss():
     
-    measure1 = Measure()
-    measure1.load_from_csv()
-    measure1.plot_ss()
-   
+    measure = Measure()
+    measure.load_from_csv()
+    measure.plot_ss()
+    
     #Visualization part
     plt.figure()
     r=1
@@ -265,7 +266,7 @@ def plot_csv():
 
 #line = "cubic wscale:7,7 rto:204 rtt:0.43/0.179 mss:1460 pmtu:1500 rcvmss:536 advmss:1460 cwnd:1405 ssthresh:80 bytes_sent:27010249109 bytes_acked:27010249110 segs_out:18546357 segs_in:537945 data_segs_out:18546355 send 38.2Gbps lastsnd:4 lastrcv:56664 pacing_rate 20.3Gbps delivery_rate 1.72Gbps delivered:18546356 busy:55032ms rcv_space:14600 rcv_ssthresh:64076 minrtt:0.028"
 #decode_ss_line(line)
-raw_to_csv()
+raw_to_csv(finput)
 
 if decode_from_ss:
     plot_ss()
