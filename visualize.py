@@ -1,24 +1,38 @@
 #!/bin/python
 import sys
+import getopt
 import numpy as np
+from pathlib import Path
 from parse import *
 from matplotlib import pyplot as plt
 
 ipath          = 'data/'
 opath          = 'output/'
-decode_from_ss = False
+decode_from_ss = True
 
-if len(sys.argv) > 0:
-    finput = str(sys.argv[1])
-    if len(sys.argv) > 2 and str(sys.argv[2]) == "ss":
-        decode_from_ss = True
-        cca = 0
+args = sys.argv
+
+if len(args) < 6:
+    sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\n")
 else:
-    finput = ipath+'data.raw'
+    if len(sys.argv) > 6 and str(sys.argv[2]) == "csv":
+        decode_from_ss = False
+    
+    for arg in args[1:]:
+        file_exist = Path(arg).is_file()
+        if file_exist is not True:
+            sys.exit(f"File {arg} does not exists")
 
+    files = {}
+    files["rtr_file"] = args[1]
+    files["atk_file"] = args[2]
+    files["cc_file"]  = args[3]
+    files["lc_file"]  = args[4]
+    files["cs_file"]  = args[5]
+    files["ls_file"]  = args[6]
 
 class Measure:
-    def __init__(self):
+    def __init__(self, data_file = None):
         self.x             = list()
         self.cwnd          = list()
         self.mss           = list()
@@ -27,7 +41,21 @@ class Measure:
         self.pacing_rate   = list()
         self.delivery_rate = list()
         self.delivered     = list()
+        self.filename      = data_file
         
+    def load_data(self):
+        self.convert_raw_to_csv()
+        if not self.is_router_data():
+            self.load_from_csv()
+        
+    def is_router_data(self):
+        with open(self.filename, 'r') as f:
+            for line in f:
+                if "dualpi2" in line:
+                    return True
+                elif "cubic" in line or "prague" in line:
+                    return False
+            
     def cwnd_mean(self):
         return sum(self.cwnd)/len(self.cwnd)
     
@@ -86,8 +114,83 @@ class Measure:
         self.pacing_rate   = csv[:,csv_pacing_rate]
         self.delivery_rate = csv[:,csv_delivery_rate]
         self.delivered     = csv[:,csv_delivered]
+
+    def add_matched_field(self,field,line):
+        return "NaN," if not search(field,line) else search(field,line)[0]+","
+
+    def decode_ss_line(self,line):
+        cca = 0
+        decoded_line  = ""
+        decoded_line += line.split()[cca]+","
+        decoded_line += self.add_matched_field('wscale:{} ',line)  # generate two fields !
+        decoded_line += self.add_matched_field('rto:{} ',line)
+        rtt_temp = self.add_matched_field('rtt:{} ',line)
+        decoded_line += rtt_temp.split("/")[0] + "," + rtt_temp.split("/")[1] if not rtt_temp == "NaN" else "NaN"
+        decoded_line += self.add_matched_field('mss:{} ',line)
+        decoded_line += self.add_matched_field('pmtu:{} ',line)
+        decoded_line += self.add_matched_field('rcvmss:{} ',line)
+        decoded_line += self.add_matched_field('advmss:{} ',line)
+        decoded_line += self.add_matched_field('cwnd:{} ',line)
+        decoded_line += self.add_matched_field('ssthresh:{} ',line)
+        decoded_line += self.add_matched_field('bytes_sent:{} ',line)
+        decoded_line += self.add_matched_field('bytes_acked:{} ',line)
+        decoded_line += self.add_matched_field('segs_out:{} ',line)
+        decoded_line += self.add_matched_field('segs_in:{} ',line)
+        decoded_line += self.add_matched_field('data_segs_out:{} ',line)
+        decoded_line += self.add_matched_field('send {}Gbps ',line)
+        decoded_line += self.add_matched_field('lastsnd:{} ',line)
+        decoded_line += self.add_matched_field('lastrcv:{} ',line)
+        decoded_line += self.add_matched_field('pacing_rate {}Gbps ',line)
+        decoded_line += self.add_matched_field('delivery_rate {}Gbps ',line)
+        decoded_line += self.add_matched_field('delivered:{} ',line)
+        decoded_line += self.add_matched_field('busy:{}ms ',line)
+        decoded_line += self.add_matched_field('rcv_space:{} ',line)
+        decoded_line += self.add_matched_field('rcv_ssthresh:{} ',line)
+        decoded_line += self.add_matched_field('notsend:{} ',line) 
+        decoded_line += self.add_matched_field('minrtt:{}',line)
         
+        return str(decoded_line)+"\n"
+
+    def decode_router_ss_line(self, line):
+        qdisc = 1
+        decoded_line  = ""
+        decoded_line += line.split()[qdisc]+","
+        decoded_line += self.add_matched_field('Sent {} bytes',line)
+        decoded_line += self.add_matched_field('bytes {} pkt',line)
+        decoded_line += self.add_matched_field('dropped {},',line)
+        decoded_line += self.add_matched_field('overlimits {} ',line)
+        decoded_line += self.add_matched_field('requeues {})',line)
+        decoded_line += self.add_matched_field('prob {} ',line)
+        decoded_line += self.add_matched_field('delay_c {}us ',line)
+        decoded_line += self.add_matched_field('delay_l {}us',line)
+        decoded_line += self.add_matched_field('pkts_in_c {} ',line)
+        decoded_line += self.add_matched_field('pkts_in_l {} ',line)
+        decoded_line += self.add_matched_field('maxq {}e',line)
+        decoded_line += self.add_matched_field('ecn_mark {} ',line)
+        decoded_line += self.add_matched_field('step_mark {}c',line)
+        return str(decoded_line)+"\n"
+
+    def convert_raw_to_csv(self):
+        data_exist = Path(self.filename).is_file()
+        if self.filename == None:
+            print("Object" + str(type(self)) + "has no data to convert (missing data file)")
+        elif data_exist is not True:
+            print("File {self.filename} does not exists")
+        else:
+            with open(opath+'data.csv', 'w') as csv_file, open(self.filename, 'r') as raw_file:
+                lines = filter(None, (line.rstrip() for line in raw_file))
+                for l in lines:
+                    if decode_from_ss:
+                        if self.is_router_data():
+                            csv_file.write(self.decode_router_ss_line(l))
+                        else:
+                            csv_file.write(self.decode_ss_line(l))
+                    else:
+                        csv_file.write(line.replace(" ", ""))
+    
     def plot_ss(self):
+        self.load_data()
+        
         plt.figure()
         r=2
         c=2
@@ -112,78 +215,6 @@ class Measure:
         plt.plot(self.x, self.pacing_rate)    
         
         plt.suptitle("Visualisation des résultats")
-        
-def add_matched_field(field,line):
-    return "NaN," if not search(field,line) else search(field,line)[0]+","
-
-def decode_ss_line(line):
-    decoded_line  = ""
-    decoded_line += line.split()[cca]+","
-    decoded_line += add_matched_field('wscale:{} ',line)  # generate two fields !
-    decoded_line += add_matched_field('rto:{} ',line)
-    rtt_temp = add_matched_field('rtt:{} ',line)
-    decoded_line += rtt_temp.split("/")[0] + "," + rtt_temp.split("/")[1] if not rtt_temp == "NaN" else "NaN"
-    decoded_line += add_matched_field('mss:{} ',line)
-    decoded_line += add_matched_field('pmtu:{} ',line)
-    decoded_line += add_matched_field('rcvmss:{} ',line)
-    decoded_line += add_matched_field('advmss:{} ',line)
-    decoded_line += add_matched_field('cwnd:{} ',line)
-    decoded_line += add_matched_field('ssthresh:{} ',line)
-    decoded_line += add_matched_field('bytes_sent:{} ',line)
-    decoded_line += add_matched_field('bytes_acked:{} ',line)
-    decoded_line += add_matched_field('segs_out:{} ',line)
-    decoded_line += add_matched_field('segs_in:{} ',line)
-    decoded_line += add_matched_field('data_segs_out:{} ',line)
-    decoded_line += add_matched_field('send {}Gbps ',line)
-    decoded_line += add_matched_field('lastsnd:{} ',line)
-    decoded_line += add_matched_field('lastrcv:{} ',line)
-    decoded_line += add_matched_field('pacing_rate {}Gbps ',line)
-    decoded_line += add_matched_field('delivery_rate {}Gbps ',line)
-    decoded_line += add_matched_field('delivered:{} ',line)
-    decoded_line += add_matched_field('busy:{}ms ',line)
-    decoded_line += add_matched_field('rcv_space:{} ',line)
-    decoded_line += add_matched_field('rcv_ssthresh:{} ',line)
-    decoded_line += add_matched_field('notsend:{} ',line) 
-    decoded_line += add_matched_field('minrtt:{}',line)
-    
-    return str(decoded_line)+"\n"
-
-def raw_to_csv(file_in):
-    with open(opath+'data.csv', 'w') as csv_file, open(file_in, 'r') as raw_file:
-        raw_file.readline()
-        lines = filter(None, (line.rstrip() for line in raw_file))
-        for l in lines:
-            if decode_from_ss:
-                csv_file.write(decode_ss_line(l))
-                #csv_file.write(line.split()[cwnd].split(":")[1]+","+line.split()[mss].split(":")[1]+",\n")
-            else:
-                csv_file.write(line.replace(" ", ""))
-
-def plot_ss():
-    
-    measure = Measure()
-    measure.load_from_csv()
-    measure.plot_ss()
-    
-    #Visualization part
-    plt.figure()
-    r=1
-    c=2
-    plt.subplot(r, c, 1)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("delivery rate (Gbps): ")
-    plt.plot(measure1.x, measure1.delivery_rate)
-    
-    plt.subplot(r, c, 2)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("delivered: ")
-    plt.plot(measure1.x, measure1.delivered)
-    
-    plt.suptitle("Visualisation des résultats")
-    
-    
-    plt.show()
-    
     
 def plot_csv():
     csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
@@ -263,12 +294,76 @@ def plot_csv():
     plt.suptitle("Visualisation des résultats")
     plt.show()
 
+def visualize(rtr_file, atk_file, cc_file, cs_file, lc_file, ls_file):
+    
+    rtr_measure = Measure(rtr_file)
+    atk_measure = Measure(atk_file)
+    cc_measure  = Measure(cc_file)
+    lc_measure  = Measure(lc_file)
+    cs_measure  = Measure(cs_file)
+    ls_measure  = Measure(ls_file)
+    
+    rtr_measure.load_data()
+    atk_measure.load_data()
+    cc_measure.load_data()
+    lc_measure.load_data()
+    cs_measure.load_data()
+    ls_measure.load_data()
+    
+    #rtr_measure.plot_ss()
+    #atk_measure.plot_ss()
+    #cc_measure.plot_ss()
+    #lc_measure.plot_ss()
+    #cs_measure.plot_ss()
+    #ls_measure.plot_ss()
+    
+    #Visualization part
+    fig = plt.figure()
+    r=2
+    c=5
+    
+    plt.subplot(r, c, 1)
+    plt.ylabel("atk cwnd mean: "+"{:.2f}".format(atk_measure.cwnd_mean()))
+    plt.plot(atk_measure.x, atk_measure.cwnd)
+    
+    plt.subplot(r, c, 2)
+    plt.ylabel("CC cwnd mean: "+"{:.2f}".format(cc_measure.cwnd_mean()))
+    plt.plot(cc_measure.x, cc_measure.cwnd)
+    
+    plt.subplot(r, c, 3)
+    plt.ylabel("LC cwnd mean: "+"{:.2f}".format(lc_measure.cwnd_mean()))
+    plt.plot(lc_measure.x, lc_measure.cwnd)
+    
+    plt.subplot(r, c, 4)
+    plt.ylabel("CS cwnd mean: "+"{:.2f}".format(cs_measure.cwnd_mean()))
+    plt.plot(cs_measure.x, cs_measure.cwnd)
 
-#line = "cubic wscale:7,7 rto:204 rtt:0.43/0.179 mss:1460 pmtu:1500 rcvmss:536 advmss:1460 cwnd:1405 ssthresh:80 bytes_sent:27010249109 bytes_acked:27010249110 segs_out:18546357 segs_in:537945 data_segs_out:18546355 send 38.2Gbps lastsnd:4 lastrcv:56664 pacing_rate 20.3Gbps delivery_rate 1.72Gbps delivered:18546356 busy:55032ms rcv_space:14600 rcv_ssthresh:64076 minrtt:0.028"
-#decode_ss_line(line)
-raw_to_csv(finput)
+    plt.subplot(r, c, 5)
+    plt.ylabel("LS cwnd mean: "+"{:.2f}".format(ls_measure.cwnd_mean()))
+    plt.plot(ls_measure.x, ls_measure.cwnd)
+    
+    plt.subplot(r, c, 6)
+    plt.ylabel("Average atk RTT mean: "+"{:.2f}".format(atk_measure.rtt_mean()))
+    plt.plot(atk_measure.x, atk_measure.rtt)
+    
+    plt.subplot(r, c, 7)
+    plt.ylabel("Average CC RTT mean: "+"{:.2f}".format(cc_measure.rtt_mean()))
+    plt.plot(cc_measure.x, cc_measure.rtt)
+    
+    plt.subplot(r, c, 8)
+    plt.ylabel("Average LC RTT mean: "+"{:.2f}".format(lc_measure.rtt_mean()))
+    plt.plot(lc_measure.x, lc_measure.rtt)
+    
+    plt.subplot(r, c, 9)
+    plt.ylabel("Average CS RTT mean: "+"{:.2f}".format(cs_measure.rtt_mean()))
+    plt.plot(cs_measure.x, cs_measure.rtt)
+    
+    plt.subplot(r, c, 10)
+    plt.ylabel("Average LS RTT mean: "+"{:.2f}".format(ls_measure.rtt_mean()))
+    plt.plot(ls_measure.x, ls_measure.rtt)
+    
+    plt.suptitle("Visualisation des résultats")
+    fig.supxlabel("time (in RTT)")
+    plt.show()
 
-if decode_from_ss:
-    plot_ss()
-else:
-    plot_csv()
+visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"])
