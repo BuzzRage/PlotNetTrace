@@ -71,7 +71,7 @@ class Measure:
     def pacing_rate_mean(self):
         return sum(self.pacing_rate)/len(self.pacing_rate)    
     
-    def load_from_csv(self,input_csv = opath+'data.csv'):        
+    def load_from_csv(self):        
         # Loading part. 
         # See https://www.man7.org/linux/man-pages/man8/ss.8.html for details
         # See `struct tcp_info` in /usr/include/linux/tcp.h for further details
@@ -105,7 +105,7 @@ class Measure:
         csv_notsent        = 26
         csv_minrtt         = 27
         
-        csv = np.genfromtxt(input_csv, delimiter=",", skip_header=1)
+        csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
         self.x             = np.arange(0,len(csv))
         self.cwnd          = csv[:,csv_cwnd]
         self.mss           = csv[:,csv_mss]
@@ -177,7 +177,7 @@ class Measure:
         elif data_exist is not True:
             print("File {self.filename} does not exists")
         else:
-            with open(opath+'data.csv', 'w') as csv_file, open(self.filename, 'r') as raw_file:
+            with open(self.filename+'.csv', 'w') as csv_file, open(self.filename, 'r') as raw_file:
                 lines = filter(None, (line.rstrip() for line in raw_file))
                 for l in lines:
                     if decode_from_ss:
@@ -294,7 +294,7 @@ def plot_csv():
     plt.suptitle("Visualisation des résultats")
     plt.show()
 
-def visualize(rtr_file, atk_file, cc_file, cs_file, lc_file, ls_file):
+def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     rtr_measure = Measure(rtr_file)
     atk_measure = Measure(atk_file)
@@ -319,51 +319,29 @@ def visualize(rtr_file, atk_file, cc_file, cs_file, lc_file, ls_file):
     
     #Visualization part
     fig = plt.figure()
-    r=2
-    c=5
+    r=1
+    c=2
     
     plt.subplot(r, c, 1)
-    plt.ylabel("atk cwnd mean: "+"{:.2f}".format(atk_measure.cwnd_mean()))
-    plt.plot(atk_measure.x, atk_measure.cwnd)
+    plt.ylabel("cwnd evolution")
+    plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
+    plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
+    plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
+    plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
+    plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
+    
     
     plt.subplot(r, c, 2)
-    plt.ylabel("CC cwnd mean: "+"{:.2f}".format(cc_measure.cwnd_mean()))
-    plt.plot(cc_measure.x, cc_measure.cwnd)
-    
-    plt.subplot(r, c, 3)
-    plt.ylabel("LC cwnd mean: "+"{:.2f}".format(lc_measure.cwnd_mean()))
-    plt.plot(lc_measure.x, lc_measure.cwnd)
-    
-    plt.subplot(r, c, 4)
-    plt.ylabel("CS cwnd mean: "+"{:.2f}".format(cs_measure.cwnd_mean()))
-    plt.plot(cs_measure.x, cs_measure.cwnd)
-
-    plt.subplot(r, c, 5)
-    plt.ylabel("LS cwnd mean: "+"{:.2f}".format(ls_measure.cwnd_mean()))
-    plt.plot(ls_measure.x, ls_measure.cwnd)
-    
-    plt.subplot(r, c, 6)
-    plt.ylabel("Average atk RTT mean: "+"{:.2f}".format(atk_measure.rtt_mean()))
-    plt.plot(atk_measure.x, atk_measure.rtt)
-    
-    plt.subplot(r, c, 7)
-    plt.ylabel("Average CC RTT mean: "+"{:.2f}".format(cc_measure.rtt_mean()))
-    plt.plot(cc_measure.x, cc_measure.rtt)
-    
-    plt.subplot(r, c, 8)
-    plt.ylabel("Average LC RTT mean: "+"{:.2f}".format(lc_measure.rtt_mean()))
-    plt.plot(lc_measure.x, lc_measure.rtt)
-    
-    plt.subplot(r, c, 9)
-    plt.ylabel("Average CS RTT mean: "+"{:.2f}".format(cs_measure.rtt_mean()))
-    plt.plot(cs_measure.x, cs_measure.rtt)
-    
-    plt.subplot(r, c, 10)
-    plt.ylabel("Average LS RTT mean: "+"{:.2f}".format(ls_measure.rtt_mean()))
-    plt.plot(ls_measure.x, ls_measure.rtt)
+    plt.ylabel("RTT evolution")
+    plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
+    plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
+    plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
+    plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
+    plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
     
     plt.suptitle("Visualisation des résultats")
     fig.supxlabel("time (in RTT)")
+    plt.legend()
     plt.show()
 
 visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"])
