@@ -11,3 +11,4 @@ Input file should be raw ss lines. For example with `ss -pti | grep -A1 "firefox
 * Correct time axis
 * Implement full router data handling
 * Implement statistics on aggregated measurments
+* Improve usage simplicity ( file handling )
