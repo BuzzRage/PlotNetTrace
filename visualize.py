@@ -56,7 +56,10 @@ class Measure:
         self.filename      = data_file
         
     def load_data(self):
-        self.convert_raw_to_csv()
+        f = self.filename+".csv"
+        file_exist = Path(f).is_file()
+        if file_exist is not True:
+            self.convert_raw_to_csv()
         if not self.is_router_data():
             self.load_from_csv()
         
