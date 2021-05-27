@@ -8,28 +8,40 @@ from matplotlib import pyplot as plt
 
 ipath          = 'data/'
 opath          = 'output/'
-decode_from_ss = True
 
-args = sys.argv
+args  = sys.argv
+files = {}
 
-if len(args) < 6:
-    sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\n")
-else:
-    if len(sys.argv) > 6 and str(sys.argv[2]) == "csv":
-        decode_from_ss = False
+filenames = list()
+if len(args) == 4 and str(args[1]) == "timecode":
+    dirpath = ipath + args[2] + "/" + args[3]
     
-    for arg in args[1:]:
-        file_exist = Path(arg).is_file()
-        if file_exist is not True:
-            sys.exit(f"File {arg} does not exists")
-
-    files = {}
-    files["rtr_file"] = args[1]
-    files["atk_file"] = args[2]
-    files["cc_file"]  = args[3]
-    files["lc_file"]  = args[4]
-    files["cs_file"]  = args[5]
-    files["ls_file"]  = args[6]
+    filenames.append(dirpath+"-rtr")
+    filenames.append(dirpath+"-atk")
+    filenames.append(dirpath+"-cc")
+    filenames.append(dirpath+"-lc")
+    filenames.append(dirpath+"-cs")
+    filenames.append(dirpath+"-ls")
+elif len(args) == 7 and str(args[1]) != "timecode":
+    filenames.append(args[1])
+    filenames.append(args[2])
+    filenames.append(args[3])
+    filenames.append(args[4])
+    filenames.append(args[5])
+    filenames.append(args[6])
+else :
+    sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\nor\n"+str(args[0])+" timecode 2021-05-20 1516\n")
+for f in filenames:
+    file_exist = Path(f).is_file()
+    if file_exist is not True:
+        sys.exit(f"File {f} does not exists")
+        
+files["rtr_file"] = filenames[0]
+files["atk_file"] = filenames[1]
+files["cc_file"]  = filenames[2]
+files["lc_file"]  = filenames[3]
+files["cs_file"]  = filenames[4]
+files["ls_file"]  = filenames[5]
 
 class Measure:
     def __init__(self, data_file = None):
@@ -179,14 +191,11 @@ class Measure:
         else:
             with open(self.filename+'.csv', 'w') as csv_file, open(self.filename, 'r') as raw_file:
                 lines = filter(None, (line.rstrip() for line in raw_file))
-                for l in lines:
-                    if decode_from_ss:
-                        if self.is_router_data():
-                            csv_file.write(self.decode_router_ss_line(l))
-                        else:
-                            csv_file.write(self.decode_ss_line(l))
+                for l in lines:                    
+                    if self.is_router_data():
+                        csv_file.write(self.decode_router_ss_line(l))
                     else:
-                        csv_file.write(line.replace(" ", ""))
+                        csv_file.write(self.decode_ss_line(l))
     
     def plot_ss(self):
         self.load_data()
