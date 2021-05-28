@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python3
 import sys
 import getopt
 import numpy as np
@@ -45,7 +45,10 @@ files["ls_file"]  = filenames[5]
 
 class Measure:
     def __init__(self, data_file = None):
+        self.filename      = data_file
         self.x             = list()
+
+        # Endpoint data
         self.cwnd          = list()
         self.mss           = list()
         self.rtt           = list()
@@ -53,7 +56,21 @@ class Measure:
         self.pacing_rate   = list()
         self.delivery_rate = list()
         self.delivered     = list()
-        self.filename      = data_file
+        
+        # Router data
+        self.bytes_sent    = list() 
+        self.pkt_sent      = list() 
+        self.pkt_dropped   = list() 
+        self.pkt_overlimits= list() 
+        self.pkt_requeued  = list() 
+        self.prob          = list() 
+        self.cdelay        = list() 
+        self.ldelay        = list() 
+        self.cpkts         = list() 
+        self.lpkts         = list() 
+        self.maxq          = list() 
+        self.ecn_mark      = list() 
+        self.step_mark     = list() 
         
     def load_data(self):
         f = self.filename+".csv"
@@ -62,6 +79,8 @@ class Measure:
             self.convert_raw_to_csv()
         if not self.is_router_data():
             self.load_from_csv()
+        elif self.is_router_data():
+            self.load_from_router_csv()
         
     def is_router_data(self):
         with open(self.filename, 'r') as f:
@@ -130,6 +149,39 @@ class Measure:
         self.delivery_rate = csv[:,csv_delivery_rate]
         self.delivered     = csv[:,csv_delivered]
 
+    def load_from_router_csv(self):
+        # Loading part. 
+        # See DualPi2 man page for details        
+        csv_bytes_sent     = 0  # Bytes sent
+        csv_pkt_sent       = 1  # Packets sent
+        csv_pkt_dropped    = 2  # Packet dropped
+        csv_pkt_overlimits = 3  # Packet overlimits
+        csv_pkt_requeued   = 4  # Packet requeued
+        csv_prob           = 5  # Probability 
+        csv_cdelay         = 6  # Delay on Classic queue 
+        csv_ldelay         = 7  # Delay on L4S queue 
+        csv_cpkts          = 8  # Packets in Classic queue
+        csv_lpkts          = 9  # Packets in L4S queue
+        csv_maxq           = 10 # Max packets in queue
+        csv_ecn_mark       = 11 # ECN marked packets
+        csv_step_mark      = 12 # ???
+        
+        csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
+        self.x             = np.arange(0,len(csv))
+        self.bytes_sent    = csv[:,csv_bytes_sent] 
+        self.pkt_sent      = csv[:,csv_pkt_sent] 
+        self.pkt_dropped   = csv[:,csv_pkt_dropped] 
+        self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
+        self.pkt_requeued  = csv[:,csv_pkt_requeued] 
+        self.prob          = csv[:,csv_prob] 
+        self.cdelay        = csv[:,csv_cdelay] 
+        self.ldelay        = csv[:,csv_ldelay] 
+        self.cpkts         = csv[:,csv_cpkts] 
+        self.lpkts         = csv[:,csv_lpkts] 
+        self.maxq          = csv[:,csv_maxq] 
+        self.ecn_mark      = csv[:,csv_ecn_mark] 
+        self.step_mark     = csv[:,csv_step_mark] 
+        
     def add_matched_field(self,field,line):
         return "NaN," if not search(field,line) else search(field,line)[0]+","
 
@@ -331,7 +383,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     #Visualization part
     fig = plt.figure()
-    r=1
+    r=3
     c=2
     
     plt.subplot(r, c, 1)
@@ -350,6 +402,27 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
     plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
     plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+    
+    
+    plt.subplot(r, c, 3)
+    plt.ylabel("Queue occupation")
+    plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
+    plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
+    
+    plt.subplot(r, c, 4)
+    plt.ylabel("Queue delay")
+    plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
+    plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
+    
+    plt.subplot(r, c, 5)
+    plt.ylabel("Marking and probability")
+    plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
+    
+    plt.subplot(r, c, 6)
+    plt.ylabel("Pkts sent and dropped")
+    plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
+    plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
+    plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
     
     plt.suptitle("Visualisation des résultats")
     fig.supxlabel("time (in RTT)")
