@@ -252,112 +252,78 @@ class Measure:
                     else:
                         csv_file.write(self.decode_ss_line(l))
     
-    def plot_ss(self):
+    def plot_all(self):
         self.load_data()
-        
         plt.figure()
-        r=2
-        c=2
-        plt.subplot(r, c, 1)
-        plt.xlabel("time (in RTT)")
-        plt.ylabel("cwnd mean: "+"{:.2f}".format(self.cwnd_mean()))
-        plt.plot(self.x, self.cwnd)
         
-        plt.subplot(r, c, 2)
-        plt.xlabel("time (in RTT)")
-        plt.ylabel("Average RTT mean: "+"{:.2f}".format(self.rtt_mean()))
-        plt.plot(self.x, self.rtt)
-        
-        plt.subplot(r, c, 3)
-        plt.xlabel("time (in RTT)")
-        plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(self.bytes_acked_mean()))
-        plt.plot(self.x, self.bytes_acked)
-        
-        plt.subplot(r, c, 4)
-        plt.xlabel("time (in RTT)")
-        plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
-        plt.plot(self.x, self.pacing_rate)    
+        if self.is_router_data():
+            r=2
+            c=3
+            plt.subplot(r, c, 1)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("Bytes sent")
+            plt.plot(self.x, self.bytes_sent)
+            
+            plt.subplot(r, c, 3)
+            plt.ylabel("Queue occupation")
+            plt.plot(self.x, self.cpkts, color='darkorange', label='Classic pkts')
+            plt.plot(self.x, self.lpkts, color='cyan', label='L4S pkts')
+            
+            plt.subplot(r, c, 4)
+            plt.ylabel("Queue delay")
+            plt.plot(self.x, self.cdelay, color='darkorange', label='Classic delay')
+            plt.plot(self.x, self.ldelay, color='cyan', label='L4S delay')
+            
+            plt.subplot(r, c, 5)
+            plt.ylabel("Marking and probability")
+            plt.plot(self.x, self.prob, color='darkblue', label='Mark probability')
+            
+            plt.subplot(r, c, 6)
+            plt.ylabel("Pkts sent and dropped")
+            plt.plot(self.x, self.pkt_sent, color='green', label='Packets sent')
+            plt.plot(self.x, self.pkt_dropped, color='r', label='Packets dropped')
+            plt.plot(self.x, self.ecn_mark, color='gold', label='ECN Marked packets')
+            
+        else:
+            r=3
+            c=3
+            plt.subplot(r, c, 1)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("cwnd mean: "+"{:.2f}".format(self.cwnd_mean()))
+            plt.plot(self.x, self.cwnd)
+
+            plt.subplot(r, c, 2)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("MSS mean: "+"{:.2f}".format(self.mss_mean()))
+            plt.plot(self.x, self.mss)
+            
+            plt.subplot(r, c, 3)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("Average RTT mean: "+"{:.2f}".format(self.rtt_mean()))
+            plt.plot(self.x, self.rtt)
+            
+            plt.subplot(r, c, 4)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(self.bytes_acked_mean()))
+            plt.plot(self.x, self.bytes_acked)
+            
+            plt.subplot(r, c, 5)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
+            plt.plot(self.x, self.pacing_rate)    
+            
+            plt.subplot(r, c, 6)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("Delivery rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
+            plt.plot(self.x, self.delivery_rate)
+            
+            plt.subplot(r, c, 7)
+            plt.xlabel("time (in RTT)")
+            plt.ylabel("Delivered packets")
+            plt.plot(self.x, self.delivered)    
         
         plt.suptitle("Visualisation des résultats")
     
-def plot_csv():
-    csv = np.genfromtxt(opath+'data.csv', delimiter=",", skip_header=1)
-
-    # Loading part
-    x       = np.arange(0,len(csv))
-
-    droprate= csv[:,8]
-    markrate= csv[:,9]
-    qlen_C  = csv[:,11]
-    qlen_L  = csv[:,10]
-    
-    CC = Measure()
-    LC = Measure()
-    CS = Measure()
-    LS = Measure()
-    
-    CC.cwnd = csv[:,0]
-    CC.mss  = csv[:,1]
-    #cwnd_C  = np.multiply(CC.cwnd, CC.mss)
-    LC.cwnd = csv[:,2]
-    LC.mss  = csv[:,3]
-    CS.cwnd = csv[:,4]
-    CS.mss  = csv[:,5]
-    LS.cwnd = csv[:,6]
-    LS.mss  = csv[:,7]
-
-    # Statistics part
-    droprate_mean= sum(droprate)/len(droprate)
-    markrate_mean= sum(markrate)/len(markrate)
-    qlen_C_mean  = sum(qlen_C)/len(qlen_C)
-    qlen_L_mean  = sum(qlen_L)/len(qlen_L)
-    
-    #Visualization part
-    r=4
-    c=2
-    plt.subplot(r, c, 1)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd CC mean: "+"{:.2f}".format(CC.cwnd_mean()))
-    plt.plot(x, CC.cwnd)
-
-    plt.subplot(r, c, 2)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd LC mean: "+"{:.2f}".format(LC.cwnd_mean()))
-    plt.plot(x, LC.cwnd)
-
-    plt.subplot(r, c, 3)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd CS mean: "+"{:.2f}".format(CS.cwnd_mean()))
-    plt.plot(x, CS.cwnd)
-
-    plt.subplot(r, c, 4)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("cwnd LS mean: "+"{:.2f}".format(LS.cwnd_mean()))
-    plt.plot(x, LS.cwnd)
-
-    plt.subplot(r, c, 5)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("drop rate mean: "+"{:.2f}".format(droprate_mean))
-    plt.plot(x, droprate)
-
-    plt.subplot(r, c, 6)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("mark rate mean: "+"{:.2f}".format(markrate_mean))
-    plt.plot(x, markrate)
-
-    plt.subplot(r, c, 7)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("qlen_C mean: "+"{:.2f}".format(qlen_C_mean))
-    plt.plot(x, qlen_C)
-
-    plt.subplot(r, c, 8)
-    plt.xlabel("time (in RTT)")
-    plt.ylabel("qlen_L mean: "+"{:.2f}".format(qlen_L_mean))
-    plt.plot(x, qlen_L)
-
-    plt.suptitle("Visualisation des résultats")
-    plt.show()
-
 def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     rtr_measure = Measure(rtr_file)
@@ -373,18 +339,14 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     lc_measure.load_data()
     cs_measure.load_data()
     ls_measure.load_data()
-    
-    #rtr_measure.plot_ss()
-    #atk_measure.plot_ss()
-    #cc_measure.plot_ss()
-    #lc_measure.plot_ss()
-    #cs_measure.plot_ss()
-    #ls_measure.plot_ss()
+
+    lc_measure.plot_all()
     
     #Visualization part
     fig = plt.figure()
     r=3
     c=2
+
     
     plt.subplot(r, c, 1)
     plt.ylabel("cwnd evolution")
