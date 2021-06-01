@@ -228,7 +228,6 @@ class Measure:
         ms = int(raw_ts.split(":")[2].split(".")[1])/1000
         t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
         td = t2 - self.timestamp
-        print(td)
         decoded_line += str(td)+","
         
         return str(decoded_line)+"\n"
@@ -259,8 +258,8 @@ class Measure:
         ms = int(raw_ts.split(":")[2].split(".")[1])
         t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
         td = int(t2 - self.timestamp)
-        
         decoded_line += str(td)+","
+        
         return str(decoded_line)+"\n"
 
     def convert_raw_to_csv(self):
