@@ -178,8 +178,8 @@ class Measure:
         self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
         self.pkt_requeued  = csv[:,csv_pkt_requeued] 
         self.prob          = csv[:,csv_prob] 
-        self.cdelay        = csv[:,csv_cdelay] 
-        self.ldelay        = csv[:,csv_ldelay] 
+        self.cdelay        = np.divide(csv[:,csv_cdelay],1000)
+        self.ldelay        = np.divide(csv[:,csv_ldelay],1000)
         self.cpkts         = csv[:,csv_cpkts] 
         self.lpkts         = csv[:,csv_lpkts] 
         self.maxq          = csv[:,csv_maxq] 
