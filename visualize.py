@@ -152,19 +152,19 @@ class Measure:
     def load_from_router_csv(self):
         # Loading part. 
         # See DualPi2 man page for details        
-        csv_bytes_sent     = 0  # Bytes sent
-        csv_pkt_sent       = 1  # Packets sent
-        csv_pkt_dropped    = 2  # Packet dropped
-        csv_pkt_overlimits = 3  # Packet overlimits
-        csv_pkt_requeued   = 4  # Packet requeued
-        csv_prob           = 5  # Probability 
-        csv_cdelay         = 6  # Delay on Classic queue 
-        csv_ldelay         = 7  # Delay on L4S queue 
-        csv_cpkts          = 8  # Packets in Classic queue
-        csv_lpkts          = 9  # Packets in L4S queue
-        csv_maxq           = 10 # Max packets in queue
-        csv_ecn_mark       = 11 # ECN marked packets
-        csv_step_mark      = 12 # ???
+        csv_bytes_sent     = 1  # Bytes sent
+        csv_pkt_sent       = 2  # Packets sent
+        csv_pkt_dropped    = 3  # Packet dropped
+        csv_pkt_overlimits = 4  # Packet overlimits
+        csv_pkt_requeued   = 5  # Packet requeued
+        csv_prob           = 6  # Probability 
+        csv_cdelay         = 7  # Delay on Classic queue 
+        csv_ldelay         = 8  # Delay on L4S queue 
+        csv_cpkts          = 9  # Packets in Classic queue
+        csv_lpkts          = 10  # Packets in L4S queue
+        csv_maxq           = 11 # Max packets in queue
+        csv_ecn_mark       = 12 # ECN marked packets
+        csv_step_mark      = 13 # ???
         
         csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
         self.x             = np.arange(0,len(csv))
@@ -234,7 +234,7 @@ class Measure:
         decoded_line += self.add_matched_field('pkts_in_l {} ',line)
         decoded_line += self.add_matched_field('maxq {}e',line)
         decoded_line += self.add_matched_field('ecn_mark {} ',line)
-        decoded_line += self.add_matched_field('step_mark {}c',line)
+        decoded_line += self.add_matched_field('step_marks {}c',line)
         return str(decoded_line)+"\n"
 
     def convert_raw_to_csv(self):
