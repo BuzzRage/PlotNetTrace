@@ -310,8 +310,7 @@ class Measure:
             plt.plot(self.x, self.prob, color='darkblue', label='Mark probability')
             
             plt.subplot(r, c, 6)
-            plt.ylabel("Pkts sent and dropped")
-            plt.plot(self.x, self.pkt_sent, color='green', label='Packets sent')
+            plt.ylabel("Pkts marked and dropped")
             plt.plot(self.x, self.pkt_dropped, color='r', label='Packets dropped')
             plt.plot(self.x, self.ecn_mark, color='gold', label='ECN Marked packets')
             
@@ -379,11 +378,11 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     plt.subplot(r, c, 1)
     plt.ylabel("cwnd evolution")
-    plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
-    plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
-    plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
-    plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
-    plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
+    plt.plot(atk_measure.x, atk_measure.cwnd*atk_measure.mss, color='r', label='atk Client')
+    plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
+    plt.plot(lc_measure.x, lc_measure.cwnd*lc_measure.mss, color='darkblue', label='LL Client')
+    plt.plot(cs_measure.x, cs_measure.cwnd*cs_measure.mss, color='gold', label='Classic Server')
+    plt.plot(ls_measure.x, ls_measure.cwnd*ls_measure.mss, color='cyan', label='LL Server')
     plt.legend()
     
     plt.subplot(r, c, 2)
@@ -413,14 +412,14 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.legend()
     
     plt.subplot(r, c, 6)
-    plt.ylabel("Pkts sent and dropped")
-    plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
+    plt.ylabel("Pkts marked and dropped")
+    #plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
     plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
     plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
     plt.legend()
     
     plt.suptitle("Visualisation des résultats")
-    fig.supxlabel("time (in RTT)")
+    fig.supxlabel("time (in ms)")
     plt.show()
 
 visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"])
