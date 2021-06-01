@@ -46,6 +46,7 @@ files["ls_file"]  = filenames[5]
 class Measure:
     def __init__(self, data_file = None):
         self.filename      = data_file
+        self.timestamp     = int()
         self.x             = list()
 
         # Endpoint data
@@ -138,9 +139,10 @@ class Measure:
         csv_rcv_thresh     = 25
         csv_notsent        = 26
         csv_minrtt         = 27
+        csv_timestamp      = 28
         
         csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
-        self.x             = np.arange(0,len(csv))
+        self.x             = csv[:,csv_timestamp]
         self.cwnd          = csv[:,csv_cwnd]
         self.mss           = csv[:,csv_mss]
         self.rtt           = csv[:,csv_rtt]
@@ -165,9 +167,11 @@ class Measure:
         csv_maxq           = 11 # Max packets in queue
         csv_ecn_mark       = 12 # ECN marked packets
         csv_step_mark      = 13 # ???
+        csv_timestamp      = 14 # Timestamp
         
         csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
-        self.x             = np.arange(0,len(csv))
+        #self.x             = np.arange(0,len(csv))
+        self.x             = csv[:,csv_timestamp] 
         self.bytes_sent    = csv[:,csv_bytes_sent] 
         self.pkt_sent      = csv[:,csv_pkt_sent] 
         self.pkt_dropped   = csv[:,csv_pkt_dropped] 
@@ -216,9 +220,20 @@ class Measure:
         decoded_line += self.add_matched_field('notsend:{} ',line) 
         decoded_line += self.add_matched_field('minrtt:{}',line)
         
+        # Timestamp calculation
+        raw_ts = line.rstrip().split(" ")[-1]
+        h  = int(raw_ts.split(":")[0])
+        m  = int(raw_ts.split(":")[1])
+        s  = int(raw_ts.split(":")[2].split(".")[0])
+        ms = int(raw_ts.split(":")[2].split(".")[1])/1000
+        t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
+        td = t2 - self.timestamp
+        print(td)
+        decoded_line += str(td)+","
+        
         return str(decoded_line)+"\n"
 
-    def decode_router_ss_line(self, line):
+    def decode_router_ss_line(self,line):
         qdisc = 1
         decoded_line  = ""
         decoded_line += line.split()[qdisc]+","
@@ -235,6 +250,17 @@ class Measure:
         decoded_line += self.add_matched_field('maxq {}e',line)
         decoded_line += self.add_matched_field('ecn_mark {} ',line)
         decoded_line += self.add_matched_field('step_marks {}c',line)
+        
+        # Timestamp calculation
+        raw_ts = line.rstrip().split(" ")[-1]
+        h  = int(raw_ts.split(":")[0])
+        m  = int(raw_ts.split(":")[1])
+        s  = int(raw_ts.split(":")[2].split(".")[0])
+        ms = int(raw_ts.split(":")[2].split(".")[1])
+        t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
+        td = int(t2 - self.timestamp)
+        
+        decoded_line += str(td)+","
         return str(decoded_line)+"\n"
 
     def convert_raw_to_csv(self):
@@ -245,8 +271,14 @@ class Measure:
             print("File {self.filename} does not exists")
         else:
             with open(self.filename+'.csv', 'w') as csv_file, open(self.filename, 'r') as raw_file:
-                lines = filter(None, (line.rstrip() for line in raw_file))
-                for l in lines:                    
+                lines = list(filter(None, (line.rstrip() for line in raw_file)))
+                
+                # Get timestamp
+                raw_timestamp = lines[0].rstrip().split(" ")[-1]
+                self.timestamp = 60*60*1000*int(raw_timestamp.split(":")[0])+60*1000*int(raw_timestamp.split(":")[1])+1000*int(raw_timestamp.split(":")[2].split(".")[0])+int(raw_timestamp.split(":")[2].split(".")[1])/1000
+                csv_file.write("Timestamp: "+str(self.timestamp)+"\n")
+                
+                for l in lines:      
                     if self.is_router_data():
                         csv_file.write(self.decode_router_ss_line(l))
                     else:
