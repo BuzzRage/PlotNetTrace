@@ -265,17 +265,17 @@ class Measure:
             plt.plot(self.x, self.bytes_sent)
             
             plt.subplot(r, c, 3)
-            plt.ylabel("Queue occupation")
+            plt.ylabel("Queue occupation (pkts)")
             plt.plot(self.x, self.cpkts, color='darkorange', label='Classic pkts')
             plt.plot(self.x, self.lpkts, color='cyan', label='L4S pkts')
             
             plt.subplot(r, c, 4)
-            plt.ylabel("Queue delay")
+            plt.ylabel("Queue delay (µs)")
             plt.plot(self.x, self.cdelay, color='darkorange', label='Classic delay')
             plt.plot(self.x, self.ldelay, color='cyan', label='L4S delay')
             
             plt.subplot(r, c, 5)
-            plt.ylabel("Marking and probability")
+            plt.ylabel("Marking and probability (%)")
             plt.plot(self.x, self.prob, color='darkblue', label='Mark probability')
             
             plt.subplot(r, c, 6)
@@ -339,8 +339,6 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     lc_measure.load_data()
     cs_measure.load_data()
     ls_measure.load_data()
-
-    lc_measure.plot_all()
     
     #Visualization part
     fig = plt.figure()
@@ -355,7 +353,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
     plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
     plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
-    
+    plt.legend()
     
     plt.subplot(r, c, 2)
     plt.ylabel("RTT evolution")
@@ -364,31 +362,34 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
     plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
     plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
-    
+    plt.legend()
     
     plt.subplot(r, c, 3)
     plt.ylabel("Queue occupation")
     plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
     plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
+    plt.legend()
     
     plt.subplot(r, c, 4)
     plt.ylabel("Queue delay")
     plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
     plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
+    plt.legend()
     
     plt.subplot(r, c, 5)
     plt.ylabel("Marking and probability")
     plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
+    plt.legend()
     
     plt.subplot(r, c, 6)
     plt.ylabel("Pkts sent and dropped")
     plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
     plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
     plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
+    plt.legend()
     
     plt.suptitle("Visualisation des résultats")
     fig.supxlabel("time (in RTT)")
-    plt.legend()
     plt.show()
 
 visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"])
