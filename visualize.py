@@ -165,7 +165,7 @@ class Measure:
         self.x             = csv[:,csv_timestamp]
         self.cwnd          = csv[:,csv_cwnd]
         self.mss           = csv[:,csv_mss]
-        self.sending_rate  = csv[:,csv_send]
+        self.sending_rate  = np.divide(csv[:,csv_send],1000000) # Convert bps to Mbps
         self.rtt           = csv[:,csv_rtt]
         self.bytes_acked   = csv[:,csv_bytes_acked]
         self.pacing_rate   = csv[:,csv_pacing_rate]
@@ -193,7 +193,7 @@ class Measure:
         csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
         self.x             = csv[:,csv_timestamp] 
         self.bytes_sent    = csv[:,csv_bytes_sent] 
-        self.pkt_sent      = csv[:,csv_pkt_sent] 
+        self.pkt_sent      = np.array(csv[:,csv_pkt_sent])
         self.pkt_dropped   = np.array(csv[:,csv_pkt_dropped])
         self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
         self.pkt_requeued  = csv[:,csv_pkt_requeued] 
@@ -436,7 +436,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.legend()
     
     plt.subplot(r, c, 3)
-    plt.ylabel("Sending rate (egress bps)")
+    plt.ylabel("Sending rate (egress Mbps)")
     plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
     plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
     #plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
