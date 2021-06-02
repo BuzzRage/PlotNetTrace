@@ -12,3 +12,4 @@ Input file should be raw ss lines. For example with `ss -pti | grep -A1 "firefox
 * Implement statistics on aggregated measurments
 * Improve usage simplicity ( file handling )
 * Choose between treatment on loading or treatment on csv writing
+* Parse csv header to load tare values

@@ -52,6 +52,7 @@ class Measure:
         # Endpoint data
         self.cwnd          = list()
         self.mss           = list()
+        self.sending_rate  = list()
         self.rtt           = list()
         self.bytes_acked   = list()
         self.pacing_rate   = list()
@@ -61,6 +62,7 @@ class Measure:
         # Router data
         self.ecn_tare      = int()
         self.drop_tare     = int()
+        self.pkt_sent_tare = int()
         self.bytes_sent    = list() 
         self.pkt_sent      = list() 
         self.pkt_dropped   = list() 
@@ -108,6 +110,22 @@ class Measure:
     def pacing_rate_mean(self):
         return sum(self.pacing_rate)/len(self.pacing_rate)    
     
+    def sending_rate_mean(self):
+        return sum(self.sending_rate)/len(self.sending_rate) 
+    
+    def conv_to_bps(self,value):
+        if value[-1] == 'G':
+            return float(value[:-1])*1000000000
+        elif value[-1] == 'M':
+            return float(value[:-1])*1000000
+        elif value[-1] == 'K':
+            return float(value[:-1])*1000
+        elif value[-1] == 'N':
+            return "NaN"
+        else:
+            return float(value[:-1])
+        
+    
     def load_from_csv(self):        
         # Loading part. 
         # See https://www.man7.org/linux/man-pages/man8/ss.8.html for details
@@ -147,6 +165,7 @@ class Measure:
         self.x             = csv[:,csv_timestamp]
         self.cwnd          = csv[:,csv_cwnd]
         self.mss           = csv[:,csv_mss]
+        self.sending_rate  = csv[:,csv_send]
         self.rtt           = csv[:,csv_rtt]
         self.bytes_acked   = csv[:,csv_bytes_acked]
         self.pacing_rate   = csv[:,csv_pacing_rate]
@@ -209,11 +228,11 @@ class Measure:
         decoded_line += self.add_matched_field('segs_out:{} ',line)
         decoded_line += self.add_matched_field('segs_in:{} ',line)
         decoded_line += self.add_matched_field('data_segs_out:{} ',line)
-        decoded_line += self.add_matched_field('send {}Gbps ',line)
+        decoded_line += str(self.conv_to_bps(self.add_matched_field('send {}bps ',line)[:-1]))+","
         decoded_line += self.add_matched_field('lastsnd:{} ',line)
         decoded_line += self.add_matched_field('lastrcv:{} ',line)
-        decoded_line += self.add_matched_field('pacing_rate {}Gbps ',line)
-        decoded_line += self.add_matched_field('delivery_rate {}Gbps ',line)
+        decoded_line += str(self.conv_to_bps(self.add_matched_field('pacing_rate {}bps ',line)[:-1]))+","
+        decoded_line += str(self.conv_to_bps(self.add_matched_field('delivery_rate {}bps ',line)[:-1]))+","
         decoded_line += self.add_matched_field('delivered:{} ',line)
         decoded_line += self.add_matched_field('busy:{}ms ',line)
         decoded_line += self.add_matched_field('rcv_space:{} ',line)
@@ -238,7 +257,7 @@ class Measure:
         decoded_line  = ""
         decoded_line += line.split()[qdisc]+","
         decoded_line += self.add_matched_field('Sent {} bytes',line)
-        decoded_line += self.add_matched_field('bytes {} pkt',line)
+        decoded_line += str(int(self.add_matched_field('bytes {} pkt',line)[:-1])-self.pkt_sent_tare)+","
         decoded_line += str(int(self.add_matched_field('dropped {},',line)[:-1])-self.drop_tare)+","
         decoded_line += self.add_matched_field('overlimits {} ',line)
         decoded_line += self.add_matched_field('requeues {})',line)
@@ -284,13 +303,16 @@ class Measure:
                 header += "Timestamp: "+str(self.timestamp)+","
                 
                 if self.is_router_data():
-                    tmp_ecn_tare  = self.add_matched_field('ecn_mark {} ',lines[0])
-                    tmp_drop_tare = self.add_matched_field('dropped {},',lines[0])
-                    self.ecn_tare  = int(tmp_ecn_tare[:-1])
-                    self.drop_tare = int(tmp_drop_tare[:-1])
+                    tmp_ecn_tare       = self.add_matched_field('ecn_mark {} ',lines[0])
+                    tmp_drop_tare      = self.add_matched_field('dropped {},',lines[0])
+                    tmp_pkt_sent_tare  = self.add_matched_field('bytes {} pkt',lines[0])
+                    self.ecn_tare      = int(tmp_ecn_tare[:-1])
+                    self.drop_tare     = int(tmp_drop_tare[:-1])
+                    self.pkt_sent_tare = int(tmp_pkt_sent_tare[:-1])
                                 
                     header += "ECN Marks counter: "+str(self.ecn_tare)+","
                     header += "Dropped Packets counter: "+str(self.drop_tare)+","
+                    header += "Packet counter: "+str(self.pkt_sent_tare)+","
                 
                 csv_file.write(header+"\n")
                 
@@ -356,13 +378,13 @@ class Measure:
             
             plt.subplot(r, c, 5)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
-            plt.plot(self.x, self.pacing_rate)    
+            plt.ylabel("Sending rate mean: "+"{:.2f}".format(self.sending_rate_mean()))
+            plt.plot(self.x, self.sending_rate)    
             
             plt.subplot(r, c, 6)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Delivery rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
-            plt.plot(self.x, self.delivery_rate)
+            plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
+            plt.plot(self.x, self.pacing_rate)
             
             plt.subplot(r, c, 7)
             plt.xlabel("time (in RTT)")
@@ -387,17 +409,19 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     cs_measure.load_data()
     ls_measure.load_data()
     
+    lc_measure.plot_all()
+    
     #Visualization part
     fig = plt.figure()
     r=3
-    c=2
+    c=3
 
     
     plt.subplot(r, c, 1)
     plt.ylabel("cwnd evolution")
     plt.plot(atk_measure.x, atk_measure.cwnd*atk_measure.mss, color='r', label='atk Client')
     plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
-    plt.plot(lc_measure.x, lc_measure.cwnd*lc_measure.mss, color='darkblue', label='LL Client')
+    #plt.plot(lc_measure.x, lc_measure.cwnd*lc_measure.mss, color='darkblue', label='LL Client')
     plt.plot(cs_measure.x, cs_measure.cwnd*cs_measure.mss, color='gold', label='Classic Server')
     plt.plot(ls_measure.x, ls_measure.cwnd*ls_measure.mss, color='cyan', label='LL Server')
     plt.legend()
@@ -412,26 +436,43 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.legend()
     
     plt.subplot(r, c, 3)
+    plt.ylabel("Sending rate (egress bps)")
+    plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
+    plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
+    #plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
+    plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
+    plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
+    plt.legend()
+    
+    plt.subplot(r, c, 4)
     plt.ylabel("Queue occupation")
     plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
     plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
     plt.legend()
     
-    plt.subplot(r, c, 4)
+    plt.subplot(r, c, 5)
     plt.ylabel("Queue delay")
     plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
     plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
     plt.legend()
     
-    plt.subplot(r, c, 5)
+    plt.subplot(r, c, 6)
     plt.ylabel("Marking and probability")
     plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
     plt.legend()
     
-    plt.subplot(r, c, 6)
-    plt.ylabel("Pkts marked and dropped")
-    #plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
+    plt.subplot(r, c, 7)
+    plt.ylabel("Pkts sent")
+    plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
+    plt.legend()
+    
+    plt.subplot(r, c, 8)
+    plt.ylabel("Pkts dropped")
     plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
+    plt.legend()
+    
+    plt.subplot(r, c, 9)
+    plt.ylabel("Pkts marked")
     plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
     plt.legend()
     
