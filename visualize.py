@@ -59,6 +59,8 @@ class Measure:
         self.delivered     = list()
         
         # Router data
+        self.ecn_tare      = int()
+        self.drop_tare     = int()
         self.bytes_sent    = list() 
         self.pkt_sent      = list() 
         self.pkt_dropped   = list() 
@@ -170,20 +172,19 @@ class Measure:
         csv_timestamp      = 14 # Timestamp
         
         csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
-        #self.x             = np.arange(0,len(csv))
         self.x             = csv[:,csv_timestamp] 
         self.bytes_sent    = csv[:,csv_bytes_sent] 
         self.pkt_sent      = csv[:,csv_pkt_sent] 
-        self.pkt_dropped   = csv[:,csv_pkt_dropped] 
+        self.pkt_dropped   = np.array(csv[:,csv_pkt_dropped])
         self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
         self.pkt_requeued  = csv[:,csv_pkt_requeued] 
         self.prob          = csv[:,csv_prob] 
-        self.cdelay        = np.divide(csv[:,csv_cdelay],1000)
-        self.ldelay        = np.divide(csv[:,csv_ldelay],1000)
+        self.cdelay        = np.divide(csv[:,csv_cdelay],1000) # Convert us to ms
+        self.ldelay        = np.divide(csv[:,csv_ldelay],1000) # Convert us to ms
         self.cpkts         = csv[:,csv_cpkts] 
         self.lpkts         = csv[:,csv_lpkts] 
         self.maxq          = csv[:,csv_maxq] 
-        self.ecn_mark      = csv[:,csv_ecn_mark] 
+        self.ecn_mark      = np.array(csv[:,csv_ecn_mark])
         self.step_mark     = csv[:,csv_step_mark] 
         
     def add_matched_field(self,field,line):
@@ -238,7 +239,7 @@ class Measure:
         decoded_line += line.split()[qdisc]+","
         decoded_line += self.add_matched_field('Sent {} bytes',line)
         decoded_line += self.add_matched_field('bytes {} pkt',line)
-        decoded_line += self.add_matched_field('dropped {},',line)
+        decoded_line += str(int(self.add_matched_field('dropped {},',line)[:-1])-self.drop_tare)+","
         decoded_line += self.add_matched_field('overlimits {} ',line)
         decoded_line += self.add_matched_field('requeues {})',line)
         decoded_line += self.add_matched_field('prob {} ',line)
@@ -247,7 +248,7 @@ class Measure:
         decoded_line += self.add_matched_field('pkts_in_c {} ',line)
         decoded_line += self.add_matched_field('pkts_in_l {} ',line)
         decoded_line += self.add_matched_field('maxq {}e',line)
-        decoded_line += self.add_matched_field('ecn_mark {} ',line)
+        decoded_line += str(int(self.add_matched_field('ecn_mark {} ',line)[:-1])-self.ecn_tare)+","
         decoded_line += self.add_matched_field('step_marks {}c',line)
         
         # Timestamp calculation
@@ -270,12 +271,28 @@ class Measure:
             print("File {self.filename} does not exists")
         else:
             with open(self.filename+'.csv', 'w') as csv_file, open(self.filename, 'r') as raw_file:
-                lines = list(filter(None, (line.rstrip() for line in raw_file)))
+                lines  = list(filter(None, (line.rstrip() for line in raw_file)))
+                header = ""
                 
-                # Get timestamp
-                raw_timestamp = lines[0].rstrip().split(" ")[-1]
-                self.timestamp = 60*60*1000*int(raw_timestamp.split(":")[0])+60*1000*int(raw_timestamp.split(":")[1])+1000*int(raw_timestamp.split(":")[2].split(".")[0])+int(raw_timestamp.split(":")[2].split(".")[1])/1000
-                csv_file.write("Timestamp: "+str(self.timestamp)+"\n")
+                # Get timestamp and counters
+                raw_timestamp  = lines[0].rstrip().split(" ")[-1]
+                h  = int(raw_timestamp.split(":")[0])
+                m  = int(raw_timestamp.split(":")[1])
+                s  = int(raw_timestamp.split(":")[2].split(".")[0])
+                ms = int(raw_timestamp.split(":")[2].split(".")[1])
+                self.timestamp = 60*60*1000*h+60*1000*m+1000*s+ms/1000
+                header += "Timestamp: "+str(self.timestamp)+","
+                
+                if self.is_router_data():
+                    tmp_ecn_tare  = self.add_matched_field('ecn_mark {} ',lines[0])
+                    tmp_drop_tare = self.add_matched_field('dropped {},',lines[0])
+                    self.ecn_tare  = int(tmp_ecn_tare[:-1])
+                    self.drop_tare = int(tmp_drop_tare[:-1])
+                                
+                    header += "ECN Marks counter: "+str(self.ecn_tare)+","
+                    header += "Dropped Packets counter: "+str(self.drop_tare)+","
+                
+                csv_file.write(header+"\n")
                 
                 for l in lines:      
                     if self.is_router_data():
@@ -301,7 +318,7 @@ class Measure:
             plt.plot(self.x, self.lpkts, color='cyan', label='L4S pkts')
             
             plt.subplot(r, c, 4)
-            plt.ylabel("Queue delay (µs)")
+            plt.ylabel("Queue delay")
             plt.plot(self.x, self.cdelay, color='darkorange', label='Classic delay')
             plt.plot(self.x, self.ldelay, color='cyan', label='L4S delay')
             
