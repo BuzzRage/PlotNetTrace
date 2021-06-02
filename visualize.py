@@ -409,7 +409,6 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     cs_measure.load_data()
     ls_measure.load_data()
     
-    lc_measure.plot_all()
     
     #Visualization part
     fig = plt.figure()
@@ -421,7 +420,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.ylabel("cwnd evolution")
     plt.plot(atk_measure.x, atk_measure.cwnd*atk_measure.mss, color='r', label='atk Client')
     plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
-    #plt.plot(lc_measure.x, lc_measure.cwnd*lc_measure.mss, color='darkblue', label='LL Client')
+    plt.plot(lc_measure.x, lc_measure.cwnd*lc_measure.mss, color='darkblue', label='LL Client')
     plt.plot(cs_measure.x, cs_measure.cwnd*cs_measure.mss, color='gold', label='Classic Server')
     plt.plot(ls_measure.x, ls_measure.cwnd*ls_measure.mss, color='cyan', label='LL Server')
     plt.legend()
@@ -439,7 +438,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.ylabel("Sending rate (egress Mbps)")
     plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
     plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
-    #plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
+    plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
     plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
     plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
     plt.legend()
@@ -448,12 +447,14 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.ylabel("Queue occupation")
     plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
     plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
+    plt.yscale('log')
     plt.legend()
     
     plt.subplot(r, c, 5)
     plt.ylabel("Queue delay")
     plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
     plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
+    plt.yscale('log')
     plt.legend()
     
     plt.subplot(r, c, 6)
