@@ -62,6 +62,7 @@ class Measure:
         # Router data
         self.ecn_tare      = int()
         self.drop_tare     = int()
+        self.step_mark_tare= int()
         self.pkt_sent_tare = int()
         self.bytes_sent    = list() 
         self.pkt_sent      = list() 
@@ -268,7 +269,7 @@ class Measure:
         decoded_line += self.add_matched_field('pkts_in_l {} ',line)
         decoded_line += self.add_matched_field('maxq {}e',line)
         decoded_line += str(int(self.add_matched_field('ecn_mark {} ',line)[:-1])-self.ecn_tare)+","
-        decoded_line += self.add_matched_field('step_marks {}c',line)
+        decoded_line += str(int(self.add_matched_field('step_marks {}c',line)[:-1])-self.step_mark_tare)+","
         
         # Timestamp calculation
         raw_ts = line.rstrip().split(" ")[-1]
@@ -303,15 +304,19 @@ class Measure:
                 header += "Timestamp: "+str(self.timestamp)+","
                 
                 if self.is_router_data():
-                    tmp_ecn_tare       = self.add_matched_field('ecn_mark {} ',lines[0])
-                    tmp_drop_tare      = self.add_matched_field('dropped {},',lines[0])
-                    tmp_pkt_sent_tare  = self.add_matched_field('bytes {} pkt',lines[0])
-                    self.ecn_tare      = int(tmp_ecn_tare[:-1])
-                    self.drop_tare     = int(tmp_drop_tare[:-1])
-                    self.pkt_sent_tare = int(tmp_pkt_sent_tare[:-1])
+                    tmp_ecn_tare        = self.add_matched_field('ecn_mark {} ',lines[0])
+                    tmp_drop_tare       = self.add_matched_field('dropped {},',lines[0])
+                    tmp_step_mark_tare  = self.add_matched_field('step_marks {}c',lines[0])
+                    tmp_pkt_sent_tare   = self.add_matched_field('bytes {} pkt',lines[0])
+
+                    self.ecn_tare       = int(tmp_ecn_tare[:-1])
+                    self.drop_tare      = int(tmp_drop_tare[:-1])
+                    self.pkt_sent_tare  = int(tmp_pkt_sent_tare[:-1])
+                    self.step_mark_tare = int(tmp_step_mark_tare[:-1])
                                 
                     header += "ECN Marks counter: "+str(self.ecn_tare)+","
                     header += "Dropped Packets counter: "+str(self.drop_tare)+","
+                    header += "Step marks counter: "+str(self.step_mark_tare)+","
                     header += "Packet counter: "+str(self.pkt_sent_tare)+","
                 
                 csv_file.write(header+"\n")
@@ -468,12 +473,13 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     plt.legend()
     
     plt.subplot(r, c, 8)
-    plt.ylabel("Pkts dropped")
-    plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
+    plt.ylabel("Step marks")
+    plt.plot(rtr_measure.x, rtr_measure.step_mark, color='r', label='Step marks')
     plt.legend()
     
     plt.subplot(r, c, 9)
-    plt.ylabel("Pkts marked")
+    plt.ylabel("Pkts dropped and marked")
+    plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
     plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
     plt.legend()
     
