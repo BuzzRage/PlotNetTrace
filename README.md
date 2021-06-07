@@ -13,3 +13,4 @@ Input file should be raw ss lines. For example with `ss -pti | grep -A1 "firefox
 * Improve usage simplicity ( file handling )
 * Choose between treatment on loading or treatment on csv writing
 * Parse csv header to load tare values
+* Plot drop and ECN marks in different subplot
