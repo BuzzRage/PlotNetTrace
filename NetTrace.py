@@ -3,6 +3,7 @@
 from pathlib import Path
 from matplotlib import pyplot as plt
 import numpy as np
+from parse import *
 
 # Class used to load data and make post-process functions
 
