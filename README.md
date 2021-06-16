@@ -8,9 +8,10 @@ Input file should be raw ss lines. For example with `ss -pti | grep -A1 "firefox
 ```
 
 ## TODO
-* Implement full router data handling
 * Implement statistics on aggregated measurments
 * Improve usage simplicity ( file handling )
 * Choose between treatment on loading or treatment on csv writing
 * Parse csv header to load tare values
 * Plot drop and ECN marks in different subplot
+* Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
+* Implement verbose mode if "-v" provided
