@@ -24,11 +24,14 @@ verbose = False
 def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     complete = True
-    
+
     for node in suffix[:-1]:
         if files[node+"_file"] == None: complete = False
 
     simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
+        
+    date = rtr_file.split("/")[1]
+    timecode = rtr_file.split("/")[2].split("-")[0]
         
     if simpletest is True:
     
@@ -99,7 +102,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
         plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
         plt.legend()
         
-        plt.suptitle("Visualisation des résultats")
+        plt.suptitle("Measurements: SimpleTest "+date+" "+timecode)
         fig.supxlabel("time (in ms)")
         plt.show()
         
