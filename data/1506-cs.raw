@@ -1,0 +1,1428 @@
+ 
+	 cubic wscale:7,7 rto:248 rtt:44.938/1.777 mss:1402 cwnd:9 ssthresh:6 bytes_acked:750108 segs_out:575 segs_in:450 send 2.2Mbps lastrcv:1784 pacing_rate 2.7Mbps unacked:8 retrans:0/29 rcv_space:14020 15:06:31.939562 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.734/1.356 mss:1402 cwnd:10 ssthresh:6 bytes_acked:755716 segs_out:581 segs_in:452 send 2.5Mbps lastsnd:4 lastrcv:1820 lastack:4 pacing_rate 3.0Mbps unacked:10 retrans:0/29 rcv_space:14020 15:06:31.973313 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.469/0.983 mss:1402 cwnd:10 ssthresh:6 bytes_acked:764128 segs_out:587 segs_in:455 send 2.5Mbps lastsnd:12 lastrcv:1852 lastack:12 pacing_rate 3.0Mbps unacked:10 retrans:0/29 rcv_space:14020 15:06:32.005335 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.015/2.737 mss:1402 cwnd:10 ssthresh:6 bytes_acked:775344 segs_out:595 segs_in:459 send 2.4Mbps lastsnd:8 lastrcv:1884 lastack:8 pacing_rate 2.9Mbps unacked:10 retrans:0/29 rcv_space:14020 15:06:32.037311 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.32/2.196 mss:1402 cwnd:11 ssthresh:6 bytes_acked:783756 segs_out:601 segs_in:462 send 2.7Mbps lastsnd:8 lastrcv:1916 lastack:8 pacing_rate 3.3Mbps unacked:10 retrans:0/29 rcv_space:14020 15:06:32.069321 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.875/1.597 mss:1402 cwnd:11 ssthresh:6 bytes_acked:792168 segs_out:607 segs_in:465 send 2.7Mbps lastsnd:20 lastrcv:1948 lastack:20 pacing_rate 3.3Mbps unacked:10 retrans:0/29 rcv_space:14020 15:06:32.101419 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.454/0.865 mss:1402 cwnd:11 ssthresh:6 bytes_acked:806188 segs_out:617 segs_in:470 send 2.8Mbps lastsnd:8 lastrcv:1980 lastack:8 pacing_rate 3.3Mbps unacked:10 retrans:0/29 rcv_space:14020 15:06:32.133531 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.268/0.516 mss:1402 cwnd:12 ssthresh:6 bytes_acked:817404 segs_out:627 segs_in:474 send 3.0Mbps lastrcv:2008 pacing_rate 3.6Mbps unacked:12 retrans:0/29 rcv_space:14020 15:06:32.165507 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.675/1.25 mss:1402 cwnd:12 ssthresh:6 bytes_acked:825816 segs_out:633 segs_in:477 send 3.0Mbps lastrcv:2040 pacing_rate 3.6Mbps unacked:12 retrans:0/29 rcv_space:14020 15:06:32.197459 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.861/2.425 mss:1402 cwnd:12 ssthresh:6 bytes_acked:837032 segs_out:641 segs_in:481 send 2.9Mbps lastsnd:12 lastrcv:2072 lastack:12 pacing_rate 3.5Mbps unacked:12 retrans:0/29 rcv_space:14020 15:06:32.225564 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.079/1.782 mss:1402 cwnd:13 ssthresh:6 bytes_acked:848248 segs_out:649 segs_in:485 send 3.2Mbps lastsnd:4 lastrcv:2100 lastack:4 pacing_rate 3.9Mbps unacked:12 retrans:0/29 rcv_space:14020 15:06:32.257423 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.335/1.925 mss:1402 cwnd:13 ssthresh:6 bytes_acked:859464 segs_out:657 segs_in:489 send 3.2Mbps lastsnd:4 lastrcv:2132 lastack:4 pacing_rate 3.9Mbps unacked:12 retrans:0/29 rcv_space:14020 15:06:32.285424 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.78/1.369 mss:1402 cwnd:13 ssthresh:6 bytes_acked:870680 segs_out:665 segs_in:493 send 3.3Mbps lastsnd:8 lastrcv:2160 lastack:8 pacing_rate 3.9Mbps unacked:12 retrans:0/29 rcv_space:14020 15:06:32.317250 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.438/0.89 mss:1402 cwnd:14 ssthresh:6 bytes_acked:881896 segs_out:675 segs_in:497 send 3.5Mbps lastsnd:4 lastrcv:2188 lastack:4 pacing_rate 4.2Mbps unacked:14 retrans:0/29 rcv_space:14020 15:06:32.345288 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.764/1.354 mss:1402 cwnd:14 ssthresh:6 bytes_acked:893112 segs_out:683 segs_in:501 send 3.5Mbps lastrcv:2216 pacing_rate 4.2Mbps unacked:14 retrans:0/29 rcv_space:14020 15:06:32.373435 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.678/2.35 mss:1402 cwnd:14 ssthresh:6 bytes_acked:907132 segs_out:693 segs_in:506 send 3.4Mbps lastsnd:4 lastrcv:2244 lastack:4 pacing_rate 4.1Mbps unacked:14 retrans:0/29 rcv_space:14020 15:06:32.401459 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.962/1.684 mss:1402 cwnd:15 ssthresh:6 bytes_acked:918348 segs_out:701 segs_in:510 send 3.7Mbps lastrcv:2272 pacing_rate 4.5Mbps unacked:14 retrans:0/29 rcv_space:14020 15:06:32.429465 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.747/2.23 mss:1402 cwnd:15 ssthresh:6 bytes_acked:929564 segs_out:709 segs_in:514 send 3.7Mbps lastrcv:2300 pacing_rate 4.4Mbps unacked:14 retrans:0/29 rcv_space:14020 15:06:32.457436 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.685/1.376 mss:1402 cwnd:16 ssthresh:6 bytes_acked:946388 segs_out:723 segs_in:520 send 4.0Mbps lastsnd:4 lastrcv:2336 lastack:4 pacing_rate 4.8Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:32.489562 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.342/0.92 mss:1402 cwnd:16 ssthresh:6 bytes_acked:957604 segs_out:731 segs_in:524 send 4.0Mbps lastsnd:4 lastrcv:2364 lastack:4 pacing_rate 4.9Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:32.521537 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.573/1.101 mss:1402 cwnd:16 ssthresh:6 bytes_acked:974428 segs_out:743 segs_in:530 send 4.0Mbps lastsnd:4 lastrcv:2396 lastack:4 pacing_rate 4.8Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:32.549247 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.256/0.522 mss:1402 cwnd:16 ssthresh:6 bytes_acked:991252 segs_out:755 segs_in:536 send 4.1Mbps lastrcv:2424 pacing_rate 4.9Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:32.581389 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.147/0.314 mss:1402 cwnd:17 ssthresh:6 bytes_acked:1002468 segs_out:763 segs_in:540 send 4.3Mbps lastsnd:8 lastrcv:2456 lastack:8 pacing_rate 5.2Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:32.609297 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.051/0.184 mss:1402 cwnd:17 ssthresh:6 bytes_acked:1019292 segs_out:775 segs_in:546 send 4.3Mbps lastsnd:4 lastrcv:2484 lastack:4 pacing_rate 5.2Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:32.641600 
+ 
+
+	 cubic wscale:7,7 rto:244 rtt:43.992/0.105 mss:1402 cwnd:18 ssthresh:6 bytes_acked:1036116 segs_out:789 segs_in:552 send 4.6Mbps lastsnd:8 lastrcv:2520 lastack:8 pacing_rate 5.5Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:32.673487 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.169/0.269 mss:1402 cwnd:18 ssthresh:6 bytes_acked:1052940 segs_out:801 segs_in:558 send 4.6Mbps lastrcv:2548 pacing_rate 5.5Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:32.705475 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.508/1.786 mss:1402 cwnd:18 ssthresh:6 bytes_acked:1069764 segs_out:813 segs_in:564 send 4.4Mbps lastrcv:2576 pacing_rate 5.3Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:32.733523 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.905/0.95 mss:1402 cwnd:18 ssthresh:6 bytes_acked:1083784 segs_out:823 segs_in:569 send 4.5Mbps lastsnd:8 lastrcv:2608 lastack:8 pacing_rate 5.4Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:32.761473 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.346/1.877 mss:1402 cwnd:19 ssthresh:6 bytes_acked:1103412 segs_out:837 segs_in:576 send 4.7Mbps lastrcv:2636 pacing_rate 5.6Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:32.793396 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.834/1.285 mss:1402 cwnd:19 ssthresh:6 bytes_acked:1117432 segs_out:847 segs_in:581 send 4.8Mbps lastsnd:4 lastrcv:2668 lastack:4 pacing_rate 5.7Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:32.821476 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.405/1.699 mss:1402 cwnd:20 ssthresh:6 bytes_acked:1137060 segs_out:863 segs_in:588 send 4.9Mbps lastsnd:4 lastrcv:2700 lastack:4 pacing_rate 5.9Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:32.853368 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.606/0.995 mss:1402 cwnd:20 ssthresh:6 bytes_acked:1153884 segs_out:875 segs_in:594 send 5.0Mbps lastrcv:2728 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:32.885343 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.95/2.66 mss:1402 cwnd:20 ssthresh:6 bytes_acked:1173512 segs_out:889 segs_in:601 send 4.7Mbps lastrcv:2760 pacing_rate 5.6Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:32.917548 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.775/1.506 mss:1402 cwnd:20 ssthresh:6 bytes_acked:1187532 segs_out:899 segs_in:606 send 4.7Mbps lastsnd:4 lastrcv:2788 lastack:4 pacing_rate 5.6Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:32.945480 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.398/0.577 mss:1402 cwnd:21 ssthresh:6 bytes_acked:1207160 segs_out:913 segs_in:613 send 5.0Mbps lastsnd:4 lastrcv:2824 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:32.977428 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.073/0.819 mss:1402 cwnd:21 ssthresh:6 bytes_acked:1226788 segs_out:927 segs_in:620 send 5.0Mbps lastsnd:4 lastrcv:2856 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.009451 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.028/1.135 mss:1402 cwnd:22 ssthresh:6 bytes_acked:1246416 segs_out:943 segs_in:627 send 5.2Mbps lastrcv:2884 pacing_rate 6.3Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.041406 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:48.256/2.552 mss:1402 cwnd:22 ssthresh:6 bytes_acked:1266044 segs_out:957 segs_in:634 send 5.1Mbps lastrcv:2916 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.073321 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.056/2.362 mss:1402 cwnd:22 ssthresh:6 bytes_acked:1285672 segs_out:971 segs_in:641 send 4.9Mbps lastrcv:2948 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.105608 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.67/1.708 mss:1402 cwnd:23 ssthresh:6 bytes_acked:1302496 segs_out:983 segs_in:647 send 5.1Mbps lastsnd:4 lastrcv:2980 lastack:4 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.137404 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.372/0.965 mss:1402 cwnd:23 ssthresh:6 bytes_acked:1319320 segs_out:995 segs_in:653 send 5.0Mbps lastrcv:3008 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.165247 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.677/0.443 mss:1402 cwnd:23 ssthresh:6 bytes_acked:1336144 segs_out:1007 segs_in:659 send 5.0Mbps lastrcv:3036 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.193421 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.436/0.451 mss:1402 cwnd:23 ssthresh:6 bytes_acked:1352968 segs_out:1019 segs_in:665 send 5.0Mbps lastsnd:4 lastrcv:3068 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.222185 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.773/0.391 mss:1402 cwnd:24 ssthresh:6 bytes_acked:1372596 segs_out:1035 segs_in:672 send 5.2Mbps lastrcv:3096 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:33.253370 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.803/1.81 mss:1402 cwnd:24 ssthresh:6 bytes_acked:1392224 segs_out:1049 segs_in:679 send 5.1Mbps lastsnd:4 lastrcv:3132 lastack:4 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:33.281430 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:54.267/2.017 mss:1402 cwnd:24 ssthresh:6 bytes_acked:1409048 segs_out:1061 segs_in:685 send 5.0Mbps lastsnd:8 lastrcv:3164 lastack:8 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:33.317665 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.325/2.074 mss:1402 cwnd:25 ssthresh:6 bytes_acked:1428676 segs_out:1075 segs_in:692 send 5.0Mbps lastrcv:3192 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:33.349383 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.785/1.874 mss:1402 cwnd:25 ssthresh:6 bytes_acked:1448304 segs_out:1089 segs_in:699 send 4.9Mbps lastrcv:3224 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:33.381275 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.237/1.212 mss:1402 cwnd:23 ssthresh:17 bytes_acked:1465128 segs_out:1100 segs_in:706 send 4.6Mbps lastsnd:4 lastrcv:3256 lastack:4 pacing_rate 5.5Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:33.409512 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.114/0.335 mss:1402 cwnd:17 ssthresh:17 bytes_acked:1484756 segs_out:1108 segs_in:713 send 3.4Mbps lastsnd:8 lastrcv:3288 lastack:4 pacing_rate 4.1Mbps unacked:17 retrans:0/29 rcv_space:14020 15:06:33.441382 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.304/0.732 mss:1402 cwnd:17 ssthresh:17 bytes_acked:1504384 segs_out:1122 segs_in:721 send 3.4Mbps lastrcv:3316 pacing_rate 4.1Mbps unacked:17 retrans:0/29 rcv_space:14020 15:06:33.473373 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.97/1.452 mss:1402 cwnd:18 ssthresh:17 bytes_acked:1517002 segs_out:1132 segs_in:725 send 3.9Mbps lastsnd:4 lastrcv:3348 lastack:4 pacing_rate 4.7Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:33.505455 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:49.2/1.847 mss:1402 cwnd:18 ssthresh:17 bytes_acked:1533826 segs_out:1143 segs_in:731 send 4.1Mbps lastsnd:4 lastrcv:3380 lastack:4 pacing_rate 4.9Mbps unacked:17 retrans:0/29 rcv_space:14020 15:06:33.533422 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.239/1.268 mss:1402 cwnd:19 ssthresh:17 bytes_acked:1550650 segs_out:1157 segs_in:737 send 4.5Mbps lastsnd:4 lastrcv:3412 lastack:4 pacing_rate 5.4Mbps unacked:19 retrans:0/29 rcv_space:14020 15:06:33.565503 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.798/1.953 mss:1402 cwnd:19 ssthresh:17 bytes_acked:1566072 segs_out:1167 segs_in:742 send 4.6Mbps lastsnd:4 lastrcv:3444 lastack:4 pacing_rate 5.5Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:33.597410 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.201/2.08 mss:1402 cwnd:19 ssthresh:17 bytes_acked:1585700 segs_out:1181 segs_in:749 send 4.5Mbps lastrcv:3472 pacing_rate 5.4Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:33.629353 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.243/2.272 mss:1402 cwnd:19 ssthresh:17 bytes_acked:1599720 segs_out:1191 segs_in:754 send 4.6Mbps lastrcv:3500 pacing_rate 5.5Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:33.657278 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.476/1.879 mss:1402 cwnd:20 ssthresh:17 bytes_acked:1616544 segs_out:1205 segs_in:760 send 4.9Mbps lastrcv:3528 pacing_rate 5.9Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.685364 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.883/1.024 mss:1402 cwnd:20 ssthresh:17 bytes_acked:1630564 segs_out:1215 segs_in:765 send 5.0Mbps lastsnd:4 lastrcv:3556 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.713441 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.08/2.87 mss:1402 cwnd:20 ssthresh:17 bytes_acked:1650192 segs_out:1229 segs_in:772 send 4.8Mbps lastrcv:3588 pacing_rate 5.7Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.745488 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.962/1.56 mss:1402 cwnd:20 ssthresh:17 bytes_acked:1669820 segs_out:1243 segs_in:779 send 4.8Mbps lastrcv:3620 pacing_rate 5.7Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.777324 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.191/1.128 mss:1402 cwnd:20 ssthresh:17 bytes_acked:1686644 segs_out:1255 segs_in:785 send 4.8Mbps lastrcv:3648 pacing_rate 5.7Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.805371 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.268/0.937 mss:1402 cwnd:21 ssthresh:17 bytes_acked:1703468 segs_out:1267 segs_in:791 send 5.0Mbps lastrcv:3676 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.833271 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.069/1.124 mss:1402 cwnd:21 ssthresh:17 bytes_acked:1720292 segs_out:1279 segs_in:797 send 5.0Mbps lastsnd:4 lastrcv:3708 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.861291 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.357/0.941 mss:1402 cwnd:21 ssthresh:17 bytes_acked:1739920 segs_out:1293 segs_in:804 send 5.0Mbps lastsnd:4 lastrcv:3740 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:33.893395 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.615/1.004 mss:1402 cwnd:22 ssthresh:17 bytes_acked:1759548 segs_out:1309 segs_in:811 send 5.3Mbps lastrcv:3768 pacing_rate 6.4Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.925418 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.442/1.166 mss:1402 cwnd:22 ssthresh:17 bytes_acked:1776372 segs_out:1321 segs_in:817 send 5.3Mbps lastrcv:3796 pacing_rate 6.4Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.953382 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:48.147/2.766 mss:1402 cwnd:22 ssthresh:17 bytes_acked:1790392 segs_out:1331 segs_in:822 send 5.1Mbps lastsnd:4 lastrcv:3824 lastack:4 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:33.981439 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.266/2.601 mss:1402 cwnd:22 ssthresh:17 bytes_acked:1807216 segs_out:1343 segs_in:828 send 4.9Mbps lastsnd:8 lastrcv:3856 lastack:8 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:34.009393 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.872/1.49 mss:1402 cwnd:23 ssthresh:17 bytes_acked:1826844 segs_out:1357 segs_in:835 send 5.1Mbps lastsnd:4 lastrcv:3888 lastack:4 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:34.041394 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.181/1.057 mss:1402 cwnd:23 ssthresh:17 bytes_acked:1846472 segs_out:1371 segs_in:842 send 5.0Mbps lastrcv:3916 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:34.073271 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.606/0.603 mss:1402 cwnd:23 ssthresh:17 bytes_acked:1863296 segs_out:1383 segs_in:848 send 5.0Mbps lastsnd:4 lastrcv:3948 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:34.101322 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.844/0.288 mss:1402 cwnd:24 ssthresh:17 bytes_acked:1882924 segs_out:1399 segs_in:855 send 5.2Mbps lastrcv:3976 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.133584 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.697/0.389 mss:1402 cwnd:24 ssthresh:17 bytes_acked:1902552 segs_out:1413 segs_in:862 send 5.2Mbps lastrcv:4008 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.165449 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:53.466/2.354 mss:1402 cwnd:24 ssthresh:17 bytes_acked:1919376 segs_out:1425 segs_in:868 send 5.0Mbps lastrcv:4036 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.193304 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.068/1.697 mss:1402 cwnd:24 ssthresh:17 bytes_acked:1936200 segs_out:1437 segs_in:874 send 4.9Mbps lastrcv:4064 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.221338 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.615/0.828 mss:1402 cwnd:25 ssthresh:17 bytes_acked:1953024 segs_out:1449 segs_in:880 send 5.0Mbps lastrcv:4092 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.249311 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.846/0.443 mss:1402 cwnd:25 ssthresh:17 bytes_acked:1967044 segs_out:1459 segs_in:885 send 5.0Mbps lastsnd:8 lastrcv:4124 lastack:8 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.277276 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.609/1.286 mss:1402 cwnd:25 ssthresh:17 bytes_acked:1986672 segs_out:1473 segs_in:892 send 5.0Mbps lastrcv:4152 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:34.309405 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.308/0.564 mss:1402 cwnd:26 ssthresh:17 bytes_acked:2003496 segs_out:1487 segs_in:898 send 5.2Mbps lastsnd:4 lastrcv:4184 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.337337 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.143/0.228 mss:1402 cwnd:26 ssthresh:17 bytes_acked:2023124 segs_out:1501 segs_in:905 send 5.2Mbps lastsnd:4 lastrcv:4216 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.369541 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:58.104/2.559 mss:1402 cwnd:26 ssthresh:17 bytes_acked:2042752 segs_out:1515 segs_in:912 send 5.0Mbps lastrcv:4244 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.401415 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.844/1.524 mss:1402 cwnd:26 ssthresh:17 bytes_acked:2062380 segs_out:1529 segs_in:919 send 4.9Mbps lastrcv:4276 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.433454 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.241/0.813 mss:1402 cwnd:26 ssthresh:17 bytes_acked:2079204 segs_out:1541 segs_in:925 send 4.8Mbps lastsnd:8 lastrcv:4312 lastack:8 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.465498 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.991/1.596 mss:1402 cwnd:27 ssthresh:17 bytes_acked:2098832 segs_out:1555 segs_in:932 send 5.0Mbps lastsnd:4 lastrcv:4344 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.497241 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.136/1.452 mss:1402 cwnd:27 ssthresh:17 bytes_acked:2118460 segs_out:1569 segs_in:939 send 5.0Mbps lastsnd:4 lastrcv:4376 lastack:4 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.529519 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.888/1.299 mss:1402 cwnd:27 ssthresh:17 bytes_acked:2138088 segs_out:1583 segs_in:946 send 5.0Mbps lastsnd:4 lastrcv:4408 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:34.561441 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.94/1.489 mss:1402 cwnd:28 ssthresh:17 bytes_acked:2157716 segs_out:1599 segs_in:953 send 5.2Mbps lastrcv:4436 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.593304 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.025/1.583 mss:1402 cwnd:28 ssthresh:17 bytes_acked:2174540 segs_out:1611 segs_in:959 send 5.1Mbps lastrcv:4464 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.621508 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:62.778/2.269 mss:1402 cwnd:28 ssthresh:17 bytes_acked:2191364 segs_out:1623 segs_in:965 send 5.0Mbps lastrcv:4492 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.649350 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.102/1.504 mss:1402 cwnd:28 ssthresh:17 bytes_acked:2208188 segs_out:1635 segs_in:971 send 4.9Mbps lastsnd:8 lastrcv:4528 lastack:8 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.681354 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.247/2.046 mss:1402 cwnd:29 ssthresh:17 bytes_acked:2227816 segs_out:1649 segs_in:978 send 5.0Mbps lastsnd:4 lastrcv:4560 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.713369 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.876/2.208 mss:1402 cwnd:29 ssthresh:17 bytes_acked:2247444 segs_out:1663 segs_in:985 send 4.9Mbps lastsnd:4 lastrcv:4592 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.745401 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.62/2.034 mss:1402 cwnd:29 ssthresh:17 bytes_acked:2267072 segs_out:1677 segs_in:992 send 5.0Mbps lastrcv:4620 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:34.777279 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.652/2.03 mss:1402 cwnd:30 ssthresh:17 bytes_acked:2286700 segs_out:1693 segs_in:999 send 5.1Mbps lastrcv:4652 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.809438 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.489/2.054 mss:1402 cwnd:30 ssthresh:17 bytes_acked:2306328 segs_out:1707 segs_in:1006 send 5.1Mbps lastrcv:4684 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.841382 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.23/1.806 mss:1402 cwnd:30 ssthresh:17 bytes_acked:2323152 segs_out:1719 segs_in:1012 send 5.2Mbps lastrcv:4712 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.869309 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:67.829/2.923 mss:1402 cwnd:30 ssthresh:17 bytes_acked:2339976 segs_out:1731 segs_in:1018 send 5.0Mbps lastrcv:4744 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.901271 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.629/2.54 mss:1402 cwnd:30 ssthresh:17 bytes_acked:2359604 segs_out:1745 segs_in:1025 send 4.8Mbps lastrcv:4776 pacing_rate 5.8Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.933381 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.204/2.238 mss:1402 cwnd:31 ssthresh:17 bytes_acked:2376428 segs_out:1757 segs_in:1031 send 5.0Mbps lastrcv:4804 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.961457 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.186/2.096 mss:1402 cwnd:31 ssthresh:17 bytes_acked:2393252 segs_out:1769 segs_in:1037 send 5.0Mbps lastrcv:4832 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:34.989440 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.548/1.879 mss:1402 cwnd:31 ssthresh:17 bytes_acked:2410076 segs_out:1781 segs_in:1043 send 4.9Mbps lastrcv:4860 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:35.017420 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.707/1.711 mss:1402 cwnd:31 ssthresh:17 bytes_acked:2426900 segs_out:1793 segs_in:1049 send 4.9Mbps lastrcv:4888 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:35.045395 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.787/1.607 mss:1402 cwnd:31 ssthresh:17 bytes_acked:2443724 segs_out:1805 segs_in:1055 send 4.9Mbps lastrcv:4916 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:35.073464 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.893/1.544 mss:1402 cwnd:32 ssthresh:17 bytes_acked:2460548 segs_out:1819 segs_in:1061 send 5.1Mbps lastsnd:4 lastrcv:4948 lastack:4 pacing_rate 6.1Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.101409 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.574/1.53 mss:1402 cwnd:32 ssthresh:17 bytes_acked:2480176 segs_out:1833 segs_in:1068 send 5.1Mbps lastrcv:4976 pacing_rate 6.1Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.133390 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:71.46/1.907 mss:1402 cwnd:32 ssthresh:17 bytes_acked:2497000 segs_out:1845 segs_in:1074 send 5.0Mbps lastrcv:5004 pacing_rate 6.0Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.161391 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:73.234/2.459 mss:1402 cwnd:32 ssthresh:17 bytes_acked:2513824 segs_out:1857 segs_in:1080 send 4.9Mbps lastsnd:4 lastrcv:5036 lastack:4 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.189882 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.228/2.148 mss:1402 cwnd:33 ssthresh:17 bytes_acked:2530648 segs_out:1869 segs_in:1086 send 5.0Mbps lastsnd:4 lastrcv:5064 lastack:4 pacing_rate 6.0Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.221526 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.761/1.662 mss:1402 cwnd:33 ssthresh:17 bytes_acked:2547472 segs_out:1881 segs_in:1092 send 5.0Mbps lastsnd:8 lastrcv:5096 lastack:8 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.249410 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:75.101/1.046 mss:1402 cwnd:33 ssthresh:17 bytes_acked:2567100 segs_out:1895 segs_in:1099 send 4.9Mbps lastsnd:4 lastrcv:5128 lastack:4 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.281439 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:75.293/0.859 mss:1402 cwnd:33 ssthresh:17 bytes_acked:2586728 segs_out:1909 segs_in:1106 send 4.9Mbps lastsnd:4 lastrcv:5160 lastack:4 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.313532 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:75.362/0.694 mss:1402 cwnd:33 ssthresh:17 bytes_acked:2606356 segs_out:1923 segs_in:1113 send 4.9Mbps lastrcv:5188 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:35.345434 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:75.52/2.793 mss:1402 cwnd:31 ssthresh:23 bytes_acked:2624582 segs_out:1935 segs_in:1120 send 4.6Mbps lastrcv:5220 pacing_rate 5.5Mbps unacked:31 retrans:0/29 rcv_space:14020 15:06:35.377505 
+ 
+
+	 cubic wscale:7,7 rto:280 rtt:76.741/2.405 mss:1402 cwnd:28 ssthresh:23 bytes_acked:2641406 segs_out:1944 segs_in:1126 send 4.1Mbps lastrcv:5248 pacing_rate 4.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:35.405355 
+ 
+
+	 cubic wscale:7,7 rto:280 rtt:77.301/2.043 mss:1402 cwnd:23 ssthresh:23 bytes_acked:2658230 segs_out:1951 segs_in:1132 send 3.3Mbps lastrcv:5276 pacing_rate 4.0Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:35.433408 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:75.131/1.777 mss:1402 cwnd:23 ssthresh:23 bytes_acked:2675054 segs_out:1963 segs_in:1139 send 3.4Mbps lastrcv:5304 pacing_rate 4.1Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:35.461419 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:68.24/3.094 mss:1402 cwnd:20 ssthresh:16 bytes_acked:2690476 segs_out:1971 segs_in:1145 send 3.3Mbps lastsnd:4 lastrcv:5332 lastack:4 pacing_rate 3.9Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:35.489384 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.554/4.436 mss:1402 cwnd:16 ssthresh:16 bytes_acked:2708702 segs_out:1980 segs_in:1152 send 3.0Mbps lastrcv:5360 pacing_rate 3.6Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:35.517487 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:54.753/4.498 mss:1402 cwnd:16 ssthresh:16 bytes_acked:2724124 segs_out:1991 segs_in:1158 send 3.3Mbps lastrcv:5388 pacing_rate 3.9Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:35.545399 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:49.126/4.639 mss:1402 cwnd:17 ssthresh:16 bytes_acked:2740948 segs_out:2003 segs_in:1164 send 3.9Mbps lastrcv:5420 pacing_rate 4.7Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:35.577316 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.131/3.741 mss:1402 cwnd:17 ssthresh:16 bytes_acked:2752164 segs_out:2012 segs_in:1168 send 4.0Mbps lastsnd:4 lastrcv:5448 lastack:4 pacing_rate 4.9Mbps unacked:17 retrans:0/29 rcv_space:14020 15:06:35.605285 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.81/2.068 mss:1402 cwnd:17 ssthresh:16 bytes_acked:2768988 segs_out:2023 segs_in:1174 send 4.2Mbps lastrcv:5476 pacing_rate 5.0Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:35.633345 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.379/3.221 mss:1402 cwnd:17 ssthresh:16 bytes_acked:2785812 segs_out:2035 segs_in:1180 send 4.1Mbps lastsnd:4 lastrcv:5512 lastack:4 pacing_rate 4.9Mbps unacked:16 retrans:0/29 rcv_space:14020 15:06:35.665360 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.21/2.092 mss:1402 cwnd:18 ssthresh:16 bytes_acked:2799832 segs_out:2047 segs_in:1185 send 4.5Mbps lastrcv:5540 pacing_rate 5.4Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:35.697407 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:44.601/1.194 mss:1402 cwnd:18 ssthresh:16 bytes_acked:2813852 segs_out:2057 segs_in:1190 send 4.5Mbps lastsnd:4 lastrcv:5568 lastack:4 pacing_rate 5.4Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:35.725453 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.732/2.34 mss:1402 cwnd:18 ssthresh:16 bytes_acked:2830676 segs_out:2069 segs_in:1196 send 4.4Mbps lastrcv:5596 pacing_rate 5.3Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:35.753360 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.708/1.976 mss:1402 cwnd:18 ssthresh:16 bytes_acked:2847500 segs_out:2081 segs_in:1202 send 4.4Mbps lastrcv:5628 pacing_rate 5.3Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:35.781368 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.242/1.404 mss:1402 cwnd:19 ssthresh:16 bytes_acked:2861520 segs_out:2091 segs_in:1207 send 4.7Mbps lastsnd:8 lastrcv:5660 lastack:8 pacing_rate 5.7Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:35.813333 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.599/1.657 mss:1402 cwnd:19 ssthresh:16 bytes_acked:2881148 segs_out:2105 segs_in:1214 send 4.7Mbps lastsnd:4 lastrcv:5692 lastack:4 pacing_rate 5.6Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:35.845316 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.282/1.858 mss:1402 cwnd:20 ssthresh:16 bytes_acked:2897972 segs_out:2119 segs_in:1220 send 5.0Mbps lastrcv:5720 pacing_rate 5.9Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:35.877329 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:45.134/1.672 mss:1402 cwnd:20 ssthresh:16 bytes_acked:2914796 segs_out:2131 segs_in:1226 send 5.0Mbps lastsnd:4 lastrcv:5752 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:35.905414 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.479/2.231 mss:1402 cwnd:20 ssthresh:16 bytes_acked:2934424 segs_out:2145 segs_in:1233 send 4.8Mbps lastsnd:4 lastrcv:5784 lastack:4 pacing_rate 5.8Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:35.937501 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:46.927/2.151 mss:1402 cwnd:20 ssthresh:16 bytes_acked:2951248 segs_out:2157 segs_in:1239 send 4.8Mbps lastsnd:4 lastrcv:5812 lastack:4 pacing_rate 5.7Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:35.969309 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.147/1.081 mss:1402 cwnd:21 ssthresh:16 bytes_acked:2970876 segs_out:2171 segs_in:1246 send 5.0Mbps lastsnd:4 lastrcv:5848 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:36.001355 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.307/0.899 mss:1402 cwnd:21 ssthresh:16 bytes_acked:2990504 segs_out:2185 segs_in:1253 send 5.0Mbps lastrcv:5876 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:36.033480 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.218/1.068 mss:1402 cwnd:22 ssthresh:16 bytes_acked:3010132 segs_out:2201 segs_in:1260 send 5.2Mbps lastrcv:5908 pacing_rate 6.3Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.065473 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.104/1.21 mss:1402 cwnd:22 ssthresh:16 bytes_acked:3026956 segs_out:2213 segs_in:1266 send 5.2Mbps lastrcv:5936 pacing_rate 6.3Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.093465 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:49.261/3.209 mss:1402 cwnd:22 ssthresh:16 bytes_acked:3043780 segs_out:2225 segs_in:1272 send 5.0Mbps lastsnd:4 lastrcv:5968 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.121422 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.452/2.088 mss:1402 cwnd:23 ssthresh:16 bytes_acked:3063408 segs_out:2239 segs_in:1279 send 5.1Mbps lastrcv:5996 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.153370 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.82/1.413 mss:1402 cwnd:23 ssthresh:16 bytes_acked:3080232 segs_out:2251 segs_in:1285 send 5.1Mbps lastrcv:6024 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.181387 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.395/0.996 mss:1402 cwnd:23 ssthresh:16 bytes_acked:3094252 segs_out:2261 segs_in:1290 send 5.0Mbps lastsnd:4 lastrcv:6052 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.209484 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.714/0.492 mss:1402 cwnd:23 ssthresh:16 bytes_acked:3111076 segs_out:2273 segs_in:1296 send 5.0Mbps lastsnd:4 lastrcv:6080 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:36.237384 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.457/0.471 mss:1402 cwnd:24 ssthresh:16 bytes_acked:3130704 segs_out:2289 segs_in:1303 send 5.2Mbps lastrcv:6112 pacing_rate 6.3Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.269583 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.793/0.4 mss:1402 cwnd:24 ssthresh:16 bytes_acked:3147528 segs_out:2301 segs_in:1309 send 5.2Mbps lastsnd:4 lastrcv:6144 lastack:4 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.297293 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:53.93/2.624 mss:1402 cwnd:24 ssthresh:16 bytes_acked:3167156 segs_out:2315 segs_in:1316 send 5.0Mbps lastsnd:4 lastrcv:6176 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.329455 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.189/1.404 mss:1402 cwnd:25 ssthresh:16 bytes_acked:3186784 segs_out:2329 segs_in:1323 send 5.1Mbps lastsnd:4 lastrcv:6208 lastack:4 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.361423 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.684/0.576 mss:1402 cwnd:25 ssthresh:16 bytes_acked:3206412 segs_out:2343 segs_in:1330 send 5.0Mbps lastrcv:6236 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.393335 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.078/0.486 mss:1402 cwnd:25 ssthresh:16 bytes_acked:3223236 segs_out:2355 segs_in:1336 send 5.0Mbps lastsnd:4 lastrcv:6268 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.421338 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.258/0.658 mss:1402 cwnd:25 ssthresh:16 bytes_acked:3240060 segs_out:2367 segs_in:1342 send 5.0Mbps lastsnd:8 lastrcv:6300 lastack:8 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:36.453409 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.53/0.937 mss:1402 cwnd:26 ssthresh:16 bytes_acked:3259688 segs_out:2383 segs_in:1349 send 5.2Mbps lastsnd:4 lastrcv:6332 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.485527 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.558/1.05 mss:1402 cwnd:26 ssthresh:16 bytes_acked:3279316 segs_out:2397 segs_in:1356 send 5.2Mbps lastsnd:4 lastrcv:6364 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.517248 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.198/1.817 mss:1402 cwnd:26 ssthresh:16 bytes_acked:3301748 segs_out:2413 segs_in:1364 send 4.9Mbps lastsnd:4 lastrcv:6400 lastack:4 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.552010 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.966/0.845 mss:1402 cwnd:26 ssthresh:16 bytes_acked:3318572 segs_out:2425 segs_in:1370 send 4.9Mbps lastsnd:8 lastrcv:6432 lastack:8 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.585497 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.848/1.709 mss:1402 cwnd:27 ssthresh:16 bytes_acked:3338200 segs_out:2439 segs_in:1377 send 5.0Mbps lastrcv:6460 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.617424 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.125/1.847 mss:1402 cwnd:27 ssthresh:16 bytes_acked:3355024 segs_out:2451 segs_in:1383 send 5.0Mbps lastrcv:6488 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.645468 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.989/1.708 mss:1402 cwnd:27 ssthresh:16 bytes_acked:3371848 segs_out:2463 segs_in:1389 send 5.0Mbps lastrcv:6516 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:36.673428 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.36/1.927 mss:1402 cwnd:28 ssthresh:16 bytes_acked:3388672 segs_out:2477 segs_in:1395 send 5.1Mbps lastsnd:4 lastrcv:6548 lastack:4 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:36.701364 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.348/1.946 mss:1402 cwnd:28 ssthresh:16 bytes_acked:3408300 segs_out:2491 segs_in:1402 send 5.1Mbps lastsnd:4 lastrcv:6580 lastack:4 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:36.733415 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.677/1.963 mss:1402 cwnd:28 ssthresh:16 bytes_acked:3427928 segs_out:2505 segs_in:1409 send 5.1Mbps lastrcv:6608 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:36.765469 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:63.748/2.056 mss:1402 cwnd:25 ssthresh:19 bytes_acked:3444752 segs_out:2514 segs_in:1416 send 4.4Mbps lastrcv:6636 pacing_rate 5.3Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:36.793567 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.083/1.99 mss:1402 cwnd:21 ssthresh:19 bytes_acked:3461576 segs_out:2522 segs_in:1422 send 3.6Mbps lastrcv:6664 pacing_rate 4.3Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:36.821374 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.661/1.494 mss:1402 cwnd:19 ssthresh:19 bytes_acked:3478400 segs_out:2532 segs_in:1429 send 3.3Mbps lastrcv:6692 pacing_rate 4.0Mbps unacked:19 retrans:0/29 rcv_space:14020 15:06:36.849312 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.87/2.041 mss:1402 cwnd:19 ssthresh:19 bytes_acked:3493822 segs_out:2542 segs_in:1434 send 3.5Mbps lastsnd:4 lastrcv:6724 lastack:4 pacing_rate 4.2Mbps unacked:18 retrans:0/29 rcv_space:14020 15:06:36.877262 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.7/3.821 mss:1402 cwnd:20 ssthresh:19 bytes_acked:3516254 segs_out:2560 segs_in:1442 send 4.4Mbps lastrcv:6756 pacing_rate 5.3Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:36.909357 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:49.603/2.959 mss:1402 cwnd:21 ssthresh:19 bytes_acked:3530274 segs_out:2571 segs_in:1447 send 4.7Mbps lastrcv:6784 pacing_rate 5.7Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:36.941480 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:49.437/2.033 mss:1402 cwnd:21 ssthresh:19 bytes_acked:3549902 segs_out:2585 segs_in:1454 send 4.8Mbps lastsnd:4 lastrcv:6820 lastack:4 pacing_rate 5.7Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:36.973585 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.526/2.123 mss:1402 cwnd:21 ssthresh:19 bytes_acked:3569530 segs_out:2599 segs_in:1461 send 4.7Mbps lastsnd:4 lastrcv:6852 lastack:4 pacing_rate 5.6Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:37.005666 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.904/1.38 mss:1402 cwnd:22 ssthresh:19 bytes_acked:3586354 segs_out:2611 segs_in:1467 send 4.8Mbps lastsnd:8 lastrcv:6884 lastack:8 pacing_rate 5.8Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:37.037492 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.167/1.001 mss:1402 cwnd:22 ssthresh:19 bytes_acked:3605982 segs_out:2625 segs_in:1474 send 4.8Mbps lastrcv:6912 pacing_rate 5.8Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:37.069579 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.863/0.698 mss:1402 cwnd:22 ssthresh:19 bytes_acked:3625610 segs_out:2639 segs_in:1481 send 4.8Mbps lastsnd:4 lastrcv:6948 lastack:4 pacing_rate 5.7Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:37.101815 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.573/0.243 mss:1402 cwnd:22 ssthresh:19 bytes_acked:3648042 segs_out:2655 segs_in:1489 send 4.8Mbps lastrcv:6980 pacing_rate 5.7Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:37.133727 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.559/0.536 mss:1402 cwnd:22 ssthresh:19 bytes_acked:3664866 segs_out:2667 segs_in:1495 send 4.8Mbps lastsnd:4 lastrcv:7012 lastack:4 pacing_rate 5.7Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:37.165574 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.571/0.669 mss:1402 cwnd:23 ssthresh:19 bytes_acked:3681690 segs_out:2681 segs_in:1501 send 5.0Mbps lastsnd:8 lastrcv:7044 lastack:8 pacing_rate 6.0Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.197602 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.817/2.317 mss:1402 cwnd:23 ssthresh:19 bytes_acked:3701318 segs_out:2695 segs_in:1508 send 4.9Mbps lastsnd:4 lastrcv:7076 lastack:4 pacing_rate 5.9Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.229907 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.065/2.271 mss:1402 cwnd:23 ssthresh:19 bytes_acked:3720946 segs_out:2709 segs_in:1515 send 4.7Mbps lastsnd:4 lastrcv:7108 lastack:4 pacing_rate 5.6Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.261567 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.687/0.673 mss:1402 cwnd:23 ssthresh:19 bytes_acked:3743378 segs_out:2725 segs_in:1523 send 4.6Mbps lastrcv:7140 pacing_rate 5.6Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.293526 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.927/0.269 mss:1402 cwnd:24 ssthresh:19 bytes_acked:3763006 segs_out:2739 segs_in:1530 send 4.8Mbps lastrcv:7172 pacing_rate 5.8Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.325638 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.202/0.508 mss:1402 cwnd:24 ssthresh:19 bytes_acked:3779830 segs_out:2751 segs_in:1536 send 4.8Mbps lastsnd:4 lastrcv:7204 lastack:4 pacing_rate 5.7Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.357488 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.106/0.183 mss:1402 cwnd:24 ssthresh:19 bytes_acked:3796654 segs_out:2763 segs_in:1542 send 4.8Mbps lastsnd:8 lastrcv:7236 lastack:8 pacing_rate 5.8Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.389632 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.461/0.88 mss:1402 cwnd:24 ssthresh:19 bytes_acked:3816282 segs_out:2777 segs_in:1549 send 4.8Mbps lastsnd:4 lastrcv:7268 lastack:4 pacing_rate 5.7Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:37.421471 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.488/1.069 mss:1402 cwnd:25 ssthresh:19 bytes_acked:3835910 segs_out:2793 segs_in:1556 send 5.0Mbps lastrcv:7296 pacing_rate 6.0Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.453352 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.148/0.445 mss:1402 cwnd:25 ssthresh:19 bytes_acked:3855538 segs_out:2807 segs_in:1563 send 5.0Mbps lastsnd:4 lastrcv:7332 lastack:4 pacing_rate 6.0Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.485764 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:57.941/2.123 mss:1402 cwnd:25 ssthresh:19 bytes_acked:3875166 segs_out:2821 segs_in:1570 send 4.8Mbps lastsnd:4 lastrcv:7364 lastack:4 pacing_rate 5.8Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.517432 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.627/1.533 mss:1402 cwnd:26 ssthresh:19 bytes_acked:3891990 segs_out:2833 segs_in:1576 send 4.9Mbps lastsnd:8 lastrcv:7396 lastack:8 pacing_rate 5.9Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.549397 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.651/1.506 mss:1402 cwnd:26 ssthresh:19 bytes_acked:3911618 segs_out:2847 segs_in:1583 send 4.8Mbps lastsnd:4 lastrcv:7428 lastack:4 pacing_rate 5.8Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.581506 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.119/1.608 mss:1402 cwnd:26 ssthresh:19 bytes_acked:3931246 segs_out:2861 segs_in:1590 send 4.8Mbps lastsnd:4 lastrcv:7460 lastack:4 pacing_rate 5.7Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.613537 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.13/1.738 mss:1402 cwnd:26 ssthresh:19 bytes_acked:3950874 segs_out:2875 segs_in:1597 send 4.8Mbps lastsnd:4 lastrcv:7492 lastack:4 pacing_rate 5.7Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.645500 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.735/1.249 mss:1402 cwnd:26 ssthresh:19 bytes_acked:3970502 segs_out:2889 segs_in:1604 send 4.8Mbps lastsnd:4 lastrcv:7524 lastack:4 pacing_rate 5.8Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:37.677549 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.649/1.09 mss:1402 cwnd:27 ssthresh:19 bytes_acked:3987326 segs_out:2903 segs_in:1610 send 5.0Mbps lastsnd:8 lastrcv:7556 lastack:8 pacing_rate 6.0Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.709589 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.191/1.726 mss:1402 cwnd:27 ssthresh:19 bytes_acked:4006954 segs_out:2917 segs_in:1617 send 4.9Mbps lastsnd:4 lastrcv:7588 lastack:4 pacing_rate 5.9Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.741791 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.083/3.249 mss:1402 cwnd:27 ssthresh:19 bytes_acked:4026582 segs_out:2931 segs_in:1624 send 4.7Mbps lastsnd:4 lastrcv:7620 lastack:4 pacing_rate 5.7Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.773641 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.206/2.166 mss:1402 cwnd:28 ssthresh:19 bytes_acked:4046210 segs_out:2945 segs_in:1631 send 4.8Mbps lastsnd:4 lastrcv:7652 lastack:4 pacing_rate 5.8Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.806037 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.434/2.064 mss:1402 cwnd:28 ssthresh:19 bytes_acked:4065838 segs_out:2959 segs_in:1638 send 4.8Mbps lastsnd:4 lastrcv:7684 lastack:4 pacing_rate 5.8Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.837523 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.107/1.717 mss:1402 cwnd:28 ssthresh:19 bytes_acked:4085466 segs_out:2973 segs_in:1645 send 4.8Mbps lastsnd:4 lastrcv:7716 lastack:4 pacing_rate 5.8Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.869309 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.072/1.67 mss:1402 cwnd:28 ssthresh:19 bytes_acked:4102290 segs_out:2985 segs_in:1651 send 4.8Mbps lastsnd:8 lastrcv:7748 lastack:8 pacing_rate 5.8Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:37.901534 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.84/2.135 mss:1402 cwnd:29 ssthresh:19 bytes_acked:4121918 segs_out:3001 segs_in:1658 send 4.9Mbps lastrcv:7776 pacing_rate 5.9Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:37.933502 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.257/2.158 mss:1402 cwnd:29 ssthresh:19 bytes_acked:4141546 segs_out:3015 segs_in:1665 send 4.9Mbps lastsnd:4 lastrcv:7812 lastack:4 pacing_rate 5.9Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:37.965246 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.981/2.669 mss:1402 cwnd:29 ssthresh:19 bytes_acked:4161174 segs_out:3029 segs_in:1672 send 4.9Mbps lastrcv:7840 pacing_rate 5.8Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:37.997441 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:68.828/2.364 mss:1402 cwnd:30 ssthresh:19 bytes_acked:4180802 segs_out:3043 segs_in:1679 send 4.9Mbps lastrcv:7872 pacing_rate 5.9Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:38.029616 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.624/2.3 mss:1402 cwnd:30 ssthresh:19 bytes_acked:4197626 segs_out:3055 segs_in:1685 send 4.8Mbps lastsnd:4 lastrcv:7904 lastack:4 pacing_rate 5.8Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:38.061290 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.629/2.084 mss:1402 cwnd:30 ssthresh:19 bytes_acked:4214450 segs_out:3067 segs_in:1691 send 4.8Mbps lastsnd:4 lastrcv:7932 lastack:4 pacing_rate 5.8Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:38.089339 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:68.964/1.352 mss:1402 cwnd:27 ssthresh:21 bytes_acked:4235480 segs_out:3080 segs_in:1699 send 4.4Mbps lastrcv:7964 pacing_rate 5.3Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:38.121541 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:68.438/0.76 mss:1402 cwnd:24 ssthresh:21 bytes_acked:4252304 segs_out:3089 segs_in:1705 send 3.9Mbps lastrcv:7992 pacing_rate 4.7Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.149449 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:68.36/0.733 mss:1402 cwnd:21 ssthresh:21 bytes_acked:4269128 segs_out:3097 segs_in:1712 send 3.4Mbps lastsnd:4 lastrcv:8024 lastack:4 pacing_rate 4.1Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:38.177519 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.23/1.782 mss:1402 cwnd:21 ssthresh:21 bytes_acked:4285952 segs_out:3109 segs_in:1718 send 3.6Mbps lastsnd:8 lastrcv:8056 lastack:8 pacing_rate 4.3Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:38.209433 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.459/3.665 mss:1402 cwnd:22 ssthresh:21 bytes_acked:4305580 segs_out:3125 segs_in:1725 send 4.4Mbps lastsnd:4 lastrcv:8088 lastack:4 pacing_rate 5.3Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:38.241391 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:50.585/3.65 mss:1402 cwnd:22 ssthresh:21 bytes_acked:4325208 segs_out:3139 segs_in:1732 send 4.9Mbps lastsnd:4 lastrcv:8120 lastack:4 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:38.273387 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.445/1.219 mss:1402 cwnd:23 ssthresh:21 bytes_acked:4344836 segs_out:3153 segs_in:1739 send 5.0Mbps lastrcv:8148 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:38.305439 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.492/0.672 mss:1402 cwnd:23 ssthresh:21 bytes_acked:4364464 segs_out:3167 segs_in:1746 send 5.0Mbps lastrcv:8180 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:38.337378 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.722/0.359 mss:1402 cwnd:23 ssthresh:21 bytes_acked:4381288 segs_out:3179 segs_in:1752 send 5.0Mbps lastsnd:4 lastrcv:8212 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:38.365529 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.43/0.379 mss:1402 cwnd:24 ssthresh:21 bytes_acked:4398112 segs_out:3193 segs_in:1758 send 5.2Mbps lastsnd:8 lastrcv:8244 lastack:8 pacing_rate 6.3Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.397479 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.377/0.577 mss:1402 cwnd:24 ssthresh:21 bytes_acked:4417740 segs_out:3207 segs_in:1765 send 5.2Mbps lastsnd:4 lastrcv:8276 lastack:4 pacing_rate 6.3Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.429338 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:54.179/2.478 mss:1402 cwnd:24 ssthresh:21 bytes_acked:4437368 segs_out:3221 segs_in:1772 send 5.0Mbps lastrcv:8304 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.461560 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.533/1.79 mss:1402 cwnd:24 ssthresh:21 bytes_acked:4454192 segs_out:3233 segs_in:1778 send 4.8Mbps lastsnd:4 lastrcv:8336 lastack:4 pacing_rate 5.8Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.489358 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.166/0.8 mss:1402 cwnd:25 ssthresh:21 bytes_acked:4473820 segs_out:3247 segs_in:1785 send 5.0Mbps lastrcv:8364 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.521479 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.086/0.238 mss:1402 cwnd:25 ssthresh:21 bytes_acked:4493448 segs_out:3261 segs_in:1792 send 5.0Mbps lastsnd:4 lastrcv:8400 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.553670 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.277/0.58 mss:1402 cwnd:25 ssthresh:21 bytes_acked:4510272 segs_out:3273 segs_in:1798 send 5.0Mbps lastsnd:8 lastrcv:8432 lastack:8 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.585404 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.33/0.608 mss:1402 cwnd:25 ssthresh:21 bytes_acked:4529900 segs_out:3287 segs_in:1805 send 5.0Mbps lastrcv:8460 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:38.617335 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.139/0.234 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4549528 segs_out:3303 segs_in:1812 send 5.2Mbps lastsnd:4 lastrcv:8496 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.649389 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.364/0.697 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4569156 segs_out:3317 segs_in:1819 send 5.2Mbps lastsnd:4 lastrcv:8528 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.681431 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:57.371/1.98 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4588784 segs_out:3331 segs_in:1826 send 5.1Mbps lastrcv:8556 pacing_rate 6.1Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.713424 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.139/1.851 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4605608 segs_out:3343 segs_in:1832 send 4.9Mbps lastrcv:8584 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.741466 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.917/0.829 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4622432 segs_out:3355 segs_in:1838 send 4.9Mbps lastsnd:4 lastrcv:8616 lastack:4 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.773439 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.897/1.681 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4642060 segs_out:3369 segs_in:1845 send 4.8Mbps lastrcv:8648 pacing_rate 5.7Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.805507 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.066/1.53 mss:1402 cwnd:27 ssthresh:21 bytes_acked:4661688 segs_out:3383 segs_in:1852 send 5.0Mbps lastsnd:4 lastrcv:8684 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.837842 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.827/1.332 mss:1402 cwnd:27 ssthresh:21 bytes_acked:4681316 segs_out:3397 segs_in:1859 send 5.0Mbps lastsnd:4 lastrcv:8716 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.869412 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.936/1.509 mss:1402 cwnd:27 ssthresh:21 bytes_acked:4700944 segs_out:3411 segs_in:1866 send 5.0Mbps lastsnd:4 lastrcv:8748 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.901631 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.897/1.557 mss:1402 cwnd:27 ssthresh:21 bytes_acked:4720572 segs_out:3425 segs_in:1873 send 5.0Mbps lastrcv:8776 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:38.933530 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.087/1.625 mss:1402 cwnd:28 ssthresh:21 bytes_acked:4737396 segs_out:3439 segs_in:1879 send 5.1Mbps lastrcv:8808 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:38.965386 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.21/1.794 mss:1402 cwnd:28 ssthresh:21 bytes_acked:4754220 segs_out:3451 segs_in:1885 send 5.1Mbps lastrcv:8836 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:38.993508 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:62.913/3.741 mss:1402 cwnd:28 ssthresh:21 bytes_acked:4773848 segs_out:3465 segs_in:1892 send 5.0Mbps lastrcv:8868 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.025490 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.497/2.889 mss:1402 cwnd:28 ssthresh:21 bytes_acked:4790672 segs_out:3477 segs_in:1898 send 4.9Mbps lastrcv:8896 pacing_rate 5.8Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.053491 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.157/2.213 mss:1402 cwnd:28 ssthresh:21 bytes_acked:4807496 segs_out:3489 segs_in:1904 send 4.8Mbps lastrcv:8924 pacing_rate 5.8Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.081365 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.823/2.165 mss:1402 cwnd:29 ssthresh:21 bytes_acked:4824320 segs_out:3501 segs_in:1910 send 4.9Mbps lastrcv:8952 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.109348 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.129/2.198 mss:1402 cwnd:29 ssthresh:21 bytes_acked:4841144 segs_out:3513 segs_in:1916 send 4.9Mbps lastsnd:4 lastrcv:8984 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.137416 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.589/1.989 mss:1402 cwnd:29 ssthresh:21 bytes_acked:4860772 segs_out:3527 segs_in:1923 send 5.0Mbps lastrcv:9012 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.169488 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.719/2.032 mss:1402 cwnd:29 ssthresh:21 bytes_acked:4877596 segs_out:3539 segs_in:1929 send 4.9Mbps lastsnd:4 lastrcv:9044 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:39.197614 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.506/2.085 mss:1402 cwnd:30 ssthresh:21 bytes_acked:4897224 segs_out:3555 segs_in:1936 send 5.1Mbps lastsnd:4 lastrcv:9076 lastack:4 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:39.229842 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.248/1.835 mss:1402 cwnd:30 ssthresh:21 bytes_acked:4914048 segs_out:3567 segs_in:1942 send 5.2Mbps lastsnd:8 lastrcv:9108 lastack:8 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:39.261613 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.368/3.071 mss:1402 cwnd:30 ssthresh:21 bytes_acked:4933676 segs_out:3581 segs_in:1949 send 5.1Mbps lastsnd:4 lastrcv:9140 lastack:4 pacing_rate 6.1Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:39.293490 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.15/3.099 mss:1402 cwnd:30 ssthresh:21 bytes_acked:4953304 segs_out:3595 segs_in:1956 send 4.9Mbps lastrcv:9168 pacing_rate 5.8Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:39.325368 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.56/2.47 mss:1402 cwnd:30 ssthresh:21 bytes_acked:4971530 segs_out:3607 segs_in:1963 send 4.8Mbps lastsnd:4 lastrcv:9200 lastack:4 pacing_rate 5.8Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:39.353573 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.043/2.134 mss:1402 cwnd:26 ssthresh:21 bytes_acked:4989756 segs_out:3617 segs_in:1970 send 4.2Mbps lastrcv:9228 pacing_rate 5.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:39.385399 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.207/1.703 mss:1402 cwnd:21 ssthresh:21 bytes_acked:5006580 segs_out:3623 segs_in:1976 send 3.4Mbps lastrcv:9256 pacing_rate 4.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:39.413612 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.359/1.975 mss:1402 cwnd:21 ssthresh:21 bytes_acked:5023404 segs_out:3636 segs_in:1983 send 3.4Mbps lastsnd:4 lastrcv:9288 lastack:4 pacing_rate 4.1Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:39.441528 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.209/3.568 mss:1402 cwnd:21 ssthresh:21 bytes_acked:5040228 segs_out:3648 segs_in:1989 send 3.8Mbps lastsnd:8 lastrcv:9320 lastack:8 pacing_rate 4.6Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:39.473367 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.554/4.123 mss:1402 cwnd:22 ssthresh:21 bytes_acked:5059856 segs_out:3662 segs_in:1996 send 4.4Mbps lastsnd:4 lastrcv:9352 lastack:4 pacing_rate 5.3Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:39.505297 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:53.041/2.413 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5079484 segs_out:3677 segs_in:2003 send 4.9Mbps lastsnd:4 lastrcv:9384 lastack:4 pacing_rate 5.8Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:39.537369 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.132/0.718 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5099112 segs_out:3691 segs_in:2010 send 4.9Mbps lastrcv:9412 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:39.569361 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.042/0.212 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5115936 segs_out:3705 segs_in:2016 send 5.2Mbps lastrcv:9440 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.597402 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.992/0.097 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5132760 segs_out:3717 segs_in:2022 send 5.2Mbps lastrcv:9468 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.625608 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.213/1.296 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5149584 segs_out:3729 segs_in:2028 send 5.2Mbps lastsnd:4 lastrcv:9500 lastack:4 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.653520 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:54.729/2.069 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5169212 segs_out:3743 segs_in:2035 send 4.9Mbps lastsnd:4 lastrcv:9532 lastack:4 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.685298 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.675/1.022 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5186036 segs_out:3755 segs_in:2041 send 4.8Mbps lastsnd:4 lastrcv:9560 lastack:4 pacing_rate 5.8Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.717491 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.89/0.377 mss:1402 cwnd:25 ssthresh:21 bytes_acked:5202860 segs_out:3767 segs_in:2047 send 5.0Mbps lastsnd:4 lastrcv:9588 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.745464 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.343/0.707 mss:1402 cwnd:25 ssthresh:21 bytes_acked:5225292 segs_out:3783 segs_in:2055 send 5.0Mbps lastrcv:9624 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.777504 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.519/0.973 mss:1402 cwnd:25 ssthresh:21 bytes_acked:5242116 segs_out:3795 segs_in:2061 send 5.0Mbps lastsnd:4 lastrcv:9656 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.809466 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.209/0.394 mss:1402 cwnd:25 ssthresh:21 bytes_acked:5261744 segs_out:3809 segs_in:2068 send 5.0Mbps lastsnd:4 lastrcv:9688 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:39.841374 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.092/0.186 mss:1402 cwnd:26 ssthresh:21 bytes_acked:5281372 segs_out:3825 segs_in:2075 send 5.2Mbps lastrcv:9716 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:39.873475 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.271/0.55 mss:1402 cwnd:26 ssthresh:21 bytes_acked:5298196 segs_out:3837 segs_in:2081 send 5.2Mbps lastsnd:4 lastrcv:9748 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:39.901334 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:57.267/1.922 mss:1402 cwnd:26 ssthresh:21 bytes_acked:5315020 segs_out:3849 segs_in:2087 send 5.1Mbps lastsnd:8 lastrcv:9780 lastack:8 pacing_rate 6.1Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:39.933389 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.674/2.589 mss:1402 cwnd:26 ssthresh:21 bytes_acked:5334648 segs_out:3863 segs_in:2094 send 4.9Mbps lastsnd:4 lastrcv:9812 lastack:4 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:39.965638 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.671/1.788 mss:1402 cwnd:26 ssthresh:21 bytes_acked:5354276 segs_out:3877 segs_in:2101 send 4.8Mbps lastsnd:4 lastrcv:9844 lastack:4 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:39.997322 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.965/1.71 mss:1402 cwnd:27 ssthresh:21 bytes_acked:5373904 segs_out:3891 segs_in:2108 send 5.0Mbps lastrcv:9872 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:40.029394 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.719/1.171 mss:1402 cwnd:27 ssthresh:21 bytes_acked:5393532 segs_out:3905 segs_in:2115 send 5.0Mbps lastsnd:4 lastrcv:9908 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:40.061361 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.83/1.416 mss:1402 cwnd:27 ssthresh:21 bytes_acked:5410356 segs_out:3917 segs_in:2121 send 5.0Mbps lastsnd:8 lastrcv:9940 lastack:8 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:40.093400 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.267/1.85 mss:1402 cwnd:27 ssthresh:21 bytes_acked:5429984 segs_out:3931 segs_in:2128 send 4.9Mbps lastrcv:9968 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:40.125453 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.105/1.719 mss:1402 cwnd:27 ssthresh:21 bytes_acked:5446808 segs_out:3943 segs_in:2134 send 5.0Mbps lastrcv:9996 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:40.153316 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.378/1.919 mss:1402 cwnd:28 ssthresh:21 bytes_acked:5463632 segs_out:3957 segs_in:2140 send 5.1Mbps lastrcv:10024 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.181358 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.506/2.048 mss:1402 cwnd:28 ssthresh:21 bytes_acked:5480456 segs_out:3969 segs_in:2146 send 5.1Mbps lastrcv:10052 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.209518 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:62.512/3.699 mss:1402 cwnd:28 ssthresh:21 bytes_acked:5497280 segs_out:3981 segs_in:2152 send 5.0Mbps lastrcv:10080 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.237361 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.34/2.378 mss:1402 cwnd:28 ssthresh:21 bytes_acked:5516908 segs_out:3995 segs_in:2159 send 4.9Mbps lastsnd:4 lastrcv:10116 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.269369 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.132/1.951 mss:1402 cwnd:28 ssthresh:21 bytes_acked:5536536 segs_out:4009 segs_in:2166 send 4.8Mbps lastsnd:4 lastrcv:10148 lastack:4 pacing_rate 5.8Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.301467 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.273/1.991 mss:1402 cwnd:29 ssthresh:21 bytes_acked:5556164 segs_out:4023 segs_in:2173 send 5.0Mbps lastsnd:4 lastrcv:10180 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.333325 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.559/1.895 mss:1402 cwnd:29 ssthresh:21 bytes_acked:5572988 segs_out:4035 segs_in:2179 send 5.0Mbps lastsnd:4 lastrcv:10212 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.365267 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.984/2.083 mss:1402 cwnd:29 ssthresh:21 bytes_acked:5592616 segs_out:4049 segs_in:2186 send 4.9Mbps lastsnd:4 lastrcv:10244 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.397387 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.884/1.961 mss:1402 cwnd:29 ssthresh:21 bytes_acked:5612244 segs_out:4063 segs_in:2193 send 4.9Mbps lastsnd:4 lastrcv:10276 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.429466 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.496/1.889 mss:1402 cwnd:29 ssthresh:21 bytes_acked:5631872 segs_out:4077 segs_in:2200 send 5.0Mbps lastsnd:4 lastrcv:10308 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:40.461545 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.453/1.931 mss:1402 cwnd:30 ssthresh:21 bytes_acked:5651500 segs_out:4093 segs_in:2207 send 5.1Mbps lastrcv:10336 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:40.493382 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.527/2.035 mss:1402 cwnd:30 ssthresh:21 bytes_acked:5668324 segs_out:4105 segs_in:2213 send 5.1Mbps lastsnd:4 lastrcv:10368 lastack:4 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:40.525461 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.894/2.829 mss:1402 cwnd:29 ssthresh:21 bytes_acked:5686550 segs_out:4117 segs_in:2220 send 4.9Mbps lastsnd:4 lastrcv:10400 lastack:4 pacing_rate 5.8Mbps unacked:29 retrans:0/29 rcv_space:14020 15:06:40.553470 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.286/3.057 mss:1402 cwnd:25 ssthresh:21 bytes_acked:5706178 segs_out:4127 segs_in:2227 send 4.0Mbps lastsnd:4 lastrcv:10432 lastack:4 pacing_rate 4.8Mbps unacked:25 retrans:0/29 rcv_space:14020 15:06:40.585523 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:71.692/1.482 mss:1402 cwnd:21 ssthresh:21 bytes_acked:5724404 segs_out:4136 segs_in:2234 send 3.3Mbps lastrcv:10460 pacing_rate 3.9Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:40.617382 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:68.068/1.851 mss:1402 cwnd:21 ssthresh:21 bytes_acked:5741228 segs_out:4148 segs_in:2240 send 3.5Mbps lastsnd:4 lastrcv:10492 lastack:4 pacing_rate 4.2Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:40.645335 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:58.897/3.563 mss:1402 cwnd:22 ssthresh:21 bytes_acked:5760856 segs_out:4162 segs_in:2247 send 4.2Mbps lastsnd:4 lastrcv:10524 lastack:4 pacing_rate 5.0Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:40.677599 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:54.686/3.604 mss:1402 cwnd:22 ssthresh:21 bytes_acked:5780484 segs_out:4177 segs_in:2254 send 4.5Mbps lastsnd:4 lastrcv:10556 lastack:4 pacing_rate 5.4Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.709369 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.701/2.461 mss:1402 cwnd:22 ssthresh:21 bytes_acked:5797308 segs_out:4189 segs_in:2260 send 4.7Mbps lastsnd:8 lastrcv:10588 lastack:8 pacing_rate 5.6Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.741611 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.238/0.725 mss:1402 cwnd:22 ssthresh:21 bytes_acked:5816936 segs_out:4203 segs_in:2267 send 4.7Mbps lastsnd:4 lastrcv:10620 lastack:4 pacing_rate 5.7Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.773289 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.066/0.238 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5836564 segs_out:4217 segs_in:2274 send 5.0Mbps lastsnd:4 lastrcv:10652 lastack:4 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.805456 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.749/0.273 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5856192 segs_out:4231 segs_in:2281 send 5.0Mbps lastsnd:4 lastrcv:10684 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.837465 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.672/0.451 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5875820 segs_out:4245 segs_in:2288 send 5.0Mbps lastsnd:4 lastrcv:10716 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.869590 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.615/0.582 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5892644 segs_out:4257 segs_in:2294 send 5.0Mbps lastsnd:4 lastrcv:10744 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.901457 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.791/0.327 mss:1402 cwnd:23 ssthresh:21 bytes_acked:5909468 segs_out:4269 segs_in:2300 send 5.0Mbps lastsnd:8 lastrcv:10776 lastack:8 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:40.929389 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.503/0.348 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5929096 segs_out:4285 segs_in:2307 send 5.2Mbps lastsnd:4 lastrcv:10808 lastack:4 pacing_rate 6.3Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:40.961522 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.739/1.967 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5948724 segs_out:4299 segs_in:2314 send 5.1Mbps lastrcv:10836 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:40.993318 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:54.887/2.462 mss:1402 cwnd:24 ssthresh:21 bytes_acked:5965548 segs_out:4311 segs_in:2320 send 4.9Mbps lastrcv:10864 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:41.021314 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.53/1.061 mss:1402 cwnd:25 ssthresh:21 bytes_acked:5982372 segs_out:4323 segs_in:2326 send 5.0Mbps lastrcv:10892 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:41.049339 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.848/0.402 mss:1402 cwnd:25 ssthresh:21 bytes_acked:6002000 segs_out:4337 segs_in:2333 send 5.0Mbps lastrcv:10924 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:41.081372 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.158/0.485 mss:1402 cwnd:25 ssthresh:21 bytes_acked:6021628 segs_out:4351 segs_in:2340 send 5.0Mbps lastsnd:4 lastrcv:10960 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:41.113495 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.29/0.704 mss:1402 cwnd:26 ssthresh:21 bytes_acked:6038452 segs_out:4365 segs_in:2346 send 5.2Mbps lastsnd:4 lastrcv:10988 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.145425 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.145/0.3 mss:1402 cwnd:26 ssthresh:21 bytes_acked:6055276 segs_out:4377 segs_in:2352 send 5.2Mbps lastsnd:8 lastrcv:11020 lastack:8 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.174038 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:57.904/3.281 mss:1402 cwnd:26 ssthresh:21 bytes_acked:6074904 segs_out:4391 segs_in:2359 send 5.0Mbps lastsnd:4 lastrcv:11052 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.205364 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.994/2.506 mss:1402 cwnd:26 ssthresh:21 bytes_acked:6094532 segs_out:4405 segs_in:2366 send 4.9Mbps lastsnd:4 lastrcv:11084 lastack:4 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.237858 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.361/0.971 mss:1402 cwnd:27 ssthresh:21 bytes_acked:6114160 segs_out:4419 segs_in:2373 send 5.0Mbps lastsnd:4 lastrcv:11116 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.269431 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.434/0.887 mss:1402 cwnd:27 ssthresh:21 bytes_acked:6133788 segs_out:4433 segs_in:2380 send 5.0Mbps lastrcv:11144 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.301321 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.721/1.329 mss:1402 cwnd:27 ssthresh:21 bytes_acked:6150612 segs_out:4445 segs_in:2386 send 5.0Mbps lastrcv:11172 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.329309 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.865/1.453 mss:1402 cwnd:27 ssthresh:21 bytes_acked:6167436 segs_out:4457 segs_in:2392 send 5.0Mbps lastsnd:4 lastrcv:11204 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:41.361409 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.065/1.596 mss:1402 cwnd:28 ssthresh:21 bytes_acked:6184260 segs_out:4471 segs_in:2398 send 5.1Mbps lastrcv:11232 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.389422 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.57/2.04 mss:1402 cwnd:28 ssthresh:21 bytes_acked:6203888 segs_out:4485 segs_in:2405 send 5.1Mbps lastrcv:11264 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.421676 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:62.926/3.706 mss:1402 cwnd:28 ssthresh:21 bytes_acked:6220712 segs_out:4497 segs_in:2411 send 5.0Mbps lastrcv:11292 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.449359 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.406/2.201 mss:1402 cwnd:29 ssthresh:21 bytes_acked:6240340 segs_out:4511 segs_in:2418 send 5.1Mbps lastsnd:4 lastrcv:11328 lastack:4 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.481339 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.859/1.689 mss:1402 cwnd:29 ssthresh:21 bytes_acked:6259968 segs_out:4525 segs_in:2425 send 5.0Mbps lastsnd:4 lastrcv:11360 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.513596 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.222/1.862 mss:1402 cwnd:29 ssthresh:21 bytes_acked:6279596 segs_out:4539 segs_in:2432 send 5.0Mbps lastrcv:11388 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.545512 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.456/1.979 mss:1402 cwnd:29 ssthresh:21 bytes_acked:6296420 segs_out:4551 segs_in:2438 send 5.0Mbps lastrcv:11416 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.573341 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.417/1.93 mss:1402 cwnd:29 ssthresh:21 bytes_acked:6310440 segs_out:4561 segs_in:2443 send 5.0Mbps lastsnd:4 lastrcv:11444 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:41.601334 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.767/2.074 mss:1402 cwnd:30 ssthresh:21 bytes_acked:6330068 segs_out:4577 segs_in:2450 send 5.1Mbps lastrcv:11476 pacing_rate 6.1Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.633285 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.104/2.142 mss:1402 cwnd:30 ssthresh:21 bytes_acked:6349696 segs_out:4591 segs_in:2457 send 5.1Mbps lastrcv:11508 pacing_rate 6.1Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.665310 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:67.559/4.02 mss:1402 cwnd:30 ssthresh:21 bytes_acked:6366520 segs_out:4603 segs_in:2463 send 5.0Mbps lastrcv:11536 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.693305 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.347/2.926 mss:1402 cwnd:30 ssthresh:21 bytes_acked:6383344 segs_out:4615 segs_in:2469 send 4.9Mbps lastrcv:11564 pacing_rate 5.8Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.721373 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.173/2.274 mss:1402 cwnd:31 ssthresh:21 bytes_acked:6400168 segs_out:4627 segs_in:2475 send 5.0Mbps lastsnd:4 lastrcv:11596 lastack:4 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.749515 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.086/2.079 mss:1402 cwnd:31 ssthresh:21 bytes_acked:6419796 segs_out:4641 segs_in:2482 send 5.0Mbps lastrcv:11624 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.781407 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.825/2.066 mss:1402 cwnd:31 ssthresh:21 bytes_acked:6439424 segs_out:4655 segs_in:2489 send 5.0Mbps lastrcv:11656 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.813380 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.074/1.89 mss:1402 cwnd:31 ssthresh:21 bytes_acked:6456248 segs_out:4667 segs_in:2495 send 5.0Mbps lastsnd:4 lastrcv:11688 lastack:4 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.845420 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.187/1.763 mss:1402 cwnd:31 ssthresh:21 bytes_acked:6473072 segs_out:4679 segs_in:2501 send 5.0Mbps lastsnd:4 lastrcv:11716 lastack:4 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:41.873344 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.341/1.617 mss:1402 cwnd:32 ssthresh:21 bytes_acked:6489896 segs_out:4693 segs_in:2507 send 5.1Mbps lastrcv:11744 pacing_rate 6.1Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:41.901504 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.367/1.533 mss:1402 cwnd:32 ssthresh:21 bytes_acked:6506720 segs_out:4705 segs_in:2513 send 5.1Mbps lastrcv:11772 pacing_rate 6.1Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:41.929511 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:71.082/2.539 mss:1402 cwnd:32 ssthresh:21 bytes_acked:6526348 segs_out:4719 segs_in:2520 send 5.0Mbps lastsnd:4 lastrcv:11808 lastack:4 pacing_rate 6.1Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:41.961620 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:73.5/2.804 mss:1402 cwnd:32 ssthresh:21 bytes_acked:6545976 segs_out:4733 segs_in:2527 send 4.9Mbps lastrcv:11836 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:41.993252 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.588/2.057 mss:1402 cwnd:33 ssthresh:21 bytes_acked:6562800 segs_out:4745 segs_in:2533 send 5.0Mbps lastrcv:11864 pacing_rate 6.0Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:42.021418 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:75.055/1.443 mss:1402 cwnd:33 ssthresh:21 bytes_acked:6579624 segs_out:4757 segs_in:2539 send 4.9Mbps lastsnd:4 lastrcv:11896 lastack:4 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:42.049420 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.921/1.149 mss:1402 cwnd:33 ssthresh:21 bytes_acked:6599252 segs_out:4771 segs_in:2546 send 4.9Mbps lastsnd:4 lastrcv:11928 lastack:4 pacing_rate 5.9Mbps unacked:32 retrans:0/29 rcv_space:14020 15:06:42.081688 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.562/1.432 mss:1402 cwnd:31 ssthresh:23 bytes_acked:6616076 segs_out:4782 segs_in:2553 send 4.7Mbps lastsnd:4 lastrcv:11956 lastack:4 pacing_rate 5.6Mbps unacked:31 retrans:0/29 rcv_space:14020 15:06:42.113448 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.844/1.215 mss:1402 cwnd:27 ssthresh:23 bytes_acked:6632900 segs_out:4790 segs_in:2559 send 4.0Mbps lastsnd:4 lastrcv:11984 lastack:4 pacing_rate 4.9Mbps unacked:27 retrans:0/29 rcv_space:14020 15:06:42.141303 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:74.865/1.001 mss:1402 cwnd:23 ssthresh:23 bytes_acked:6649724 segs_out:4798 segs_in:2565 send 3.4Mbps lastsnd:4 lastrcv:12012 lastack:4 pacing_rate 4.1Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:42.169385 
+ 
+
+	 cubic wscale:7,7 rto:276 rtt:73.361/1.466 mss:1402 cwnd:23 ssthresh:23 bytes_acked:6666548 segs_out:4810 segs_in:2572 send 3.5Mbps lastsnd:4 lastrcv:12040 lastack:4 pacing_rate 4.2Mbps unacked:23 retrans:0/29 rcv_space:14020 15:06:42.197405 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.734/2.76 mss:1402 cwnd:23 ssthresh:23 bytes_acked:6683372 segs_out:4821 segs_in:2578 send 3.9Mbps lastrcv:12068 pacing_rate 4.6Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:42.225335 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.312/3.098 mss:1402 cwnd:24 ssthresh:23 bytes_acked:6700196 segs_out:4835 segs_in:2584 send 4.4Mbps lastrcv:12096 pacing_rate 5.3Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:42.253245 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:57.035/3.559 mss:1402 cwnd:24 ssthresh:23 bytes_acked:6717020 segs_out:4847 segs_in:2590 send 4.7Mbps lastrcv:12124 pacing_rate 5.7Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:42.281186 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.862/1.664 mss:1402 cwnd:25 ssthresh:23 bytes_acked:6733844 segs_out:4859 segs_in:2596 send 4.9Mbps lastrcv:12152 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:42.309322 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.798/1.474 mss:1402 cwnd:25 ssthresh:23 bytes_acked:6750668 segs_out:4871 segs_in:2602 send 4.9Mbps lastrcv:12180 pacing_rate 5.9Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:42.337462 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.378/0.667 mss:1402 cwnd:26 ssthresh:23 bytes_acked:6767492 segs_out:4885 segs_in:2608 send 5.2Mbps lastsnd:4 lastrcv:12212 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.365411 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.154/0.273 mss:1402 cwnd:26 ssthresh:23 bytes_acked:6787120 segs_out:4899 segs_in:2615 send 5.2Mbps lastrcv:12240 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.397292 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:58.099/2.525 mss:1402 cwnd:26 ssthresh:23 bytes_acked:6803944 segs_out:4911 segs_in:2621 send 5.0Mbps lastrcv:12268 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.425326 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.844/2.005 mss:1402 cwnd:26 ssthresh:23 bytes_acked:6820768 segs_out:4923 segs_in:2627 send 4.9Mbps lastrcv:12296 pacing_rate 5.8Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.453451 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.253/0.808 mss:1402 cwnd:27 ssthresh:23 bytes_acked:6840396 segs_out:4937 segs_in:2634 send 5.0Mbps lastrcv:12328 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.485476 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.431/0.837 mss:1402 cwnd:27 ssthresh:23 bytes_acked:6857220 segs_out:4949 segs_in:2640 send 5.0Mbps lastrcv:12356 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.513332 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.714/1.259 mss:1402 cwnd:27 ssthresh:23 bytes_acked:6874044 segs_out:4961 segs_in:2646 send 5.0Mbps lastsnd:4 lastrcv:12388 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.545310 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.839/1.466 mss:1402 cwnd:27 ssthresh:23 bytes_acked:6890868 segs_out:4973 segs_in:2652 send 5.0Mbps lastsnd:4 lastrcv:12416 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.573512 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.467/1.959 mss:1402 cwnd:28 ssthresh:23 bytes_acked:6910496 segs_out:4989 segs_in:2659 send 5.1Mbps lastrcv:12448 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.605394 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.549/2.042 mss:1402 cwnd:28 ssthresh:23 bytes_acked:6927320 segs_out:5001 segs_in:2665 send 5.1Mbps lastrcv:12476 pacing_rate 6.1Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.633369 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:62.444/2.987 mss:1402 cwnd:28 ssthresh:23 bytes_acked:6946948 segs_out:5015 segs_in:2672 send 5.0Mbps lastrcv:12508 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.665510 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.15/1.924 mss:1402 cwnd:28 ssthresh:23 bytes_acked:6966576 segs_out:5029 segs_in:2679 send 4.9Mbps lastsnd:4 lastrcv:12544 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.697499 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.888/1.8 mss:1402 cwnd:28 ssthresh:23 bytes_acked:6986204 segs_out:5043 segs_in:2686 send 4.8Mbps lastrcv:12572 pacing_rate 5.8Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.729323 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.242/1.978 mss:1402 cwnd:28 ssthresh:23 bytes_acked:7003028 segs_out:5055 segs_in:2692 send 4.8Mbps lastrcv:12600 pacing_rate 5.8Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.757391 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.097/1.721 mss:1402 cwnd:29 ssthresh:23 bytes_acked:7019852 segs_out:5067 segs_in:2698 send 5.0Mbps lastsnd:4 lastrcv:12632 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.789333 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.515/1.959 mss:1402 cwnd:29 ssthresh:23 bytes_acked:7036676 segs_out:5079 segs_in:2704 send 5.0Mbps lastrcv:12660 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.817340 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.029/2.096 mss:1402 cwnd:29 ssthresh:23 bytes_acked:7056304 segs_out:5093 segs_in:2711 send 4.9Mbps lastrcv:12692 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:42.849284 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.741/2.208 mss:1402 cwnd:26 ssthresh:20 bytes_acked:7073128 segs_out:5103 segs_in:2718 send 4.4Mbps lastrcv:12720 pacing_rate 5.3Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:42.877393 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.502/1.671 mss:1402 cwnd:22 ssthresh:20 bytes_acked:7089952 segs_out:5111 segs_in:2724 send 3.8Mbps lastsnd:4 lastrcv:12752 lastack:4 pacing_rate 4.5Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:42.905325 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.4/1.569 mss:1402 cwnd:20 ssthresh:20 bytes_acked:7109580 segs_out:5123 segs_in:2732 send 3.4Mbps lastsnd:4 lastrcv:12784 lastack:4 pacing_rate 4.1Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:42.937655 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:57.377/3.132 mss:1402 cwnd:21 ssthresh:20 bytes_acked:7129208 segs_out:5137 segs_in:2739 send 4.1Mbps lastsnd:4 lastrcv:12816 lastack:4 pacing_rate 4.9Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:42.969423 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.492/3.934 mss:1402 cwnd:21 ssthresh:20 bytes_acked:7146032 segs_out:5149 segs_in:2745 send 4.6Mbps lastsnd:8 lastrcv:12848 lastack:8 pacing_rate 5.5Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:43.001451 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:48.83/2.516 mss:1402 cwnd:21 ssthresh:20 bytes_acked:7165660 segs_out:5163 segs_in:2752 send 4.8Mbps lastsnd:4 lastrcv:12880 lastack:4 pacing_rate 5.8Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:43.033429 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.635/1.022 mss:1402 cwnd:21 ssthresh:20 bytes_acked:7185288 segs_out:5177 segs_in:2759 send 4.9Mbps lastsnd:4 lastrcv:12912 lastack:4 pacing_rate 5.9Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:43.065365 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.24/0.939 mss:1402 cwnd:21 ssthresh:20 bytes_acked:7204916 segs_out:5191 segs_in:2766 send 5.0Mbps lastsnd:4 lastrcv:12944 lastack:4 pacing_rate 6.0Mbps unacked:20 retrans:0/29 rcv_space:14020 15:06:43.097505 
+ 
+
+	 cubic wscale:7,7 rto:248 rtt:47.419/0.816 mss:1402 cwnd:22 ssthresh:20 bytes_acked:7224544 segs_out:5207 segs_in:2773 send 5.2Mbps lastsnd:4 lastrcv:12976 lastack:4 pacing_rate 6.2Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.129519 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:48.406/1.841 mss:1402 cwnd:22 ssthresh:20 bytes_acked:7244172 segs_out:5221 segs_in:2780 send 5.1Mbps lastsnd:4 lastrcv:13008 lastack:4 pacing_rate 6.1Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.161461 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:49.911/2.385 mss:1402 cwnd:22 ssthresh:20 bytes_acked:7260996 segs_out:5233 segs_in:2786 send 4.9Mbps lastsnd:4 lastrcv:13036 lastack:4 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.193693 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.026/1.49 mss:1402 cwnd:22 ssthresh:20 bytes_acked:7277820 segs_out:5245 segs_in:2792 send 4.8Mbps lastsnd:4 lastrcv:13068 lastack:4 pacing_rate 5.8Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.221630 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.599/0.675 mss:1402 cwnd:23 ssthresh:20 bytes_acked:7297448 segs_out:5259 segs_in:2799 send 5.0Mbps lastrcv:13096 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.253369 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.448/0.555 mss:1402 cwnd:23 ssthresh:20 bytes_acked:7314272 segs_out:5271 segs_in:2805 send 5.0Mbps lastsnd:4 lastrcv:13128 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.281776 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.454/0.65 mss:1402 cwnd:23 ssthresh:20 bytes_acked:7333900 segs_out:5285 segs_in:2812 send 5.0Mbps lastsnd:4 lastrcv:13160 lastack:4 pacing_rate 6.0Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:43.313441 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.778/0.373 mss:1402 cwnd:24 ssthresh:20 bytes_acked:7353528 segs_out:5301 segs_in:2819 send 5.2Mbps lastrcv:13188 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.345253 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.408/0.254 mss:1402 cwnd:24 ssthresh:20 bytes_acked:7373156 segs_out:5315 segs_in:2826 send 5.2Mbps lastsnd:4 lastrcv:13224 lastack:4 pacing_rate 6.3Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.377285 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:53.045/2.359 mss:1402 cwnd:24 ssthresh:20 bytes_acked:7389980 segs_out:5327 segs_in:2832 send 5.1Mbps lastsnd:8 lastrcv:13256 lastack:8 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.409285 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.232/2.397 mss:1402 cwnd:24 ssthresh:20 bytes_acked:7409608 segs_out:5341 segs_in:2839 send 4.9Mbps lastsnd:4 lastrcv:13288 lastack:4 pacing_rate 5.8Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.441219 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.038/1.087 mss:1402 cwnd:25 ssthresh:20 bytes_acked:7429236 segs_out:5355 segs_in:2846 send 5.0Mbps lastsnd:4 lastrcv:13320 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.473262 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.026/0.23 mss:1402 cwnd:25 ssthresh:20 bytes_acked:7448864 segs_out:5369 segs_in:2853 send 5.0Mbps lastrcv:13348 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.505371 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.022/0.113 mss:1402 cwnd:25 ssthresh:20 bytes_acked:7465688 segs_out:5381 segs_in:2859 send 5.0Mbps lastsnd:4 lastrcv:13380 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:43.533487 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.26/0.492 mss:1402 cwnd:26 ssthresh:20 bytes_acked:7485316 segs_out:5397 segs_in:2866 send 5.2Mbps lastrcv:13408 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.565553 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.407/0.702 mss:1402 cwnd:26 ssthresh:20 bytes_acked:7502140 segs_out:5409 segs_in:2872 send 5.2Mbps lastsnd:4 lastrcv:13440 lastack:4 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.593313 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:58.606/2.954 mss:1402 cwnd:26 ssthresh:20 bytes_acked:7518964 segs_out:5421 segs_in:2878 send 5.0Mbps lastrcv:13468 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.625415 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.087/2.139 mss:1402 cwnd:27 ssthresh:20 bytes_acked:7535788 segs_out:5433 segs_in:2884 send 5.0Mbps lastsnd:4 lastrcv:13500 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.653353 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.739/1.418 mss:1402 cwnd:27 ssthresh:20 bytes_acked:7555416 segs_out:5447 segs_in:2891 send 5.0Mbps lastrcv:13528 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.685416 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.613/1.075 mss:1402 cwnd:27 ssthresh:20 bytes_acked:7577848 segs_out:5463 segs_in:2899 send 5.0Mbps lastrcv:13564 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.717385 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.899/1.429 mss:1402 cwnd:27 ssthresh:20 bytes_acked:7594672 segs_out:5475 segs_in:2905 send 5.0Mbps lastrcv:13592 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.749353 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.008/1.606 mss:1402 cwnd:27 ssthresh:20 bytes_acked:7611496 segs_out:5487 segs_in:2911 send 5.0Mbps lastsnd:4 lastrcv:13624 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:43.777357 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.664/1.159 mss:1402 cwnd:28 ssthresh:20 bytes_acked:7631124 segs_out:5503 segs_in:2918 send 5.2Mbps lastsnd:4 lastrcv:13656 lastack:4 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.809394 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.014/1.575 mss:1402 cwnd:28 ssthresh:20 bytes_acked:7647948 segs_out:5515 segs_in:2924 send 5.1Mbps lastsnd:4 lastrcv:13688 lastack:4 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.841374 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:64.01/3.315 mss:1402 cwnd:28 ssthresh:20 bytes_acked:7667576 segs_out:5529 segs_in:2931 send 4.9Mbps lastrcv:13716 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.873226 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.197/2.535 mss:1402 cwnd:29 ssthresh:20 bytes_acked:7684400 segs_out:5541 segs_in:2937 send 5.0Mbps lastrcv:13744 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.901301 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.851/2.231 mss:1402 cwnd:29 ssthresh:20 bytes_acked:7701224 segs_out:5553 segs_in:2943 send 4.9Mbps lastrcv:13772 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.929490 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:66.102/2.166 mss:1402 cwnd:29 ssthresh:20 bytes_acked:7718048 segs_out:5565 segs_in:2949 send 4.9Mbps lastsnd:4 lastrcv:13804 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.957567 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.564/1.942 mss:1402 cwnd:29 ssthresh:20 bytes_acked:7737676 segs_out:5579 segs_in:2956 send 5.0Mbps lastrcv:13832 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:43.989235 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.45/1.872 mss:1402 cwnd:30 ssthresh:20 bytes_acked:7754500 segs_out:5593 segs_in:2962 send 5.1Mbps lastrcv:13860 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.017345 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.649/1.978 mss:1402 cwnd:30 ssthresh:20 bytes_acked:7771324 segs_out:5605 segs_in:2968 send 5.1Mbps lastsnd:4 lastrcv:13892 lastack:4 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.045339 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.517/2.022 mss:1402 cwnd:30 ssthresh:20 bytes_acked:7790952 segs_out:5619 segs_in:2975 send 5.1Mbps lastsnd:4 lastrcv:13924 lastack:4 pacing_rate 6.2Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.077445 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:67.536/1.922 mss:1402 cwnd:30 ssthresh:20 bytes_acked:7807776 segs_out:5631 segs_in:2981 send 5.0Mbps lastsnd:8 lastrcv:13956 lastack:8 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.109550 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.497/2.396 mss:1402 cwnd:30 ssthresh:20 bytes_acked:7827404 segs_out:5645 segs_in:2988 send 4.8Mbps lastsnd:4 lastrcv:13988 lastack:4 pacing_rate 5.8Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.141452 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:70.358/2.078 mss:1402 cwnd:31 ssthresh:20 bytes_acked:7847032 segs_out:5659 segs_in:2995 send 4.9Mbps lastsnd:4 lastrcv:14020 lastack:4 pacing_rate 5.9Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.173347 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:69.835/1.294 mss:1402 cwnd:31 ssthresh:20 bytes_acked:7866660 segs_out:5673 segs_in:3002 send 5.0Mbps lastsnd:4 lastrcv:14052 lastack:4 pacing_rate 6.0Mbps unacked:30 retrans:0/29 rcv_space:14020 15:06:44.205298 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:71.129/2.435 mss:1402 cwnd:26 ssthresh:21 bytes_acked:7884886 segs_out:5682 segs_in:3009 send 4.1Mbps lastrcv:14080 pacing_rate 4.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.237401 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:71.886/1.367 mss:1402 cwnd:21 ssthresh:21 bytes_acked:7901710 segs_out:5689 segs_in:3015 send 3.3Mbps lastsnd:8 lastrcv:14112 lastack:4 pacing_rate 3.9Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:44.265421 
+ 
+
+	 cubic wscale:7,7 rto:272 rtt:71.114/0.792 mss:1402 cwnd:21 ssthresh:21 bytes_acked:7919936 segs_out:5702 segs_in:3022 send 3.3Mbps lastsnd:8 lastrcv:14144 lastack:8 pacing_rate 4.0Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:44.297479 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.853/2.775 mss:1402 cwnd:22 ssthresh:21 bytes_acked:7939564 segs_out:5716 segs_in:3029 send 4.0Mbps lastsnd:4 lastrcv:14176 lastack:4 pacing_rate 4.8Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:44.329443 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.831/3.57 mss:1402 cwnd:22 ssthresh:21 bytes_acked:7959192 segs_out:5730 segs_in:3036 send 4.4Mbps lastsnd:4 lastrcv:14208 lastack:4 pacing_rate 5.3Mbps unacked:21 retrans:0/29 rcv_space:14020 15:06:44.361336 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:53.239/2.303 mss:1402 cwnd:23 ssthresh:21 bytes_acked:7978820 segs_out:5745 segs_in:3043 send 4.8Mbps lastsnd:4 lastrcv:14240 lastack:4 pacing_rate 5.8Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:44.393299 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.238/0.785 mss:1402 cwnd:23 ssthresh:21 bytes_acked:7998448 segs_out:5759 segs_in:3050 send 4.9Mbps lastsnd:4 lastrcv:14272 lastack:4 pacing_rate 5.9Mbps unacked:22 retrans:0/29 rcv_space:14020 15:06:44.425327 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:52.573/1.241 mss:1402 cwnd:24 ssthresh:21 bytes_acked:8015272 segs_out:5773 segs_in:3056 send 5.1Mbps lastsnd:8 lastrcv:14304 lastack:8 pacing_rate 6.1Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.457427 
+ 
+
+	 cubic wscale:7,7 rto:252 rtt:51.834/0.538 mss:1402 cwnd:24 ssthresh:21 bytes_acked:8034900 segs_out:5787 segs_in:3063 send 5.2Mbps lastsnd:4 lastrcv:14336 lastack:4 pacing_rate 6.2Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.489327 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:53.906/2.412 mss:1402 cwnd:24 ssthresh:21 bytes_acked:8054528 segs_out:5801 segs_in:3070 send 5.0Mbps lastrcv:14364 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.521416 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.473/1.569 mss:1402 cwnd:24 ssthresh:21 bytes_acked:8074156 segs_out:5815 segs_in:3077 send 4.9Mbps lastsnd:4 lastrcv:14400 lastack:4 pacing_rate 5.8Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.553273 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.065/0.669 mss:1402 cwnd:25 ssthresh:21 bytes_acked:8093784 segs_out:5829 segs_in:3084 send 5.0Mbps lastrcv:14428 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.585382 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.035/0.194 mss:1402 cwnd:25 ssthresh:21 bytes_acked:8110608 segs_out:5841 segs_in:3090 send 5.0Mbps lastrcv:14456 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.613367 
+ 
+
+	 cubic wscale:7,7 rto:256 rtt:55.999/0.102 mss:1402 cwnd:25 ssthresh:21 bytes_acked:8127432 segs_out:5853 segs_in:3096 send 5.0Mbps lastrcv:14484 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.641399 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.238/0.526 mss:1402 cwnd:25 ssthresh:21 bytes_acked:8144256 segs_out:5865 segs_in:3102 send 5.0Mbps lastsnd:4 lastrcv:14516 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.669473 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.349/0.708 mss:1402 cwnd:25 ssthresh:21 bytes_acked:8161080 segs_out:5877 segs_in:3108 send 5.0Mbps lastsnd:4 lastrcv:14544 lastack:4 pacing_rate 6.0Mbps unacked:24 retrans:0/29 rcv_space:14020 15:06:44.701499 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.602/1.15 mss:1402 cwnd:26 ssthresh:21 bytes_acked:8177904 segs_out:5891 segs_in:3114 send 5.2Mbps lastrcv:14572 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.729358 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:56.733/1.327 mss:1402 cwnd:26 ssthresh:21 bytes_acked:8194728 segs_out:5903 segs_in:3120 send 5.1Mbps lastrcv:14600 pacing_rate 6.2Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.757381 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:58.118/3.073 mss:1402 cwnd:26 ssthresh:21 bytes_acked:8211552 segs_out:5915 segs_in:3126 send 5.0Mbps lastsnd:4 lastrcv:14632 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.785403 
+ 
+
+	 cubic wscale:7,7 rto:260 rtt:59.777/2.118 mss:1402 cwnd:26 ssthresh:21 bytes_acked:8231180 segs_out:5929 segs_in:3133 send 4.9Mbps lastsnd:4 lastrcv:14664 lastack:4 pacing_rate 5.9Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.817413 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.598/1.478 mss:1402 cwnd:27 ssthresh:21 bytes_acked:8250808 segs_out:5943 segs_in:3140 send 5.0Mbps lastrcv:14692 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.849490 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.953/1.68 mss:1402 cwnd:27 ssthresh:21 bytes_acked:8267632 segs_out:5955 segs_in:3146 send 5.0Mbps lastsnd:4 lastrcv:14724 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.877321 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.692/1.167 mss:1402 cwnd:27 ssthresh:21 bytes_acked:8287260 segs_out:5969 segs_in:3153 send 5.0Mbps lastrcv:14752 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.909478 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.615/1.117 mss:1402 cwnd:27 ssthresh:21 bytes_acked:8304084 segs_out:5981 segs_in:3159 send 5.0Mbps lastrcv:14780 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.937260 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.81/1.365 mss:1402 cwnd:27 ssthresh:21 bytes_acked:8320908 segs_out:5993 segs_in:3165 send 5.0Mbps lastrcv:14808 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.965378 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.889/1.514 mss:1402 cwnd:27 ssthresh:21 bytes_acked:8337732 segs_out:6005 segs_in:3171 send 5.0Mbps lastsnd:4 lastrcv:14840 lastack:4 pacing_rate 6.0Mbps unacked:26 retrans:0/29 rcv_space:14020 15:06:44.993363 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.642/1.212 mss:1402 cwnd:28 ssthresh:21 bytes_acked:8354556 segs_out:6019 segs_in:3177 send 5.2Mbps lastsnd:4 lastrcv:14868 lastack:4 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.025359 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:60.981/1.555 mss:1402 cwnd:28 ssthresh:21 bytes_acked:8371380 segs_out:6031 segs_in:3183 send 5.1Mbps lastrcv:14896 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.053363 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:61.167/1.817 mss:1402 cwnd:28 ssthresh:21 bytes_acked:8388204 segs_out:6043 segs_in:3189 send 5.1Mbps lastrcv:14924 pacing_rate 6.2Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.081389 
+ 
+
+	 cubic wscale:7,7 rto:264 rtt:63.758/2.792 mss:1402 cwnd:28 ssthresh:21 bytes_acked:8405028 segs_out:6055 segs_in:3195 send 4.9Mbps lastsnd:4 lastrcv:14956 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.109377 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.119/2.329 mss:1402 cwnd:28 ssthresh:21 bytes_acked:8424656 segs_out:6069 segs_in:3202 send 4.8Mbps lastsnd:4 lastrcv:14988 lastack:4 pacing_rate 5.8Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.141350 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.601/2.094 mss:1402 cwnd:28 ssthresh:21 bytes_acked:8444284 segs_out:6083 segs_in:3209 send 4.8Mbps lastsnd:4 lastrcv:15020 lastack:4 pacing_rate 5.7Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.173365 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.62/2.148 mss:1402 cwnd:29 ssthresh:21 bytes_acked:8463912 segs_out:6097 segs_in:3216 send 5.0Mbps lastsnd:4 lastrcv:15052 lastack:4 pacing_rate 5.9Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.205372 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.338/1.963 mss:1402 cwnd:29 ssthresh:21 bytes_acked:8480736 segs_out:6109 segs_in:3222 send 5.0Mbps lastsnd:4 lastrcv:15080 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.237400 
+ 
+
+	 cubic wscale:7,7 rto:268 rtt:65.341/1.996 mss:1402 cwnd:29 ssthresh:21 bytes_acked:8497560 segs_out:6121 segs_in:3228 send 5.0Mbps lastsnd:4 lastrcv:15108 lastack:4 pacing_rate 6.0Mbps unacked:28 retrans:0/29 rcv_space:14020 15:06:45.265263 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
