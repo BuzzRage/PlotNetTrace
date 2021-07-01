@@ -15,3 +15,4 @@ Input file should be raw ss lines. For example with `ss -pti | grep -A1 "firefox
 * Plot drop and ECN marks in different subplot
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
 * Implement verbose mode if "-v" provided
+* Combine raw input file with packet captured to get more stats using `scapy`
