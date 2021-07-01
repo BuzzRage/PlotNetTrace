@@ -265,7 +265,7 @@ class Measure:
                 s  = int(raw_timestamp.split(":")[2].split(".")[0])
                 ms = int(raw_timestamp.split(":")[2].split(".")[1])
                 self.timestamp = 60*60*1000*h+60*1000*m+1000*s+ms/1000
-                header += "Timestamp: "+str(self.timestamp)+","
+                header += "Timestamp: "+str(self.timestamp)+", "
                 
                 if self.is_router_data():
                     tmp_ecn_tare        = self.add_matched_field('ecn_mark {} ',lines[0])
@@ -278,9 +278,9 @@ class Measure:
                     self.pkt_sent_tare  = int(tmp_pkt_sent_tare[:-1])
                     self.step_mark_tare = int(tmp_step_mark_tare[:-1])
                                 
-                    header += "ECN Marks counter: "+str(self.ecn_tare)+","
-                    header += "Dropped Packets counter: "+str(self.drop_tare)+","
-                    header += "Step marks counter: "+str(self.step_mark_tare)+","
+                    header += "ECN Marks counter: "+str(self.ecn_tare)+", "
+                    header += "Dropped Packets counter: "+str(self.drop_tare)+", "
+                    header += "Step marks counter: "+str(self.step_mark_tare)+", "
                     header += "Packet counter: "+str(self.pkt_sent_tare)+","
                 
                 csv_file.write(header+"\n")
