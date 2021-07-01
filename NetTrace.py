@@ -162,7 +162,7 @@ class Measure:
         self.pkt_dropped   = np.array(csv[:,csv_pkt_dropped])
         self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
         self.pkt_requeued  = csv[:,csv_pkt_requeued] 
-        self.prob          = csv[:,csv_prob] 
+        self.prob          = csv[:,csv_prob]*100               # Convert fraction to %age
         self.cdelay        = np.divide(csv[:,csv_cdelay],1000) # Convert us to ms
         self.ldelay        = np.divide(csv[:,csv_ldelay],1000) # Convert us to ms
         self.cpkts         = csv[:,csv_cpkts] 

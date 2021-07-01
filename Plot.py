@@ -82,7 +82,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
         plt.legend()
         
         plt.subplot(r, c, 6)
-        plt.ylabel("Marking and probability")
+        plt.ylabel("Marking probability (%)")
         plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
         plt.legend()
         
