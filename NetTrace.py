@@ -77,6 +77,10 @@ class Measure:
     
     def sending_rate_mean(self):
         return sum(self.sending_rate)/len(self.sending_rate) 
+        
+    def load_sending_rate(self):
+        for i in range(0,len(self.rtt)):
+           self.sending_rate[i] = self.cwnd[i]*self.mss[i]*8000000/self.rtt[i]
     
     def conv_to_bps(self,value):
         if value[-1] == 'G':
