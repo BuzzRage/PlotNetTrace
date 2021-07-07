@@ -25,11 +25,14 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     complete = True
     rtr_only = False
+    simpletest = False
+    cc_with_lc = False
     
     for node in suffix[:-1]:
         if files[node+"_file"] == None: complete = False
 
-    simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and complete is False) else False
+    simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
+    cc_with_lc = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] == None) else False
     rtr_only = True if (files["rtr_file"] != None and files["cc_file"] == None and files["cs_file"] == None) else False
     
         
@@ -43,6 +46,75 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
         rtr_measure.plot_all()
         
         plt.suptitle("Measurements: Picoquic tests "+date+" "+timecode)
+        plt.show()
+        
+
+    if cc_with_lc is True:
+    
+        rtr_measure = NetTrace.Measure(rtr_file)
+        cc_measure  = NetTrace.Measure(cc_file)
+
+        rtr_measure.load_data()
+        cc_measure.load_data()
+        
+        #Visualization part
+        fig = plt.figure()
+        r=3
+        c=3
+
+        
+        plt.subplot(r, c, 1)
+        plt.ylabel("cwnd evolution")
+        plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
+        plt.legend()
+        
+        plt.subplot(r, c, 2)
+        plt.ylabel("RTT evolution")
+        plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
+        plt.legend()
+        
+        plt.subplot(r, c, 3)
+        plt.ylabel("Sending rate (egress Mbps)")
+        plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
+        plt.legend()
+        
+        plt.subplot(r, c, 4)
+        plt.ylabel("Queue occupation")
+        plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
+        plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
+        plt.yscale('log')
+        plt.legend()
+        
+        plt.subplot(r, c, 5)
+        plt.ylabel("Queue delay")
+        plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
+        plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
+        plt.yscale('log')
+        plt.legend()
+        
+        plt.subplot(r, c, 6)
+        plt.ylabel("Marking probability (%)")
+        plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
+        plt.legend()
+        
+        plt.subplot(r, c, 7)
+        plt.ylabel("Pkts sent")
+        plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
+        plt.legend()
+        
+        plt.subplot(r, c, 8)
+        plt.ylabel("Step marks")
+        plt.plot(rtr_measure.x, rtr_measure.step_mark, color='r', label='Step marks')
+        plt.legend()
+        
+        plt.subplot(r, c, 9)
+        plt.ylabel("Pkts dropped and marked")
+        plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
+        plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
+        plt.legend()
+        
+        plt.suptitle("Measurements: SimpleTest "+date+" "+timecode)
+        fig.supxlabel("time (in ms)")
         plt.show()
         
     if simpletest is True:
