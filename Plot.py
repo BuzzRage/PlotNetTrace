@@ -24,14 +24,24 @@ verbose = False
 def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
     complete = True
-
+    rtr_only = False
+    
     for node in suffix[:-1]:
         if files[node+"_file"] == None: complete = False
 
     simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
+    rtr_only = True if (files["rtr_file"] != None and files["cc_file"] == None and files["cs_file"] == None and complete is False) else False
         
     date = rtr_file.split("/")[1]
     timecode = rtr_file.split("/")[2].split("-")[0]
+        
+    if rtr_only is True:
+        rtr_measure = NetTrace.Measure(rtr_file)
+        rtr_measure.load_data()
+        rtr_measure.plot_all()
+        
+        plt.suptitle("Measurements: Picoquic tests "+date+" "+timecode)
+        plt.show()
         
     if simpletest is True:
     
