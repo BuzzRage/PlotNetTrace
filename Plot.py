@@ -29,8 +29,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     for node in suffix[:-1]:
         if files[node+"_file"] == None: complete = False
 
-    simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
-    simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] == None)
+    simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and complete is False) else False
     rtr_only = True if (files["rtr_file"] != None and files["cc_file"] == None and files["cs_file"] == None) else False
     
         
