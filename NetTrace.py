@@ -307,24 +307,27 @@ class Measure:
             plt.ylabel("Bytes sent")
             plt.plot(self.x, self.bytes_sent)
             
-            plt.subplot(r, c, 3)
+            plt.subplot(r, c, 2)
             plt.ylabel("Queue occupation (pkts)")
             plt.plot(self.x, self.cpkts, color='darkorange', label='Classic pkts')
             plt.plot(self.x, self.lpkts, color='cyan', label='L4S pkts')
             
-            plt.subplot(r, c, 4)
+            plt.subplot(r, c, 3)
             plt.ylabel("Queue delay")
             plt.plot(self.x, self.cdelay, color='darkorange', label='Classic delay')
             plt.plot(self.x, self.ldelay, color='cyan', label='L4S delay')
             
-            plt.subplot(r, c, 5)
+            plt.subplot(r, c, 4)
             plt.ylabel("Marking and probability (%)")
             plt.plot(self.x, self.prob, color='darkblue', label='Mark probability')
             
-            plt.subplot(r, c, 6)
-            plt.ylabel("Pkts marked and dropped")
-            plt.plot(self.x, self.pkt_dropped, color='r', label='Packets dropped')
+            plt.subplot(r, c, 5)
+            plt.ylabel("Marked Packets")
             plt.plot(self.x, self.ecn_mark, color='gold', label='ECN Marked packets')
+            
+            plt.subplot(r, c, 6)
+            plt.ylabel("Dropped Packets")
+            plt.plot(self.x, self.pkt_dropped, color='r', label='Packets dropped')
             
         else:
             r=3
