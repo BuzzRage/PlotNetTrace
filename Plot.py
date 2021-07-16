@@ -121,8 +121,8 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             
             plt.subplot(r, c, 1)
             plt.ylabel("cwnd evolution (MSS)")
-            plt.plot(cc_measure.x, cc_measure, color='darkorange', label='Classic Client')
-            plt.plot(cs_measure.x, cs_measure, color='gold', label='Classic Server')
+            plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
+            plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
             plt.legend()
             
             plt.subplot(r, c, 2)
