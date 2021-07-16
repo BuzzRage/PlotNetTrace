@@ -2,6 +2,7 @@
 
 from pathlib import Path
 from matplotlib import pyplot as plt
+import random
 import numpy as np
 from parse import *
 
@@ -339,39 +340,43 @@ class Measure:
         else:
             r=3
             c=3
+
+            colors = ["darkblue", "green", "gold", "red", "cyan"]
+            random_color = random.choice(colors)
+
             plt.subplot(r, c, 1)
             plt.xlabel("time (in RTT)")
             plt.ylabel("cwnd mean: "+"{:.2f}".format(self.cwnd_mean()))
-            plt.plot(self.x, self.cwnd)
+            plt.plot(self.x, self.cwnd, color=random_color)
 
             plt.subplot(r, c, 2)
             plt.xlabel("time (in RTT)")
             plt.ylabel("MSS mean: "+"{:.2f}".format(self.mss_mean()))
-            plt.plot(self.x, self.mss)
+            plt.plot(self.x, self.mss, color=random_color)
             
             plt.subplot(r, c, 3)
             plt.xlabel("time (in RTT)")
             plt.ylabel("Average RTT mean: "+"{:.2f}".format(self.rtt_mean()))
-            plt.plot(self.x, self.rtt)
+            plt.plot(self.x, self.rtt, color=random_color)
             
             plt.subplot(r, c, 4)
             plt.xlabel("time (in RTT)")
             plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(self.bytes_acked_mean()))
-            plt.plot(self.x, self.bytes_acked)
+            plt.plot(self.x, self.bytes_acked, color=random_color)
             
             plt.subplot(r, c, 5)
             plt.xlabel("time (in RTT)")
             plt.ylabel("Sending rate mean: "+"{:.2f}".format(self.sending_rate_mean()))
-            plt.plot(self.x, self.sending_rate)    
+            plt.plot(self.x, self.sending_rate, color=random_color)
             
             plt.subplot(r, c, 6)
             plt.xlabel("time (in RTT)")
             plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
-            plt.plot(self.x, self.pacing_rate)
+            plt.plot(self.x, self.pacing_rate, color=random_color)
             
             plt.subplot(r, c, 7)
             plt.xlabel("time (in RTT)")
             plt.ylabel("Delivered packets")
-            plt.plot(self.x, self.delivered)   
+            plt.plot(self.x, self.delivered, color=random_color)
         
         plt.suptitle(title)
