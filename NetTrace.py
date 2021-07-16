@@ -346,32 +346,32 @@ class Measure:
 
             plt.subplot(r, c, 1)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("cwnd mean: "+"{:.2f}".format(self.cwnd_mean()))
+            plt.ylabel("cwnd mean: {:.2f} MSS".format(self.cwnd_mean()))
             plt.plot(self.x, self.cwnd, color=random_color)
 
             plt.subplot(r, c, 2)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("MSS mean: "+"{:.2f}".format(self.mss_mean()))
+            plt.ylabel("MSS mean: {:.2f} Bytes".format(self.mss_mean()))
             plt.plot(self.x, self.mss, color=random_color)
             
             plt.subplot(r, c, 3)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Average RTT mean: "+"{:.2f}".format(self.rtt_mean()))
+            plt.ylabel("Average RTT mean: {:.2f} ms".format(self.rtt_mean()))
             plt.plot(self.x, self.rtt, color=random_color)
             
             plt.subplot(r, c, 4)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("ACKed bytes mean: "+"{:.2f}".format(self.bytes_acked_mean()))
+            plt.ylabel("ACKed bytes evolution (Bytes)")
             plt.plot(self.x, self.bytes_acked, color=random_color)
             
             plt.subplot(r, c, 5)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Sending rate mean: "+"{:.2f}".format(self.sending_rate_mean()))
+            plt.ylabel("Sending rate mean: {:.2f} Mbps".format(self.sending_rate_mean()))
             plt.plot(self.x, self.sending_rate, color=random_color)
             
             plt.subplot(r, c, 6)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Pacing rate mean: "+"{:.2f}".format(self.pacing_rate_mean()))
+            plt.ylabel("Pacing rate mean: {:.2f} Mbps".format(self.pacing_rate_mean()))
             plt.plot(self.x, self.pacing_rate, color=random_color)
             
             plt.subplot(r, c, 7)
