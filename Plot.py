@@ -23,22 +23,29 @@ verbose = False
 
 def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     
-    complete = True
-    rtr_only = False
-    simpletest = False
-    cc_with_lc = False
+    complete     = True
+    rtr_only     = False
+    simpletest   = False
+    cc_with_lc   = False
+    classic_only = False
     
     for node in suffix[:-1]:
         if files[node+"_file"] == None: complete = False
 
-    simpletest = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
-    cc_with_lc = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] == None) else False
-    rtr_only = True if (files["rtr_file"] != None and files["cc_file"] == None and files["cs_file"] == None) else False
+    simpletest   = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
+    cc_with_lc   = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] == None)                       else False
+    rtr_only     = True if (files["rtr_file"] != None and files["cc_file"] == None and files["cs_file"] == None)                       else False
+    classic_only = True if (files["rtr_file"] == None and files["cc_file"] != None and files["cs_file"] != None)                       else False
     
-        
-    
-    date = rtr_file.split("/")[1]
-    timecode = rtr_file.split("/")[2].split("-")[0]
+    if classic_only is True:
+        cc_measure = NetTrace.Measure(cc_file)
+        cs_measure = NetTrace.Measure(cs_file)
+        cc_measure.load_data()
+        cs_measure.load_data()
+        cc_measure.plot_all(title="CC measurement: AQM=pfifo_fast "+date+" "+timecode)
+        cs_measure.plot_all(title="CS measurement: AQM=pfifo_fast "+date+" "+timecode)
+
+        plt.show()
         
     if rtr_only is True:
         rtr_measure = NetTrace.Measure(rtr_file)
@@ -280,7 +287,11 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
 
 
 if len(args) == 4 and str(args[1]) == "timecode":
-    dirpath = ipath + args[2] + "/" + args[3]
+    
+    date = args[2]
+    timecode = args[3]
+    
+    dirpath = ipath + date + "/" + timecode
     
     for node in suffix:
         filename = dirpath+"-"+node

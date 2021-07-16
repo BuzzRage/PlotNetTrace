@@ -295,9 +295,9 @@ class Measure:
                     else:
                         csv_file.write(self.decode_ss_line(l))
     
-    def plot_all(self):
+    def plot_all(self, title = "Visualisation de la mesure"):
         self.load_data()
-        plt.figure()
+        plt.figure(num=self.filename)
         
         if self.is_router_data():
             r=2
@@ -365,6 +365,6 @@ class Measure:
             plt.subplot(r, c, 7)
             plt.xlabel("time (in RTT)")
             plt.ylabel("Delivered packets")
-            plt.plot(self.x, self.delivered)    
+            plt.plot(self.x, self.delivered)   
         
-        plt.suptitle("Visualisation des résultats")
+        plt.suptitle(title)
