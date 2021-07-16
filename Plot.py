@@ -33,7 +33,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
     
     simpletest   = True if (rtr_file != None and cc_file != None and cs_file != None and complete is False) else False
     
-    if complete is False and simpletest is False and cc_with_lc is False and rtr_only is False:
+    if complete is False and simpletest is False:
         for node in suffix:
             if local_args[node+"_file"] != None:
                 unknown_measure = NetTrace.Measure(local_args[node+"_file"])
