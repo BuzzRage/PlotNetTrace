@@ -55,7 +55,7 @@ class Measure:
     def is_router_data(self):
         with open(self.filename, 'r') as f:
             for line in f:
-                if "dualpi2" in line:
+                if "dualpi2" in line or "pfifo_fast" in line:
                     return True
                 elif "cubic" in line or "prague" in line:
                     return False
