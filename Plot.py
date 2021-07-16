@@ -40,19 +40,13 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     if classic_only is True:
         cc_measure = NetTrace.Measure(cc_file)
         cs_measure = NetTrace.Measure(cs_file)
-        cc_measure.load_data()
-        cs_measure.load_data()
         cc_measure.plot_all(title="CC measurement: AQM=pfifo_fast "+date+" "+timecode)
         cs_measure.plot_all(title="CS measurement: AQM=pfifo_fast "+date+" "+timecode)
-
         plt.show()
         
     if rtr_only is True:
         rtr_measure = NetTrace.Measure(rtr_file)
-        rtr_measure.load_data()
-        rtr_measure.plot_all()
-        
-        plt.suptitle("Measurements: Picoquic tests "+date+" "+timecode)
+        rtr_measure.plot_all(title="Measurements: Picoquic tests "+date+" "+timecode)
         plt.show()
         
 
