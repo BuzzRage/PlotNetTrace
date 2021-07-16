@@ -222,23 +222,28 @@ class Measure:
         return str(decoded_line)+"\n"
 
     def decode_router_ss_line(self,line):
-        qdisc = 1
+        qdisc = line.split()[1]
+
         decoded_line  = ""
-        decoded_line += line.split()[qdisc]+","
+        decoded_line += qdisc+","
         decoded_line += self.add_matched_field('Sent {} bytes',line)
         decoded_line += str(int(self.add_matched_field('bytes {} pkt',line)[:-1])-self.pkt_sent_tare)+","
         decoded_line += str(int(self.add_matched_field('dropped {},',line)[:-1])-self.drop_tare)+","
         decoded_line += self.add_matched_field('overlimits {} ',line)
         decoded_line += self.add_matched_field('requeues {})',line)
-        decoded_line += self.add_matched_field('prob {} ',line)
-        decoded_line += self.add_matched_field('delay_c {}us ',line)
-        decoded_line += self.add_matched_field('delay_l {}us',line)
-        decoded_line += self.add_matched_field('pkts_in_c {} ',line)
-        decoded_line += self.add_matched_field('pkts_in_l {} ',line)
-        decoded_line += self.add_matched_field('maxq {}e',line)
-        decoded_line += str(int(self.add_matched_field('ecn_mark {} ',line)[:-1])-self.ecn_tare)+","
-        decoded_line += str(int(self.add_matched_field('step_marks {}c',line)[:-1])-self.step_mark_tare)+","
-        
+
+        if qdisc == "dualpi2":
+            decoded_line += self.add_matched_field('prob {} ',line)
+            decoded_line += self.add_matched_field('delay_c {}us ',line)
+            decoded_line += self.add_matched_field('delay_l {}us',line)
+            decoded_line += self.add_matched_field('pkts_in_c {} ',line)
+            decoded_line += self.add_matched_field('pkts_in_l {} ',line)
+            decoded_line += self.add_matched_field('maxq {}e',line)
+            decoded_line += str(int(self.add_matched_field('ecn_mark {} ',line)[:-1])-self.ecn_tare)+","
+            decoded_line += str(int(self.add_matched_field('step_marks {}c',line)[:-1])-self.step_mark_tare)+","
+        else:
+            decoded_line += ",,,,,,,,"
+            
         # Timestamp calculation
         raw_ts = line.rstrip().split(" ")[-1]
         h  = int(raw_ts.split(":")[0])
@@ -276,8 +281,9 @@ class Measure:
                     tmp_drop_tare       = self.add_matched_field('dropped {},',lines[0])
                     tmp_step_mark_tare  = self.add_matched_field('step_marks {}c',lines[0])
                     tmp_pkt_sent_tare   = self.add_matched_field('bytes {} pkt',lines[0])
-
-                    if len(tmp_ecn_tare) != 0:                       # If AQM is DualPI2
+					
+                    # If AQM is DualPI2
+                    if len(tmp_ecn_tare) == "NaN,":
                         self.ecn_tare       = int(tmp_ecn_tare[:-1])
                         self.step_mark_tare = int(tmp_step_mark_tare[:-1])
                         header += "ECN Marks counter: "+str(self.ecn_tare)+", "
