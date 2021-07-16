@@ -142,6 +142,11 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
             plt.legend()
             
+            plt.subplot(r, c, 5)
+            plt.ylabel("Bytes sent")
+            plt.plot(rtr_measure.x, rtr_measure.bytes_sent, color='green', label='Bytes sent')
+            plt.legend()
+            
             plt.subplot(r, c, 6)
             plt.ylabel("Pkts dropped and marked")
             plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
