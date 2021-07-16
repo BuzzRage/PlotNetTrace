@@ -22,7 +22,8 @@ files["rtrvm_file"] = None
 verbose = False
 
 
-def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
+def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file):
+    local_args = locals()
     
     complete     = True
     rtr_only     = False
@@ -31,13 +32,20 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
     classic_only = False
     
     for node in suffix[:-1]:
-        if files[node+"_file"] == None: complete = False
-
-    simpletest   = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] != None and complete is False) else False
-    cc_with_lc   = True if (files["rtr_file"] != None and files["cc_file"] != None and files["cs_file"] == None)                       else False
-    rtr_only     = True if (files["rtr_file"] != None and files["cc_file"] == None and files["cs_file"] == None)                       else False
-    classic_only = True if (files["rtr_file"] == None and files["cc_file"] != None and files["cs_file"] != None)                       else False
+        if local_args[node+"_file"] == None: complete = False
     
+    simpletest   = True if (rtr_file != None and cc_file != None and cs_file != None and complete is False) else False
+    cc_with_lc   = True if (rtr_file != None and cc_file != None and cs_file == None)                       else False
+    rtr_only     = True if (rtr_file != None and cc_file == None and cs_file == None)                       else False
+    classic_only = True if (rtr_file == None and cc_file != None and cs_file != None)                       else False
+    
+    if complete is False and simpletest is False and cc_with_lc is False and rtr_only is False and classic_only is False:
+        for node in suffix:
+            if local_args[node+"_file"] != None:
+                unknown_measure = NetTrace.Measure(local_args[node+"_file"])
+                unknown_measure.plot_all()
+        plt.show()
+
     if classic_only is True:
         cc_measure = NetTrace.Measure(cc_file)
         cs_measure = NetTrace.Measure(cs_file)
@@ -318,40 +326,49 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file):
         plt.show()
 
 
-if len(args) == 4 and str(args[1]) == "timecode":
-    
-    date = args[2]
-    timecode = args[3]
-    
+if args[1] in ["verbose", "v", "-v"]:
+    verbose=True
+
+if "timecode" in [str(args[1]), str(args[2])] and len(args) in range(4,6):
+    date = args[-2]
+    timecode = args[-1]
     dirpath = ipath + date + "/" + timecode
-    
+
     for node in suffix:
         filename = dirpath+"-"+node
         node_exist = Path(filename).is_file()
         
         if verbose is True:
-            files[node+"_file"] = filename if node_exist is True else print("Warning: file {} does not exist.".format(filename))
+            files[node+"_file"] = filename if node_exist is True else print("Info: file {} does not exist.".format(filename))
         else:
             if node_exist is True: files[node+"_file"] = filename
     
-elif len(args) == 7 and str(args[1]) != "timecode":
+elif "timecode" not in [str(args[1]), str(args[2])] and len(args) in range(1,8):
+    if Path(args[-1]).is_file() is not True:
+        sys.exit(f"File {args[-1]} does not exists")
+    date =  args[-1].split("/")[-2]
+    timecode = args[-1].split("/")[-1].split("-")[-2]
     
-    for f in args[1:]:
+    if verbose is True:
+        index = 2
+    else:
+        index = 1
+
+    for f in args[index:]:
         file_exist = Path(f).is_file()
         if file_exist is not True:
             sys.exit(f"File {f} does not exists")
-            
-    files["rtr_file"] = args[1]
-    files["atk_file"] = args[2]
-    files["cc_file"]  = args[3]
-    files["lc_file"]  = args[4]
-    files["cs_file"]  = args[5]
-    files["ls_file"]  = args[6]
-    
+
+        for node in suffix:
+            if f.split("-")[-1] == node:
+                files[node+"_file"] = f
+                if verbose is True:
+                    print("Info: Loading file {}.".format(f))
+
 else:
     sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\nor\n"+str(args[0])+" timecode 2021-05-20 1516\n")
     
 
-visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"])
+visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"])
 
 
