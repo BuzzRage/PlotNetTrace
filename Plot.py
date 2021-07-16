@@ -59,13 +59,13 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             c=3
             
             plt.subplot(r, c, 1)
-            plt.ylabel("cwnd evolution")
-            plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
-            plt.plot(cs_measure.x, cs_measure.cwnd*cs_measure.mss, color='gold', label='Classic Server')
+            plt.ylabel("cwnd evolution (MSS)")
+            plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
+            plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
             plt.legend()
             
             plt.subplot(r, c, 2)
-            plt.ylabel("RTT evolution")
+            plt.ylabel("RTT evolution (ms)")
             plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
             plt.legend()
@@ -77,14 +77,14 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.legend()
             
             plt.subplot(r, c, 4)
-            plt.ylabel("Queue occupation")
+            plt.ylabel("Queue occupation (pkts)")
             plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
             plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
             plt.yscale('log')
             plt.legend()
             
             plt.subplot(r, c, 5)
-            plt.ylabel("Queue delay")
+            plt.ylabel("Queue delay (ms)")
             plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
             plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
             plt.yscale('log')
@@ -120,13 +120,13 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             c=3
             
             plt.subplot(r, c, 1)
-            plt.ylabel("cwnd evolution")
-            plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
-            plt.plot(cs_measure.x, cs_measure.cwnd*cs_measure.mss, color='gold', label='Classic Server')
+            plt.ylabel("cwnd evolution (MSS)")
+            plt.plot(cc_measure.x, cc_measure, color='darkorange', label='Classic Client')
+            plt.plot(cs_measure.x, cs_measure, color='gold', label='Classic Server')
             plt.legend()
             
             plt.subplot(r, c, 2)
-            plt.ylabel("RTT evolution")
+            plt.ylabel("RTT evolution (ms)")
             plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
             plt.legend()
@@ -174,16 +174,16 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
 
         
         plt.subplot(r, c, 1)
-        plt.ylabel("cwnd evolution")
-        plt.plot(atk_measure.x, atk_measure.cwnd*atk_measure.mss, color='r', label='atk Client')
-        plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
-        plt.plot(lc_measure.x, lc_measure.cwnd*lc_measure.mss, color='darkblue', label='LL Client')
-        plt.plot(cs_measure.x, cs_measure.cwnd*cs_measure.mss, color='gold', label='Classic Server')
-        plt.plot(ls_measure.x, ls_measure.cwnd*ls_measure.mss, color='cyan', label='LL Server')
+        plt.ylabel("cwnd evolution (MSS)")
+        plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
+        plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
+        plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
+        plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
+        plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
         plt.legend()
         
         plt.subplot(r, c, 2)
-        plt.ylabel("RTT evolution")
+        plt.ylabel("RTT evolution (ms)")
         plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
         plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
         plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
@@ -201,21 +201,21 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
         plt.legend()
         
         plt.subplot(r, c, 4)
-        plt.ylabel("Queue occupation")
+        plt.ylabel("Queue occupation (pkts)")
         plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
         plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
         plt.yscale('log')
         plt.legend()
         
         plt.subplot(r, c, 5)
-        plt.ylabel("Queue delay")
+        plt.ylabel("Queue delay (ms)")
         plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
         plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
         plt.yscale('log')
         plt.legend()
         
         plt.subplot(r, c, 6)
-        plt.ylabel("Marking and probability")
+        plt.ylabel("Marking probability (%)")
         plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
         plt.legend()
         
