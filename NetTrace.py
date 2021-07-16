@@ -282,9 +282,9 @@ class Measure:
                     tmp_drop_tare       = self.add_matched_field('dropped {},',lines[0])
                     tmp_step_mark_tare  = self.add_matched_field('step_marks {}c',lines[0])
                     tmp_pkt_sent_tare   = self.add_matched_field('bytes {} pkt',lines[0])
-					
+
                     # If AQM is DualPI2
-                    if len(tmp_ecn_tare) != "NaN,":
+                    if tmp_ecn_tare != "NaN,":
                         self.ecn_tare       = int(tmp_ecn_tare[:-1])
                         self.step_mark_tare = int(tmp_step_mark_tare[:-1])
                         header += "ECN Marks counter: "+str(self.ecn_tare)+", "
