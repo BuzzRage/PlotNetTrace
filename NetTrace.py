@@ -277,14 +277,15 @@ class Measure:
                     tmp_step_mark_tare  = self.add_matched_field('step_marks {}c',lines[0])
                     tmp_pkt_sent_tare   = self.add_matched_field('bytes {} pkt',lines[0])
 
-                    self.ecn_tare       = int(tmp_ecn_tare[:-1])
+                    if len(tmp_ecn_tare) != 0:                       # If AQM is DualPI2
+                        self.ecn_tare       = int(tmp_ecn_tare[:-1])
+                        self.step_mark_tare = int(tmp_step_mark_tare[:-1])
+                        header += "ECN Marks counter: "+str(self.ecn_tare)+", "
+                        header += "Step marks counter: "+str(self.step_mark_tare)+", "
+
                     self.drop_tare      = int(tmp_drop_tare[:-1])
                     self.pkt_sent_tare  = int(tmp_pkt_sent_tare[:-1])
-                    self.step_mark_tare = int(tmp_step_mark_tare[:-1])
-                                
-                    header += "ECN Marks counter: "+str(self.ecn_tare)+", "
                     header += "Dropped Packets counter: "+str(self.drop_tare)+", "
-                    header += "Step marks counter: "+str(self.step_mark_tare)+", "
                     header += "Packet counter: "+str(self.pkt_sent_tare)+","
                 
                 csv_file.write(header+"\n")
