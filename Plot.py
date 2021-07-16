@@ -26,106 +26,20 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
     local_args = locals()
     
     complete     = True
-    rtr_only     = False
     simpletest   = False
-    cc_with_lc   = False
-    classic_only = False
     
     for node in suffix[:-1]:
         if local_args[node+"_file"] == None: complete = False
     
     simpletest   = True if (rtr_file != None and cc_file != None and cs_file != None and complete is False) else False
-    cc_with_lc   = True if (rtr_file != None and cc_file != None and cs_file == None)                       else False
-    rtr_only     = True if (rtr_file != None and cc_file == None and cs_file == None)                       else False
-    classic_only = True if (rtr_file == None and cc_file != None and cs_file != None)                       else False
     
-    if complete is False and simpletest is False and cc_with_lc is False and rtr_only is False and classic_only is False:
+    if complete is False and simpletest is False and cc_with_lc is False and rtr_only is False:
         for node in suffix:
             if local_args[node+"_file"] != None:
                 unknown_measure = NetTrace.Measure(local_args[node+"_file"])
                 unknown_measure.plot_all()
         plt.show()
 
-    if classic_only is True:
-        cc_measure = NetTrace.Measure(cc_file)
-        cs_measure = NetTrace.Measure(cs_file)
-        cc_measure.plot_all(title="CC measurement: AQM=pfifo_fast "+date+" "+timecode)
-        cs_measure.plot_all(title="CS measurement: AQM=pfifo_fast "+date+" "+timecode)
-        plt.show()
-        
-    if rtr_only is True:
-        rtr_measure = NetTrace.Measure(rtr_file)
-        rtr_measure.plot_all(title="Measurements: Picoquic tests "+date+" "+timecode)
-        plt.show()
-        
-
-    if cc_with_lc is True:
-    
-        rtr_measure = NetTrace.Measure(rtr_file)
-        cc_measure  = NetTrace.Measure(cc_file)
-
-        rtr_measure.load_data()
-        cc_measure.load_data()
-        
-        #Visualization part
-        fig = plt.figure()
-        r=3
-        c=3
-
-        
-        plt.subplot(r, c, 1)
-        plt.ylabel("cwnd evolution")
-        plt.plot(cc_measure.x, cc_measure.cwnd*cc_measure.mss, color='darkorange', label='Classic Client')
-        plt.legend()
-        
-        plt.subplot(r, c, 2)
-        plt.ylabel("RTT evolution")
-        plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
-        plt.legend()
-        
-        plt.subplot(r, c, 3)
-        plt.ylabel("Sending rate (egress Mbps)")
-        plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
-        plt.legend()
-        
-        plt.subplot(r, c, 4)
-        plt.ylabel("Queue occupation")
-        plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
-        plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
-        plt.yscale('log')
-        plt.legend()
-        
-        plt.subplot(r, c, 5)
-        plt.ylabel("Queue delay")
-        plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
-        plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
-        plt.yscale('log')
-        plt.legend()
-        
-        plt.subplot(r, c, 6)
-        plt.ylabel("Marking probability (%)")
-        plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
-        plt.legend()
-        
-        plt.subplot(r, c, 7)
-        plt.ylabel("Pkts sent")
-        plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
-        plt.legend()
-        
-        plt.subplot(r, c, 8)
-        plt.ylabel("Step marks")
-        plt.plot(rtr_measure.x, rtr_measure.step_mark, color='r', label='Step marks')
-        plt.legend()
-        
-        plt.subplot(r, c, 9)
-        plt.ylabel("Pkts dropped and marked")
-        plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
-        plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
-        plt.legend()
-        
-        plt.suptitle("Measurements: SimpleTest "+date+" "+timecode)
-        fig.supxlabel("time (in ms)")
-        plt.show()
         
     if simpletest is True:
     
