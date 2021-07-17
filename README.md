@@ -14,5 +14,7 @@ Input file should be raw ss lines. For example with `ss -pti | grep -A1 "firefox
 * Parse csv header to load tare values
 * Plot drop and ECN marks in different subplot
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
-* Implement verbose mode if "-v" provided
+* Improve verbose mode if "-v" provided
 * Combine raw input file with packet captured to get more stats using `scapy`
+* NetTrace: add a specific case for pfifo_fast in plot_all()
+* NetTrace: add color consistency in plot_all()
