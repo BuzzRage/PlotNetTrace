@@ -81,7 +81,14 @@ class Measure:
         
     def load_sending_rate(self):
         for i in range(0,len(self.rtt)):
-           self.sending_rate[i] = self.cwnd[i]*self.mss[i]*8000000/self.rtt[i]
+           self.sending_rate[i] = ((self.cwnd[i]*self.mss[i]*8)/1000000)/(self.rtt[i]/1000)
+    
+    def mean_mbps_rate(self):
+        if "rtr" in self.filename:
+            return (((self.bytes_sent[-1]-self.bytes_sent[0])*8)/1000000)/(self.x[-1]/1000-self.x[0]/1000)
+        else:
+            return self.sending_rate_mean()
+           
     
     def conv_to_bps(self,value):
         if value[-1] == 'G':
@@ -93,7 +100,7 @@ class Measure:
         elif value[-1] == 'N':
             return "NaN"
         else:
-            return float(value[:-1])
+            return float(value)
         
     
     def load_from_csv(self):        

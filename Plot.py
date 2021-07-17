@@ -170,11 +170,11 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
         
             plt.subplot(r, c, 3)
             plt.ylabel("Sending rate (egress Mbps)")
-            plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
-            plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
+            plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client (mean: {:.2f} Mbps)'.format(cc_measure.sending_rate_mean()))
+            plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server (mean: {:.2f} Mbps)'.format(cs_measure.sending_rate_mean()))
             if simpletest is False:
-                plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
-                plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
+                plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client (mean: {:.2f} Mbps)'.format(lc_measure.sending_rate_mean()))
+                plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.sending_rate_mean()))
             if complete is True:
                 plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
             plt.legend()
@@ -185,7 +185,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.legend()
             
             plt.subplot(r, c, 5)
-            plt.ylabel("Bytes sent")
+            plt.ylabel("Bytes sent (Average rate: {:.2f} Mbps )".format(rtr_measure.mean_mbps_rate()))
             plt.plot(rtr_measure.x, rtr_measure.bytes_sent, color='green', label='Bytes sent')
             plt.legend()
             
