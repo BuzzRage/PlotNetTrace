@@ -31,9 +31,10 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
     for node in suffix[:-1]:
         if local_args[node+"_file"] == None: complete = False
     
-    simpletest   = True if (rtr_file != None and cc_file != None and cs_file != None and complete is False) else False
+    simpletest = True if (rtr_file != None and cc_file != None and cs_file != None and lc_file == None and complete is False) else False
+    downlink   = True if (rtr_file != None and cc_file != None and cs_file != None and lc_file != None and ls_file != None and complete is False) else False
     
-    if complete is False and simpletest is False:
+    if complete is False and simpletest is False and downlink is False:
         for node in suffix:
             if local_args[node+"_file"] != None:
                 unknown_measure = NetTrace.Measure(local_args[node+"_file"])
@@ -156,21 +157,22 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             fig.supxlabel("time (in ms)")
             plt.show()
         
-    if complete is True:
+    if downlink is True or complete is True:
         rtr_measure = NetTrace.Measure(rtr_file)
-        atk_measure = NetTrace.Measure(atk_file)
         cc_measure  = NetTrace.Measure(cc_file)
         lc_measure  = NetTrace.Measure(lc_file)
         cs_measure  = NetTrace.Measure(cs_file)
         ls_measure  = NetTrace.Measure(ls_file)
         
         rtr_measure.load_data()
-        atk_measure.load_data()
         cc_measure.load_data()
         lc_measure.load_data()
         cs_measure.load_data()
         ls_measure.load_data()
         
+        if complete is True:
+            atk_measure = NetTrace.Measure(atk_file)
+            atk_measure.load_data()
         
         #Visualization part
         fig = plt.figure()
@@ -180,29 +182,32 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
         
         plt.subplot(r, c, 1)
         plt.ylabel("cwnd evolution (MSS)")
-        plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
         plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
         plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
         plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
         plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
+        if complete is True:
+            plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
         plt.legend()
         
         plt.subplot(r, c, 2)
         plt.ylabel("RTT evolution (ms)")
-        plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
         plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
         plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
         plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
         plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+        if complete is True:
+            plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
         plt.legend()
         
         plt.subplot(r, c, 3)
         plt.ylabel("Sending rate (egress Mbps)")
-        plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
         plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
         plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
         plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
+        if complete is True:
+            plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
         plt.legend()
         
         plt.subplot(r, c, 4)
