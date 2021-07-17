@@ -42,41 +42,66 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
         plt.show()
 
         
-    if simpletest is True:
-    
+    if simpletest is True or downlink is True or complete is True:
         rtr_measure = NetTrace.Measure(rtr_file)
         cc_measure  = NetTrace.Measure(cc_file)
         cs_measure  = NetTrace.Measure(cs_file)
-
+                
         rtr_measure.load_data()
         cc_measure.load_data()
         cs_measure.load_data()
         
+        if simpletest is False:
+            lc_measure  = NetTrace.Measure(lc_file)
+            ls_measure  = NetTrace.Measure(ls_file)
+            lc_measure.load_data()
+            ls_measure.load_data()
+        
+        if complete is True:
+            atk_measure = NetTrace.Measure(atk_file)
+            atk_measure.load_data()
+        
         #Visualization part
         fig = plt.figure()
-                
+        
         if not np.isnan(rtr_measure.cpkts[0]):
             r=3
             c=3
-            
+
             plt.subplot(r, c, 1)
             plt.ylabel("cwnd evolution (MSS)")
             plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
-            plt.legend()
+            if simpletest is False:
+                plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
+                plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
             
+            if complete is True:
+                plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
+            plt.legend()
+        
             plt.subplot(r, c, 2)
             plt.ylabel("RTT evolution (ms)")
             plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
+            if simpletest is False:
+                plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
+                plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+            if complete is True:
+                plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
             plt.legend()
-            
+        
             plt.subplot(r, c, 3)
             plt.ylabel("Sending rate (egress Mbps)")
             plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
+            if simpletest is False:
+                plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
+                plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
+            if complete is True:
+                plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
             plt.legend()
-            
+        
             plt.subplot(r, c, 4)
             plt.ylabel("Queue occupation (pkts)")
             plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
@@ -111,11 +136,11 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
             plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
             plt.legend()
-            
+        
             plt.suptitle("AQM=DuaplPI2, Timecode: "+date+" "+timecode)
             fig.supxlabel("time (in ms)")
             plt.show()
-        
+
         else:
             r=2
             c=3
@@ -124,18 +149,34 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.ylabel("cwnd evolution (MSS)")
             plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
-            plt.legend()
+            if simpletest is False:
+                plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
+                plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
             
+            if complete is True:
+                plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
+            plt.legend()
+        
             plt.subplot(r, c, 2)
             plt.ylabel("RTT evolution (ms)")
             plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
+            if simpletest is False:
+                plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
+                plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+            if complete is True:
+                plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
             plt.legend()
-            
+        
             plt.subplot(r, c, 3)
             plt.ylabel("Sending rate (egress Mbps)")
             plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
             plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
+            if simpletest is False:
+                plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
+                plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
+            if complete is True:
+                plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
             plt.legend()
             
             plt.subplot(r, c, 4)
@@ -156,99 +197,6 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.suptitle("AQM=pfifo_fast, Timecode: "+date+" "+timecode)
             fig.supxlabel("time (in ms)")
             plt.show()
-        
-    if downlink is True or complete is True:
-        rtr_measure = NetTrace.Measure(rtr_file)
-        cc_measure  = NetTrace.Measure(cc_file)
-        lc_measure  = NetTrace.Measure(lc_file)
-        cs_measure  = NetTrace.Measure(cs_file)
-        ls_measure  = NetTrace.Measure(ls_file)
-        
-        rtr_measure.load_data()
-        cc_measure.load_data()
-        lc_measure.load_data()
-        cs_measure.load_data()
-        ls_measure.load_data()
-        
-        if complete is True:
-            atk_measure = NetTrace.Measure(atk_file)
-            atk_measure.load_data()
-        
-        #Visualization part
-        fig = plt.figure()
-        r=3
-        c=3
-
-        
-        plt.subplot(r, c, 1)
-        plt.ylabel("cwnd evolution (MSS)")
-        plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
-        plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
-        plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
-        plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
-        if complete is True:
-            plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
-        plt.legend()
-        
-        plt.subplot(r, c, 2)
-        plt.ylabel("RTT evolution (ms)")
-        plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
-        plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
-        plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
-        plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
-        if complete is True:
-            plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
-        plt.legend()
-        
-        plt.subplot(r, c, 3)
-        plt.ylabel("Sending rate (egress Mbps)")
-        plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client')
-        plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client')
-        plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server')
-        plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server')
-        if complete is True:
-            plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
-        plt.legend()
-        
-        plt.subplot(r, c, 4)
-        plt.ylabel("Queue occupation (pkts)")
-        plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
-        plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
-        plt.yscale('log')
-        plt.legend()
-        
-        plt.subplot(r, c, 5)
-        plt.ylabel("Queue delay (ms)")
-        plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
-        plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
-        plt.yscale('log')
-        plt.legend()
-        
-        plt.subplot(r, c, 6)
-        plt.ylabel("Marking probability (%)")
-        plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue', label='Mark probability')
-        plt.legend()
-        
-        plt.subplot(r, c, 7)
-        plt.ylabel("Pkts sent")
-        plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green', label='Packets sent')
-        plt.legend()
-        
-        plt.subplot(r, c, 8)
-        plt.ylabel("Step marks")
-        plt.plot(rtr_measure.x, rtr_measure.step_mark, color='r', label='Step marks')
-        plt.legend()
-        
-        plt.subplot(r, c, 9)
-        plt.ylabel("Pkts dropped and marked")
-        plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
-        plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
-        plt.legend()
-        
-        plt.suptitle("Visualisation des résultats")
-        fig.supxlabel("time (in ms)")
-        plt.show()
-
 
 if args[1] in ["verbose", "v", "-v"]:
     verbose=True
