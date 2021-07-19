@@ -16,12 +16,11 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * Implement statistics on aggregated measurments
 * Improve usage simplicity ( file handling )
 * Choose between treatment on loading or treatment on csv writing
-* Parse csv header to load tare values
+* Parse csv header to load tare values (ex: bytes sent)
 * Plot drop and ECN marks in different subplot
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
 * Improve verbose mode if "-v" provided
 * Combine raw input file with packet captured to get more stats using `scapy`
-* NetTrace: add a specific case for pfifo_fast in plot_all()
-* NetTrace: add color consistency in plot_all()
 * Add calculation of actual sending rate for endpoints
 * Add config file to store infos for data location (input and output files path)
+* NetTrace.py: Create a class router and a class endpoint that both implements attributes of Measure class

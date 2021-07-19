@@ -13,7 +13,8 @@ class Measure:
         self.filename      = data_file
         self.timestamp     = int()
         self.x             = list()
-
+        self.is_rtr_data   = False
+        
         # Endpoint data
         self.cwnd          = list()
         self.mss           = list()
@@ -42,24 +43,27 @@ class Measure:
         self.maxq          = list() 
         self.ecn_mark      = list() 
         self.step_mark     = list() 
+        self.AQM_is_L4S    = False
         
     def load_data(self):
+        
+        with open(self.filename, 'r') as f:
+            for line in f:
+                if "dualpi2" in line or "pfifo_fast" in line:
+                    self.is_rtr_data = True
+                elif "cubic" in line or "prague" in line:
+                    self.is_rtr_data = False
+        
         f = self.filename+".csv"
         file_exist = Path(f).is_file()
         if file_exist is not True:
             self.convert_raw_to_csv()
-        if not self.is_router_data():
-            self.load_from_csv()
-        elif self.is_router_data():
-            self.load_from_router_csv()
         
-    def is_router_data(self):
-        with open(self.filename, 'r') as f:
-            for line in f:
-                if "dualpi2" in line or "pfifo_fast" in line:
-                    return True
-                elif "cubic" in line or "prague" in line:
-                    return False
+        if self.is_rtr_data: 
+            self.load_from_router_csv()
+            self.AQM_is_L4S = True if not np.isnan(self.cpkts[0]) else False
+        elif not self.is_rtr_data:
+            self.load_from_csv()
             
     def cwnd_mean(self):
         return sum(self.cwnd)/len(self.cwnd)
@@ -84,7 +88,7 @@ class Measure:
            self.sending_rate[i] = ((self.cwnd[i]*self.mss[i]*8)/1000000)/(self.rtt[i]/1000)
     
     def mean_mbps_rate(self):
-        if "rtr" in self.filename:
+        if self.is_rtr_data:
             return (((self.bytes_sent[-1]-self.bytes_sent[0])*8)/1000000)/(self.x[-1]/1000-self.x[0]/1000)
         else:
             return self.sending_rate_mean()
@@ -284,7 +288,7 @@ class Measure:
                 self.timestamp = 60*60*1000*h+60*1000*m+1000*s+ms/1000
                 header += "Timestamp: "+str(self.timestamp)+", "
                 
-                if self.is_router_data():
+                if self.is_rtr_data:
                     tmp_ecn_tare        = self.add_matched_field('ecn_mark {} ',lines[0])
                     tmp_drop_tare       = self.add_matched_field('dropped {},',lines[0])
                     tmp_step_mark_tare  = self.add_matched_field('step_marks {}c',lines[0])
@@ -305,7 +309,7 @@ class Measure:
                 csv_file.write(header+"\n")
                 
                 for l in lines:      
-                    if self.is_router_data():
+                    if self.is_rtr_data:
                         csv_file.write(self.decode_router_ss_line(l))
                     else:
                         csv_file.write(self.decode_ss_line(l))
@@ -314,35 +318,60 @@ class Measure:
         self.load_data()
         plt.figure(num=self.filename)
         
-        if self.is_router_data():
+        if self.is_rtr_data and not np.isnan(self.cpkts[0]):
             r=2
             c=3
             plt.subplot(r, c, 1)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Bytes sent")
+            plt.ylabel("Bytes sent (Average rate: {:.2f} Mbps)".format(self.mean_mbps_rate()))
             plt.plot(self.x, self.bytes_sent)
             
             plt.subplot(r, c, 2)
             plt.ylabel("Queue occupation (pkts)")
             plt.plot(self.x, self.cpkts, color='darkorange', label='Classic pkts')
             plt.plot(self.x, self.lpkts, color='cyan', label='L4S pkts')
+            plt.legend()
             
             plt.subplot(r, c, 3)
             plt.ylabel("Queue delay")
             plt.plot(self.x, self.cdelay, color='darkorange', label='Classic delay')
             plt.plot(self.x, self.ldelay, color='cyan', label='L4S delay')
+            plt.yscale('log')
+            plt.legend()
             
             plt.subplot(r, c, 4)
-            plt.ylabel("Marking and probability (%)")
-            plt.plot(self.x, self.prob, color='darkblue', label='Mark probability')
+            plt.ylabel("Marking probability (%)")
+            plt.plot(self.x, self.prob, color='darkblue')
             
             plt.subplot(r, c, 5)
             plt.ylabel("Marked Packets")
             plt.plot(self.x, self.ecn_mark, color='gold', label='ECN Marked packets')
+            plt.legend()
             
             plt.subplot(r, c, 6)
             plt.ylabel("Dropped Packets")
-            plt.plot(self.x, self.pkt_dropped, color='r', label='Packets dropped')
+            plt.plot(self.x, self.pkt_dropped, color='r', label='Dropped pkts')
+            plt.legend()
+            
+        elif self.is_rtr_data and np.isnan(self.cpkts[0]):
+            r=1
+            c=3
+
+            plt.subplot(r, c, 1)
+            plt.ylabel("Packets sent")
+            plt.plot(self.x, self.pkt_sent, color='green')
+
+            plt.subplot(r, c, 2)
+            plt.ylabel("Bytes sent (Average rate: {:.2f} Mbps )".format(self.mean_mbps_rate()))
+            plt.plot(self.x, self.bytes_sent, color='green')
+
+            plt.subplot(r, c, 3)
+            plt.ylabel("Dropped Packets")
+            plt.plot(self.x, self.pkt_dropped, color='r')
+            
+            plt.suptitle("AQM=pfifo_fast, Timecode: "+date+" "+timecode)
+            fig.supxlabel("time (in ms)")
+            plt.show()
             
         else:
             r=3
@@ -373,7 +402,7 @@ class Measure:
             
             plt.subplot(r, c, 5)
             plt.xlabel("time (in RTT)")
-            plt.ylabel("Sending rate mean: {:.2f} Mbps".format(self.sending_rate_mean()))
+            plt.ylabel("Sending rate mean: {:.2f} Mbps".format(self.mean_mbps_rate()))
             plt.plot(self.x, self.sending_rate, color=random_color)
             
             plt.subplot(r, c, 6)
