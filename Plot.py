@@ -119,17 +119,17 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
             
             plt.subplot(r, c, 7)
-            plt.ylabel("Packets sent")
+            plt.ylabel("Packets sent (Average rate: {:.2f} Mbps )".format(rtr_measure.mean_mbps_rate()))
             plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green')
             
             plt.subplot(r, c, 8)
-            plt.ylabel("Step marks")
-            plt.plot(rtr_measure.x, rtr_measure.step_mark, color='r')
+            plt.ylabel("Dropped Packets")
+            plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r')
             
             plt.subplot(r, c, 9)
-            plt.ylabel("Pkts dropped and marked")
-            plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r', label='Packets dropped')
-            plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='ECN Marked packets')
+            plt.ylabel("ECN Marked packets")
+            plt.plot(rtr_measure.x, rtr_measure.step_mark, color='#80B280', label='step marks')
+            plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
             plt.legend()
         
             plt.suptitle("AQM=DuaplPI2, Timecode: "+date+" "+timecode)

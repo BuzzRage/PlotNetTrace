@@ -318,7 +318,7 @@ class Measure:
         self.load_data()
         plt.figure(num=self.filename)
         
-        if self.is_rtr_data and not np.isnan(self.cpkts[0]):
+        if self.is_rtr_data and self.AQM_is_L4S:
             r=2
             c=3
             plt.subplot(r, c, 1)
@@ -344,16 +344,16 @@ class Measure:
             plt.plot(self.x, self.prob, color='darkblue')
             
             plt.subplot(r, c, 5)
-            plt.ylabel("Marked Packets")
-            plt.plot(self.x, self.ecn_mark, color='gold', label='ECN Marked packets')
-            plt.legend()
+            plt.ylabel("Dropped Packets")
+            plt.plot(self.x, self.pkt_dropped, color='r')
             
             plt.subplot(r, c, 6)
-            plt.ylabel("Dropped Packets")
-            plt.plot(self.x, self.pkt_dropped, color='r', label='Dropped pkts')
+            plt.ylabel("ECN Marked packets")
+            plt.plot(self.x, self.step_mark, color='#80B280', label='step marks')
+            plt.plot(self.x, self.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
             plt.legend()
             
-        elif self.is_rtr_data and np.isnan(self.cpkts[0]):
+        elif self.is_rtr_data and not self.AQM_is_L4S:
             r=1
             c=3
 

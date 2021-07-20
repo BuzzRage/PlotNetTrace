@@ -17,11 +17,9 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * Improve usage simplicity ( file handling )
 * Choose between treatment on loading or treatment on csv writing
 * Parse csv header to load tare values (ex: bytes sent)
-* Plot drop and ECN marks in different subplot and add step marks to ECN subplot
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
 * Improve verbose mode if "-v" provided
 * Combine raw input file with packet captured to get more stats using `scapy`
 * Add calculation of actual sending rate for endpoints
-* NetTrace.py: Add calculation of AQM average rate for dualpi2 plots
 * Add config file to store infos for data location (input and output files path)
 * NetTrace.py: Create a class router and a class endpoint that both implements attributes of Measure class
