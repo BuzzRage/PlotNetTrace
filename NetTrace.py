@@ -57,7 +57,7 @@ class Measure:
                     self.is_rtr_data = True
                     if "dualpi2" in line:
                         self.AQM_is_L4S = True
-                    else
+                    else:
                         self.AQM_is_L4S = False
                     break
                 elif "cubic" in line or "prague" in line:

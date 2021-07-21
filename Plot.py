@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import NetTrace
 
-args   = sys.argv
+args   = list(sys.argv)
 ipath  = 'data/'
 opath  = 'output/'
 suffix = ["rtr","atk","cc","lc","cs","ls","rtrvm"]
@@ -19,7 +19,8 @@ files["cs_file"]    = None
 files["ls_file"]    = None
 files["rtrvm_file"] = None
 
-verbose = False
+verbose_mode  = False
+timecode_mode = False
 
 
 def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file):
@@ -166,40 +167,37 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
 
 
 
+for arg in sys.argv:
+    if arg in ["verbose","-v","timecode"]:
+        args.remove(arg)
+        if arg in ["verbose","-v"]:
+            verbose_mode=True
+        elif arg == "timecode":
+            timecode_mode=True
 
 
-
-
-
-if args[1] in ["verbose", "v", "-v"]:
-    verbose=True
-
-if "timecode" in [str(args[1]), str(args[2])] and len(args) in range(4,6):
-    date = args[-2]
-    timecode = args[-1]
+if timecode_mode is True and len(args) == 3:
+    date = args[1]
+    timecode = args[2]
     dirpath = ipath + date + "/" + timecode
 
     for node in suffix:
         filename = dirpath+"-"+node
         node_exist = Path(filename).is_file()
         
-        if verbose is True:
+        if verbose_mode is True:
             files[node+"_file"] = filename if node_exist is True else print("Info: file {} does not exist.".format(filename))
         else:
             if node_exist is True: files[node+"_file"] = filename
     
-elif "timecode" not in [str(args[1]), str(args[2])] and len(args) in range(1,8):
+elif timecode_mode is False and len(args) in range(2,8):
     if Path(args[-1]).is_file() is not True:
         sys.exit(f"File {args[-1]} does not exists")
+
     date =  args[-1].split("/")[-2]
     timecode = args[-1].split("/")[-1].split("-")[-2]
     
-    if verbose is True:
-        index = 2
-    else:
-        index = 1
-
-    for f in args[index:]:
+    for f in args:
         file_exist = Path(f).is_file()
         if file_exist is not True:
             sys.exit(f"File {f} does not exists")
@@ -207,7 +205,7 @@ elif "timecode" not in [str(args[1]), str(args[2])] and len(args) in range(1,8):
         for node in suffix:
             if f.split("-")[-1] == node:
                 files[node+"_file"] = f
-                if verbose is True:
+                if verbose_mode is True:
                     print("Info: Loading file {}.".format(f))
 
 else:
