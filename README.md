@@ -23,3 +23,5 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * Add calculation of actual sending rate for endpoints
 * Add config file to store infos for data location (input and output files path)
 * NetTrace.py: Create a class router and a class endpoint that both implements attributes of Measure class
+* NetTrace.py: Change add_matched_field() to not return ','
+* Add option to force .csv file rewriting or implement a version system and force writing if new version
