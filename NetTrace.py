@@ -16,34 +16,38 @@ class Measure:
         self.is_rtr_data   = False
         
         # Endpoint data
-        self.cwnd          = list()
-        self.mss           = list()
-        self.sending_rate  = list()
-        self.rtt           = list()
-        self.bytes_acked   = list()
-        self.pacing_rate   = list()
-        self.delivery_rate = list()
-        self.delivered     = list()
+        self.bytes_acked_tare = list()
+        self.cwnd             = list()
+        self.mss              = list()
+        self.rtt              = list()
+        self.bytes_acked      = list()
+        self.delivered        = list()
+        self.sending_rate     = list()
+        self.pacing_rate      = list()
+        self.delivery_rate    = list()
+        self.data_rate        = list()
+        self.is_sender        = False
         
         # Router data
-        self.ecn_tare      = int()
-        self.drop_tare     = int()
-        self.step_mark_tare= int()
-        self.pkt_sent_tare = int()
-        self.bytes_sent    = list() 
-        self.pkt_sent      = list() 
-        self.pkt_dropped   = list() 
-        self.pkt_overlimits= list() 
-        self.pkt_requeued  = list() 
-        self.prob          = list() 
-        self.cdelay        = list() 
-        self.ldelay        = list() 
-        self.cpkts         = list() 
-        self.lpkts         = list() 
-        self.maxq          = list() 
-        self.ecn_mark      = list() 
-        self.step_mark     = list() 
-        self.AQM_is_L4S    = False
+        self.ecn_tare        = int()
+        self.drop_tare       = int()
+        self.step_mark_tare  = int()
+        self.Bytes_sent_tare = int()
+        self.pkt_sent_tare   = int()
+        self.bytes_sent      = list()
+        self.pkt_sent        = list()
+        self.pkt_dropped     = list()
+        self.pkt_overlimits  = list()
+        self.pkt_requeued    = list()
+        self.prob            = list()
+        self.cdelay          = list()
+        self.ldelay          = list()
+        self.cpkts           = list()
+        self.lpkts           = list()
+        self.maxq            = list()
+        self.ecn_mark        = list()
+        self.step_mark       = list()
+        self.AQM_is_L4S      = False
         
     def load_data(self):
         
@@ -51,9 +55,19 @@ class Measure:
             for line in f:
                 if "dualpi2" in line or "pfifo_fast" in line:
                     self.is_rtr_data = True
+                    if "dualpi2" in line:
+                        self.AQM_is_L4S = True
+                    else
+                        self.AQM_is_L4S = False
+                    break
                 elif "cubic" in line or "prague" in line:
                     self.is_rtr_data = False
-        
+                    if "bytes_acked" in line:
+                        self.is_sender = True
+                    else:
+                        self.is_sender = False
+                    break
+
         f = self.filename+".csv"
         file_exist = Path(f).is_file()
         if file_exist is not True:
@@ -61,9 +75,10 @@ class Measure:
         
         if self.is_rtr_data: 
             self.load_from_router_csv()
-            self.AQM_is_L4S = True if not np.isnan(self.cpkts[0]) else False
         elif not self.is_rtr_data:
             self.load_from_csv()
+            if self.is_sender:
+                self.load_data_rate()
             
     def cwnd_mean(self):
         return sum(self.cwnd)/len(self.cwnd)
@@ -74,14 +89,25 @@ class Measure:
     def rtt_mean(self):
         return sum(self.rtt)/len(self.rtt)   
     
-    def bytes_acked_mean(self):
-        return sum(self.bytes_acked)/len(self.bytes_acked)
-    
     def pacing_rate_mean(self):
         return sum(self.pacing_rate)/len(self.pacing_rate)    
     
     def sending_rate_mean(self):
         return sum(self.sending_rate)/len(self.sending_rate) 
+
+    def data_date_mean(self):
+        return sum(self.data_rate)/len(self.data_rate)
+
+    def load_data_rate(self):
+        sec = 1000
+        prev_sec = 0
+        self.data_rate.append((self.bytes_acked[0]*8)/((self.x[0]+1)/1000))
+        for i in range(1,len(self.x)):
+            if self.x[i] < sec:
+                self.data_rate.append((((self.bytes_acked[i]-self.bytes_acked[0])*8)/1000000)/((self.x[i]-self.x[0])/sec))
+            else:
+                prev_sec = next(j for j in range(prev_sec,len(self.x)) if self.x[j] > (self.x[i]-sec))
+                self.data_rate.append((((self.bytes_acked[i]-self.bytes_acked[prev_sec])*8)/1000000)/((self.x[i]-self.x[prev_sec])/sec))
         
     def load_sending_rate(self):
         for i in range(0,len(self.rtt)):
@@ -89,7 +115,7 @@ class Measure:
     
     def mean_mbps_rate(self):
         if self.is_rtr_data:
-            return (((self.bytes_sent[-1]-self.bytes_sent[0])*8)/1000000)/(self.x[-1]/1000-self.x[0]/1000)
+            return (((self.bytes_sent[-1]-self.bytes_sent[0])*8)/1000000)/((self.x[-1]-self.x[0])/1000)
         else:
             return self.sending_rate_mean()
            
@@ -205,7 +231,10 @@ class Measure:
         decoded_line += self.add_matched_field('cwnd:{} ',line)
         decoded_line += self.add_matched_field('ssthresh:{} ',line)
         decoded_line += self.add_matched_field('bytes_sent:{} ',line)
-        decoded_line += self.add_matched_field('bytes_acked:{} ',line)
+        if "bytes_acked" in line:
+            decoded_line += str(int(self.add_matched_field('bytes_acked:{} ',line)[:-1])-self.bytes_acked_tare)+","
+        else:
+            decoded_line += "NaN,"
         decoded_line += self.add_matched_field('segs_out:{} ',line)
         decoded_line += self.add_matched_field('segs_in:{} ',line)
         decoded_line += self.add_matched_field('data_segs_out:{} ',line)
@@ -238,7 +267,7 @@ class Measure:
 
         decoded_line  = ""
         decoded_line += qdisc+","
-        decoded_line += self.add_matched_field('Sent {} bytes',line)
+        decoded_line += str(int(self.add_matched_field('Sent {} bytes',line)[:-1])-self.Bytes_sent_tare)+","
         decoded_line += str(int(self.add_matched_field('bytes {} pkt',line)[:-1])-self.pkt_sent_tare)+","
         decoded_line += str(int(self.add_matched_field('dropped {},',line)[:-1])-self.drop_tare)+","
         decoded_line += self.add_matched_field('overlimits {} ',line)
@@ -292,6 +321,7 @@ class Measure:
                     tmp_ecn_tare        = self.add_matched_field('ecn_mark {} ',lines[0])
                     tmp_drop_tare       = self.add_matched_field('dropped {},',lines[0])
                     tmp_step_mark_tare  = self.add_matched_field('step_marks {}c',lines[0])
+                    tmp_bytes_sent_tare = self.add_matched_field('Sent {} bytes',lines[0])
                     tmp_pkt_sent_tare   = self.add_matched_field('bytes {} pkt',lines[0])
 
                     # If AQM is DualPI2
@@ -302,10 +332,16 @@ class Measure:
                         header += "Step marks counter: "+str(self.step_mark_tare)+", "
 
                     self.drop_tare      = int(tmp_drop_tare[:-1])
+                    self.Bytes_sent_tare= int(tmp_bytes_sent_tare[:-1])
                     self.pkt_sent_tare  = int(tmp_pkt_sent_tare[:-1])
                     header += "Dropped Packets counter: "+str(self.drop_tare)+", "
-                    header += "Packet counter: "+str(self.pkt_sent_tare)+","
-                
+                    header += "Bytes counter: "+str(self.Bytes_sent_tare)+", "
+                    header += "Packet counter: "+str(self.pkt_sent_tare)+", "
+                elif "bytes_acked" in lines[0]:
+                    print(lines[0])
+                    self.bytes_acked_tare =  int(self.add_matched_field('bytes_acked:{} ',lines[0])[:-1])
+                    header += "Bytes ACKed counter: "+str(self.bytes_acked_tare)+", "
+
                 csv_file.write(header+"\n")
                 
                 for l in lines:      
@@ -404,6 +440,8 @@ class Measure:
             plt.xlabel("time (in RTT)")
             plt.ylabel("Sending rate mean: {:.2f} Mbps".format(self.mean_mbps_rate()))
             plt.plot(self.x, self.sending_rate, color=random_color)
+            if self.is_sender:
+                plt.plot(self.x, self.data_rate, label='data rate (mean: {:.2f} Mbps)'.format(self.data_date_mean()), color='darkorange')
             
             plt.subplot(r, c, 6)
             plt.xlabel("time (in RTT)")

@@ -92,9 +92,12 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
         plt.ylabel("Sending rate (egress Mbps)")
         plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client (mean: {:.2f} Mbps)'.format(cc_measure.mean_mbps_rate()))
         plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server (mean: {:.2f} Mbps)'.format(cs_measure.mean_mbps_rate()))
+        plt.plot(cs_measure.x, cs_measure.data_rate, color='red', label='CS data rate (mean: {:.2f} Mbps)'.format(cs_measure.data_date_mean()))
+
         if simpletest is False:
             plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client (mean: {:.2f} Mbps)'.format(lc_measure.mean_mbps_rate()))
             plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
+            plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
         if complete is True:
             plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
         plt.legend()
