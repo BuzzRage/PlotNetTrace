@@ -49,7 +49,7 @@ class Measure:
         self.step_mark       = list()
         self.AQM_is_L4S      = False
         
-    def load_data(self):
+    def load_data(self, rewrite_mode=False):
         
         with open(self.filename, 'r') as f:
             for line in f:
@@ -70,7 +70,7 @@ class Measure:
 
         f = self.filename+".csv"
         file_exist = Path(f).is_file()
-        if file_exist is not True:
+        if (file_exist is not True) or (rewrite_mode is True):
             self.convert_raw_to_csv()
         
         if self.is_rtr_data: 
@@ -338,7 +338,6 @@ class Measure:
                     header += "Bytes counter: "+str(self.Bytes_sent_tare)+", "
                     header += "Packet counter: "+str(self.pkt_sent_tare)+", "
                 elif "bytes_acked" in lines[0]:
-                    print(lines[0])
                     self.bytes_acked_tare =  int(self.add_matched_field('bytes_acked:{} ',lines[0])[:-1])
                     header += "Bytes ACKed counter: "+str(self.bytes_acked_tare)+", "
 

@@ -21,9 +21,9 @@ files["rtrvm_file"] = None
 
 verbose_mode  = False
 timecode_mode = False
+rewrite_mode  = False
 
-
-def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file):
+def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file, rewrite_mode=False):
     local_args = locals()
     
     complete     = True
@@ -42,19 +42,19 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
         cc_measure  = NetTrace.Measure(cc_file)
         cs_measure  = NetTrace.Measure(cs_file)
                 
-        rtr_measure.load_data()
-        cc_measure.load_data()
-        cs_measure.load_data()
+        rtr_measure.load_data(rewrite_mode)
+        cc_measure.load_data(rewrite_mode)
+        cs_measure.load_data(rewrite_mode)
         
         if simpletest is False:
             lc_measure  = NetTrace.Measure(lc_file)
             ls_measure  = NetTrace.Measure(ls_file)
-            lc_measure.load_data()
-            ls_measure.load_data()
+            lc_measure.load_data(rewrite_mode)
+            ls_measure.load_data(rewrite_mode)
         
         if complete is True:
             atk_measure = NetTrace.Measure(atk_file)
-            atk_measure.load_data()
+            atk_measure.load_data(rewrite_mode)
         
         #Visualization part
         fig = plt.figure()
@@ -168,12 +168,14 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
 
 
 for arg in sys.argv:
-    if arg in ["verbose","-v","timecode"]:
+    if arg in ["verbose","-v","timecode", "rewrite"]:
         args.remove(arg)
         if arg in ["verbose","-v"]:
             verbose_mode=True
         elif arg == "timecode":
             timecode_mode=True
+        elif arg == "rewrite":
+            rewrite_mode=True
 
 
 if timecode_mode is True and len(args) == 3:
@@ -212,6 +214,6 @@ else:
     sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\nor\n"+str(args[0])+" timecode 2021-05-20 1516\n")
     
 
-visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"])
+visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
 
 
