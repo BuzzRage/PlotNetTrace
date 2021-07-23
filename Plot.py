@@ -171,11 +171,14 @@ def special_plot(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_f
     local_args = locals()    
     
     rtr_measure = NetTrace.Measure(rtr_file)
-    lc_measure = NetTrace.Measure(lc_file)
-    ls_measure = NetTrace.Measure(ls_file)
+    ls1_measure = NetTrace.Measure(ls1_file)
+    ls2_measure = NetTrace.Measure(ls2_file)
+    ls3_measure = NetTrace.Measure(ls3_file)
     rtr_measure.load_data(rewrite_mode)
-    lc_measure.load_data(rewrite_mode)
-    ls_measure.load_data(rewrite_mode)
+    ls1_measure.load_data(rewrite_mode)
+    ls2_measure.load_data(rewrite_mode)
+    ls3_measure.load_data(rewrite_mode)
+    
                 
     #Visualization part
     fig = plt.figure()
@@ -184,12 +187,18 @@ def special_plot(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_f
             
     plt.subplot(r, c, 1)
     plt.ylabel("RTT evolution (ms)")
-    plt.plot(ls_measure.x, ls_measure.rtt, color='cyan')
+    plt.plot(ls1_measure.x, ls1_measure.rtt, color='cyan')
+    plt.plot(ls2_measure.x, ls2_measure.rtt, color='blue')
+    plt.plot(ls3_measure.x, ls3_measure.rtt, color='darkblue')
 
     plt.subplot(r, c, 2)
     plt.ylabel("Sending rate")
-    plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
-    plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
+    plt.plot(ls1_measure.x, ls1_measure.sending_rate, color='cyan', label='egress rate (mean: {:.2f} Mbps)'.format(ls1_measure.mean_mbps_rate()))
+    plt.plot(ls1_measure.x, ls1_measure.data_rate, color='yellow', label='data rate (mean: {:.2f} Mbps)'.format(ls1_measure.data_date_mean()))
+    plt.plot(ls2_measure.x, ls2_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls2_measure.mean_mbps_rate()))
+    plt.plot(ls2measure.x, ls2_measure.data_rate, color='orange', label='data rate (mean: {:.2f} Mbps)'.format(ls2_measure.data_date_mean()))
+    plt.plot(ls3_measure.x, ls3_measure.sending_rate, color='darkblue', label='egress rate (mean: {:.2f} Mbps)'.format(ls3_measure.mean_mbps_rate()))
+    plt.plot(ls3_measure.x, ls3_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls3_measure.data_date_mean()))
     plt.legend(bbox_to_anchor=(1,1), loc="upper left", prop={'size': 6})
     
     plt.subplot(r, c, 3)
