@@ -184,19 +184,18 @@ def special_plot(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_f
             
     plt.subplot(r, c, 1)
     plt.ylabel("RTT evolution (ms)")
-    plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+    plt.plot(ls_measure.x, ls_measure.rtt, color='cyan')
     plt.legend()
 
     plt.subplot(r, c, 2)
-    plt.ylabel("Sending rate (egress Mbps)")
-    plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
-    plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
+    plt.ylabel("Sending rate")
+    plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
+    plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
     plt.legend(bbox_to_anchor=(1,1), loc="upper left", prop={'size': 6})
     
     plt.subplot(r, c, 3)
-    plt.ylabel("Queue delay (ms)")
-    plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
-    plt.plot(rtr_measure.x, rtr_measure.ldelay, 'o', color='cyan', label='L4S delay')
+    plt.ylabel("lqueue delay (ms)")
+    plt.plot(rtr_measure.x, rtr_measure.ldelay, '.', color='cyan')
     plt.yscale('log')
     plt.legend()
     
