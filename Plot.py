@@ -104,7 +104,7 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
         if complete is True:
             plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
-        plt.legend()
+        plt.legend(bbox_to_anchor=(1,1), loc="upper left", prop={'size': 6})
 
         
         if rtr_measure.AQM_is_L4S is True:
