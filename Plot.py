@@ -167,6 +167,53 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
                 unknown_measure.plot_all()
         plt.show()
 
+def special_plot(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file, rewrite_mode=False):
+    local_args = locals()    
+    
+    rtr_measure = NetTrace.Measure(rtr_file)
+    lc_measure = NetTrace.Measure(lc_file)
+    ls_measure = NetTrace.Measure(ls_file)
+    rtr_measure.load_data(rewrite_mode)
+    lc_measure.load_data(rewrite_mode)
+    ls_measure.load_data(rewrite_mode)
+                
+    #Visualization part
+    fig = plt.figure()
+
+            
+    plt.subplot(r, c, 1)
+    plt.ylabel("RTT evolution (ms)")
+    plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+    plt.legend()
+
+    plt.subplot(r, c, 2)
+    plt.ylabel("Sending rate (egress Mbps)")
+    plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
+    plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
+    plt.legend(bbox_to_anchor=(1,1), loc="upper left", prop={'size': 6})
+    
+    plt.subplot(r, c, 3)
+    plt.ylabel("Queue delay (ms)")
+    plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
+    plt.plot(rtr_measure.x, rtr_measure.ldelay, 'o', color='cyan', label='L4S delay')
+    plt.yscale('log')
+    plt.legend()
+    
+    plt.subplot(r, c, 4)
+    plt.ylabel("ECN Marked packets")
+    plt.plot(rtr_measure.x, rtr_measure.step_mark, color='#80B280', label='step marks')
+    plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
+    plt.legend()
+
+    plt.suptitle("AQM=DuaplPI2, Timecode: "+date+" "+timecode)
+    fig.supxlabel("time (in ms)")
+    plt.show()
+            
+
+
+
+
+
 
 
 
@@ -217,6 +264,7 @@ else:
     sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\nor\n"+str(args[0])+" timecode 2021-05-20 1516\n")
     
 
-visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
+#visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
+special_plot(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
 
 
