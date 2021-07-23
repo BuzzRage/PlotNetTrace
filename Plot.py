@@ -179,7 +179,8 @@ def special_plot(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_f
                 
     #Visualization part
     fig = plt.figure()
-
+    r=2
+    c=2
             
     plt.subplot(r, c, 1)
     plt.ylabel("RTT evolution (ms)")
