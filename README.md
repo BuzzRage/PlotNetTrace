@@ -12,6 +12,13 @@ For router data, `tc -s qdisc show dev <your device> | tr -d "\n"` is used and g
 qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64  Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0)  backlog 0b 0p requeues 0  maxpacket 0 drop_overlimit 0 new_flow_count 0 ecn_mark 0  new_flows_len 0 old_flows_len 0
 ```
 
+## Requirements
+
+* python3
+* `matplotlib`
+* `numpy`
+* `parse`
+
 ## TODO
 * Implement statistics on aggregated measurments
 * Improve usage simplicity ( file handling )
