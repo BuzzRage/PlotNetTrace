@@ -32,23 +32,24 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
     for node in suffix[:-1]:
         if local_args[node+"_file"] == None: complete = False
     
-    simpletest = True if (rtr_file != None and cc_file != None and cs_file != None and lc_file == None and complete is False) else False
+    simpletest = True if (rtr_file != None and cc_file != None and cs_file != None and lc_file == None) else False
     downlink   = True if (rtr_file != None and cc_file != None and cs_file != None and lc_file != None and ls_file != None and complete is False) else False
+    l_flows    = True if (rtr_file != None and cc_file == None and cs_file == None and lc_file != None and ls_file != None) else False
     
     
-    
-    if simpletest is True or downlink is True or complete is True:
+    if simpletest is True or downlink is True or complete is True or l_flows is True:
         rtr_measure = NetTrace.Measure(rtr_file)
-        cc_measure  = NetTrace.Measure(cc_file)
-        cs_measure  = NetTrace.Measure(cs_file)
-                
         rtr_measure.load_data(rewrite_mode)
-        cc_measure.load_data(rewrite_mode)
-        cs_measure.load_data(rewrite_mode)
         
-        if simpletest is False:
-            lc_measure  = NetTrace.Measure(lc_file)
-            ls_measure  = NetTrace.Measure(ls_file)
+        if l_flows is not True:
+            cc_measure = NetTrace.Measure(cc_file)
+            cs_measure = NetTrace.Measure(cs_file)
+            cc_measure.load_data(rewrite_mode)
+            cs_measure.load_data(rewrite_mode)
+
+        if simpletest is not True:
+            lc_measure = NetTrace.Measure(lc_file)
+            ls_measure = NetTrace.Measure(ls_file)
             lc_measure.load_data(rewrite_mode)
             ls_measure.load_data(rewrite_mode)
         
@@ -68,21 +69,22 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
             
         plt.subplot(r, c, 1)
         plt.ylabel("cwnd evolution (MSS)")
-        plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
-        plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
-        if simpletest is False:
+        if l_flows is not True:
+            plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
+            plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
+        if simpletest is not True:
             plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
             plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
-        
         if complete is True:
             plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
         plt.legend()
     
         plt.subplot(r, c, 2)
         plt.ylabel("RTT evolution (ms)")
-        plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
-        plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
-        if simpletest is False:
+        if l_flows is not True:
+            plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
+            plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
+        if simpletest is not True:
             plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
             plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
         if complete is True:
@@ -91,11 +93,12 @@ def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file
     
         plt.subplot(r, c, 3)
         plt.ylabel("Sending rate (egress Mbps)")
-        plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client (mean: {:.2f} Mbps)'.format(cc_measure.mean_mbps_rate()))
-        plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server (mean: {:.2f} Mbps)'.format(cs_measure.mean_mbps_rate()))
-        plt.plot(cs_measure.x, cs_measure.data_rate, color='red', label='CS data rate (mean: {:.2f} Mbps)'.format(cs_measure.data_date_mean()))
+        if l_flows is not True:
+            plt.plot(cc_measure.x, cc_measure.sending_rate, color='darkorange', label='Classic Client (mean: {:.2f} Mbps)'.format(cc_measure.mean_mbps_rate()))
+            plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server (mean: {:.2f} Mbps)'.format(cs_measure.mean_mbps_rate()))
+            plt.plot(cs_measure.x, cs_measure.data_rate, color='red', label='CS data rate (mean: {:.2f} Mbps)'.format(cs_measure.data_date_mean()))
 
-        if simpletest is False:
+        if simpletest is not True:
             plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client (mean: {:.2f} Mbps)'.format(lc_measure.mean_mbps_rate()))
             plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
             plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
