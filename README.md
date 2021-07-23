@@ -34,3 +34,4 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * NetTrace.py: Correct pacing rate ( bps to Mbps )
 * NetTrace.py: Synchronize measurments (provide a common timestamp when writing raw data ?)
 * NetTrace.py: Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and goes back to 0 )
+* Create a dedicated file for args handling
