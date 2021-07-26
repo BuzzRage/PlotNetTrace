@@ -90,7 +90,7 @@ class Measure:
         return sum(self.rtt)/len(self.rtt)   
     
     def pacing_rate_mean(self):
-        return sum(self.pacing_rate)/len(self.pacing_rate)    
+        return sum(self.pacing_rate)/len(self.pacing_rate)
     
     def sending_rate_mean(self):
         return sum(self.sending_rate)/len(self.sending_rate) 
@@ -175,7 +175,7 @@ class Measure:
         self.sending_rate  = np.divide(csv[:,csv_send],1000000) # Convert bps to Mbps
         self.rtt           = csv[:,csv_rtt]
         self.bytes_acked   = csv[:,csv_bytes_acked]
-        self.pacing_rate   = csv[:,csv_pacing_rate]
+        self.pacing_rate   = np.devide(csv[:,csv_pacing_rate],1000000) # Convert bps to Mbps
         self.delivery_rate = csv[:,csv_delivery_rate]
         self.delivered     = csv[:,csv_delivered]
 
