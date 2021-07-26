@@ -21,6 +21,7 @@ files["rtrvm_file"] = None
 
 verbose_mode  = False
 timecode_mode = False
+special_mode  = False
 rewrite_mode  = False
 
 def visualize(rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file, rewrite_mode=False):
@@ -234,12 +235,14 @@ def special_plot(rtr_file, ls_file, rewrite_mode=False):
 
 
 for arg in sys.argv:
-    if arg in ["verbose","-v","timecode", "rewrite"]:
+    if arg in ["verbose","-v","timecode", "rewrite", "special"]:
         args.remove(arg)
         if arg in ["verbose","-v"]:
             verbose_mode=True
         elif arg == "timecode":
             timecode_mode=True
+        elif arg == "special":
+            special_mode=True
         elif arg == "rewrite":
             rewrite_mode=True
 
@@ -280,7 +283,9 @@ else:
     sys.exit("Invalid arguments. Expected usage:\n"+str(args[0])+" rtr_file atk_file cc_file lc_file cs_file ls_file\nor\n"+str(args[0])+" timecode 2021-05-20 1516\n")
     
 
-#visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
-special_plot(files["rtr_file"], files["ls_file"], rewrite_mode)
+if special_mode is True:
+    special_plot(files["rtr_file"], files["ls_file"], rewrite_mode)
+else:
+    visualize(files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
 
 
