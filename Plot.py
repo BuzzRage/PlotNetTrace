@@ -155,8 +155,8 @@ class Plot:
 
         else:
             for node in self.suffix:
-                if local_args[node+"_file"] != None:
-                    unknown_measure = NetTrace.Measure(local_args[node+"_file"])
+                if self.files[node+"_file"] != None:
+                    unknown_measure = NetTrace.Measure(self.files[node+"_file"])
                     unknown_measure.plot_all()
             plt.show()
 
@@ -187,7 +187,7 @@ class Plot:
         plt.grid()
 
         plt.subplot(r, c, 3)
-        plt.ylabel("Sending rate")
+        plt.ylabel("Sending rate (Mbps)")
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
         plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
@@ -195,7 +195,7 @@ class Plot:
         plt.grid()
 
         plt.subplot(r, c, 4)
-        plt.ylabel("Sending rate")
+        plt.ylabel("Sending rate (Mbps)")
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
         plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
