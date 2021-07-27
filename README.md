@@ -31,7 +31,6 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * Add config file to store infos for data location (input and output files path)
 * NetTrace.py: Create a class router and a class endpoint that both implements attributes of Measure class
 * NetTrace.py: Change add_matched_field() to not return ','
-* NetTrace.py: Correct pacing rate ( bps to Mbps )
 * NetTrace.py: Synchronize measurments (provide a common timestamp when writing raw data ?)
 * NetTrace.py: Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and goes back to 0 )
 * Correct "data_date_mean() typo
