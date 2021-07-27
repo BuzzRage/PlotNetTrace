@@ -35,3 +35,4 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * NetTrace.py: Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and goes back to 0 )
 * Correct "data_date_mean() typo
 * Change simpletest into c_flows
+* Provide better documentation and usage message
