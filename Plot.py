@@ -182,7 +182,7 @@ class Plot:
 
         plt.subplot(r, c, 2)
         plt.ylabel("RTT evolution (ms)")
-        plt.hist(ls_measure.rtt, bins=np.arange(min(ls_measure.rtt),max(ls_measure.rtt)), density=True)
+        plt.hist(ls_measure.rtt, bins=np.arange(min(ls_measure.rtt),max(ls_measure.rtt)), density=False)
         plt.grid()
 
         plt.subplot(r, c, 3)
@@ -209,7 +209,7 @@ class Plot:
 
         plt.subplot(r, c, 6)
         plt.ylabel("lqueue delay (ms)")
-        plt.hist(rtr_measure.ldelay, bins=np.arange(min(rtr_measure.ldelay),max(rtr_measure.ldelay)), density=True)
+        plt.hist(rtr_measure.ldelay, bins=np.arange(min(rtr_measure.ldelay),max(rtr_measure.ldelay)), density=False)
         plt.grid()
 
         plt.show()
