@@ -20,6 +20,7 @@ class Measure:
         self.cwnd             = list()
         self.mss              = list()
         self.rtt              = list()
+        self.rttvar           = list()
         self.bytes_acked      = list()
         self.delivered        = list()
         self.sending_rate     = list()
@@ -176,6 +177,7 @@ class Measure:
         self.mss           = csv[:,csv_mss]
         self.sending_rate  = np.divide(csv[:,csv_send],1000000) # Convert bps to Mbps
         self.rtt           = csv[:,csv_rtt]
+        self.rttvar        = csv[:,csv_rttvar]
         self.bytes_acked   = csv[:,csv_bytes_acked]
         self.pacing_rate   = np.divide(csv[:,csv_pacing_rate],1000000) # Convert bps to Mbps
         self.delivery_rate = csv[:,csv_delivery_rate]
