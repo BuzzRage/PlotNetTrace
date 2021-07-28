@@ -182,8 +182,7 @@ class Plot:
 
         plt.subplot(r, c, 2)
         plt.ylabel("RTT evolution (ms)")
-        plt.xlabel("time (in ms)")
-        plt.plot(ls_measure.x, ls_measure.rtt, color='green')
+        plt.hist(ls_measure.rtt, bins=np.arange(min(ls_measure.rtt),max(ls_measure.rtt)), density=True)
         plt.grid()
 
         plt.subplot(r, c, 3)
@@ -196,10 +195,9 @@ class Plot:
 
         plt.subplot(r, c, 4)
         plt.ylabel("Sending rate (Mbps)")
-        plt.xlabel("time (in ms)")
-        plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
-        plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
-        plt.legend(loc="lower left", prop={'size': 8})
+        interval = np.arange(min(ls_measure.sending_rate),max(ls_measure.sending_rate),0.2)
+        plt.hist(ls_measure.sending_rate, bins=interval, density=False, color='blue')
+        plt.hist(ls_measure.data_rate, bins=np.arange(min(ls_measure.data_rate),max(ls_measure.data_rate),0.2), density=False, color='red')
         plt.grid()
 
         plt.subplot(r, c, 5)
@@ -211,9 +209,58 @@ class Plot:
 
         plt.subplot(r, c, 6)
         plt.ylabel("lqueue delay (ms)")
-        plt.plot(rtr_measure.x, rtr_measure.ldelay, '.', color='green')
-        plt.yscale('log')
-        plt.xlabel("time (in ms)")
+        plt.hist(rtr_measure.ldelay, bins=np.arange(min(rtr_measure.ldelay),max(rtr_measure.ldelay)), density=True)
         plt.grid()
 
         plt.show()
+
+
+    def multiexp_plot(self, path):
+
+        #experiences = {'000': None, '001': "1653", '010': "1712", '011': "1707", '100': None, '101': "1648", '110': "1740", '111': "1724"}
+        experiences = {'001': "1653", '010': "1712", '011': "1707", '101': "1648", '110': "1740", '111': "1724"}
+        #rtr_data    = {experiences[0]: rtr[0], experiences[1]: rtr[1], experiences[2]: rtr[2], experiences[3]: rtr[3], experiences[4]: rtr[4], experiences[5]: rtr[5]}
+        rtr_data    = dict()
+        lflow_data  = dict()
+        
+        for exp in experiences.keys():
+            if experiences[exp]:
+                rtr_data[exp]   = NetTrace.Measure(path+experiences[exp]+"-rtr")
+                lflow_data[exp] = NetTrace.Measure(path+experiences[exp]+"-ls")
+                rtr_data[exp].load_data(self.rewriteCSV)
+                lflow_data[exp].load_data(self.rewriteCSV)
+                
+        r = 3
+        c = 2
+        plt.figure()
+        
+        plt.subplot(r, c, 1)
+        plt.boxplot([lflow_data[x].rtt for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("RTT")
+        plt.grid()
+        
+        plt.subplot(r, c, 2)
+        plt.boxplot([lflow_data[x].sending_rate for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("Sending rate")
+        plt.grid()
+        
+        plt.subplot(r, c, 3)
+        plt.boxplot([lflow_data[x].rttvar for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("Mean deviation of RTT")
+        plt.grid()
+        
+        plt.subplot(r, c, 4)
+        plt.boxplot([rtr_data[x].ldelay for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("Low latency queue")
+        plt.grid()
+        
+        plt.subplot(r, c, 5)
+        plt.boxplot([rtr_data[x].prob for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("Marking probability")
+        plt.grid()
+        
+        
+        plt.show()
+
+        
+        #ls_measure.lastsnd
