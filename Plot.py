@@ -231,7 +231,7 @@ class Plot:
                 lflow_data[exp].load_data(self.rewriteCSV)
                 
         r = 3
-        c = 2
+        c = 3
         plt.figure()
         
         plt.subplot(r, c, 1)
@@ -257,6 +257,16 @@ class Plot:
         plt.subplot(r, c, 5)
         plt.boxplot([rtr_data[x].prob for x in experiences.keys()], labels = experiences.keys())
         plt.ylabel("Marking probability")
+        plt.grid()
+        
+        plt.subplot(r, c, 6)
+        plt.boxplot([rtr_data[x].pkt_dropped for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("Dropped packets")
+        plt.grid()
+        
+        plt.subplot(r, c, 7)
+        plt.boxplot([rtr_data[x].ecn_mark for x in experiences.keys()], labels = experiences.keys())
+        plt.ylabel("Marked packets")
         plt.grid()
         
         
