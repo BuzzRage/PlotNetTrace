@@ -11,7 +11,7 @@ class Plot:
         self.timecode   = timecode
         self.files      = {"rtr_file":rtr_file, "atk_file":atk_file, "cc_file":cc_file, "lc_file":lc_file, "cs_file":cs_file, "ls_file":ls_file, "rtrvm_file":rtrvm_file}
         self.complete   = False
-        self.simpletest = False
+        self.c_flows = False
         self.l_flows    = False
         self.downlink   = False
         self.rewriteCSV = rewrite_mode
@@ -23,14 +23,14 @@ class Plot:
             if self.files[node+"_file"] == None: complete = False
             
         self.complete   = complete
-        self.simpletest = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] == None) else False
+        self.c_flows = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] == None) else False
         self.l_flows    = True if (self.files["rtr_file"] != None and self.files["cc_file"] == None and self.files["cs_file"] == None and self.files["lc_file"] != None and self.files["ls_file"] != None) else False
         self.downlink   = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] != None and self.files["ls_file"] != None and self.complete is False) else False
     
     def visualize(self):
         self.load_testbed_type()
         
-        if self.simpletest is True or self.downlink is True or self.complete is True or self.l_flows is True:
+        if self.c_flows is True or self.downlink is True or self.complete is True or self.l_flows is True:
             rtr_measure = NetTrace.Measure(self.files["rtr_file"])
             rtr_measure.load_data(self.rewriteCSV)
             
@@ -40,7 +40,7 @@ class Plot:
                 cc_measure.load_data(self.rewriteCSV)
                 cs_measure.load_data(self.rewriteCSV)
 
-            if self.simpletest is not True:
+            if self.c_flows is not True:
                 lc_measure = NetTrace.Measure(self.files["lc_file"])
                 ls_measure = NetTrace.Measure(self.files["ls_file"])
                 lc_measure.load_data(self.rewriteCSV)
@@ -65,7 +65,7 @@ class Plot:
             if self.l_flows is not True:
                 plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
                 plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
-            if self.simpletest is not True:
+            if self.c_flows is not True:
                 plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
                 plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
             if self.complete is True:
@@ -77,7 +77,7 @@ class Plot:
             if self.l_flows is not True:
                 plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
                 plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
-            if self.simpletest is not True:
+            if self.c_flows is not True:
                 plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
                 plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
             if self.complete is True:
@@ -91,7 +91,7 @@ class Plot:
                 plt.plot(cs_measure.x, cs_measure.sending_rate, color='gold', label='Classic Server (mean: {:.2f} Mbps)'.format(cs_measure.mean_mbps_rate()))
                 plt.plot(cs_measure.x, cs_measure.data_rate, color='red', label='CS data rate (mean: {:.2f} Mbps)'.format(cs_measure.data_date_mean()))
 
-            if self.simpletest is not True:
+            if self.c_flows is not True:
                 plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client (mean: {:.2f} Mbps)'.format(lc_measure.mean_mbps_rate()))
                 plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
                 plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_date_mean()))
