@@ -98,7 +98,7 @@ class Measure:
     def sending_rate_mean(self):
         return sum(self.sending_rate)/len(self.sending_rate) 
 
-    def data_date_mean(self):
+    def data_rate_mean(self):
         return sum(self.data_rate)/len(self.data_rate)
 
     def load_data_rate(self):
@@ -446,7 +446,7 @@ class Measure:
             plt.ylabel("Sending rate mean: {:.2f} Mbps".format(self.mean_mbps_rate()))
             plt.plot(self.x, self.sending_rate, color=random_color)
             if self.is_sender:
-                plt.plot(self.x, self.data_rate, label='data rate (mean: {:.2f} Mbps)'.format(self.data_date_mean()), color='darkorange')
+                plt.plot(self.x, self.data_rate, label='data rate (mean: {:.2f} Mbps)'.format(self.data_rate_mean()), color='darkorange')
 
             plt.subplot(r, c, 6)
             plt.xlabel("time (in RTT)")
