@@ -213,11 +213,66 @@ class Plot:
         plt.grid()
 
         plt.show()
+        
+    def special_plot(self):
+        self.load_testbed_type()
+
+        rtr_measure = NetTrace.Measure(self.files["rtr_file"])
+        ls_measure = NetTrace.Measure(self.files["ls_file"])
+        rtr_measure.load_data(self.rewriteCSV)
+        ls_measure.load_data(self.rewriteCSV)
+
+
+        #Visualization part
+        fig = plt.figure()
+        r=3
+        c=2
+
+        plt.subplot(r, c, 1)
+        plt.ylabel("RTT evolution (ms)")
+        plt.xlabel("time (in ms)")
+        plt.plot(ls_measure.x, ls_measure.rtt, color='green')
+        plt.grid()
+
+        plt.subplot(r, c, 2)
+        plt.ylabel("Marking probability (%)")
+        plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
+        plt.grid()
+        
+        plt.subplot(r, c, 3)
+        plt.ylabel("Sending rate (Mbps)")
+        plt.xlabel("time (in ms)")
+        plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
+        plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_rate_mean()))
+        plt.legend(loc="upper right", prop={'size': 8})
+        plt.grid()
+
+        plt.subplot(r, c, 4)
+        plt.ylabel("Dropped Packets")
+        plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r')
+        plt.grid()
+        
+        plt.subplot(r, c, 5)
+        plt.ylabel("lqueue delay (ms)")
+        plt.plot(rtr_measure.x, rtr_measure.ldelay, '.', color='green')
+        plt.yscale('log')
+        plt.xlabel("time (in ms)")
+        plt.grid()
+
+        plt.subplot(r, c, 6)
+        plt.ylabel("ECN Marked packets")
+        plt.plot(rtr_measure.x, rtr_measure.step_mark, color='#80B280', label='step marks')
+        plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
+        plt.legend()
+        plt.grid()
+        
+        plt.show()
 
 
     def multiexp_plot(self, path):
 
         #experiences = {'000': None, '001': "1653", '010': "1712", '011': "1707", '100': None, '101': "1648", '110': "1740", '111': "1724"}
+        #experiences = {'000': "1722", '001': "1725", '010': "1734", '011': "1731", '100': "1805", '101': "1746", '110': "1808", '111': "1749"}
         experiences = {'001': "1653", '010': "1712", '011': "1707", '101': "1648", '110': "1740", '111': "1724"}
         #rtr_data    = {experiences[0]: rtr[0], experiences[1]: rtr[1], experiences[2]: rtr[2], experiences[3]: rtr[3], experiences[4]: rtr[4], experiences[5]: rtr[5]}
         rtr_data    = dict()
