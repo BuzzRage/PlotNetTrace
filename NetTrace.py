@@ -9,118 +9,28 @@ from parse import *
 # Class used to load data and make post-process functions
 
 class Measure:
+    """Measure is a parent class that has two children: 
+        - Endpoint
+        - Router
+        
+        Measure class defines common operators and attributes.
+    """
     def __init__(self, data_file = None):
         self.filename      = data_file
         self.timestamp     = int()
         self.x             = list()
-        self.is_rtr_data   = False
-
-        # Endpoint data
-        self.bytes_acked_tare = list()
-        self.cwnd             = list()
-        self.mss              = list()
-        self.rtt              = list()
-        self.rttvar           = list()
-        self.bytes_acked      = list()
-        self.delivered        = list()
-        self.sending_rate     = list()
-        self.pacing_rate      = list()
-        self.delivery_rate    = list()
-        self.data_rate        = list()
-        self.lastsnd          = list()
-        self.lastrcv          = list()
-        self.is_sender        = False
-
-        # Router data
-        self.ecn_tare        = int()
-        self.drop_tare       = int()
-        self.step_mark_tare  = int()
-        self.Bytes_sent_tare = int()
-        self.pkt_sent_tare   = int()
-        self.bytes_sent      = list()
-        self.pkt_sent        = list()
-        self.pkt_dropped     = list()
-        self.pkt_overlimits  = list()
-        self.pkt_requeued    = list()
-        self.prob            = list()
-        self.cdelay          = list()
-        self.ldelay          = list()
-        self.cpkts           = list()
-        self.lpkts           = list()
-        self.maxq            = list()
-        self.ecn_mark        = list()
-        self.step_mark       = list()
-        self.AQM_is_L4S      = False
 
     def load_data(self, rewrite_mode=False):
-
-        with open(self.filename, 'r') as f:
-            for line in f:
-                if "dualpi2" in line or "pfifo_fast" in line:
-                    self.is_rtr_data = True
-                    if "dualpi2" in line:
-                        self.AQM_is_L4S = True
-                    else:
-                        self.AQM_is_L4S = False
-                    break
-                elif "cubic" in line or "prague" in line:
-                    self.is_rtr_data = False
-                    if "bytes_acked" in line:
-                        self.is_sender = True
-                    else:
-                        self.is_sender = False
-                    break
-
         f = self.filename+".csv"
         file_exist = Path(f).is_file()
+
         if (file_exist is not True) or (rewrite_mode is True):
             self.convert_raw_to_csv()
 
-        if self.is_rtr_data: 
-            self.load_from_router_csv()
-        elif not self.is_rtr_data:
-            self.load_from_csv()
-            if self.is_sender:
-                self.load_data_rate()
-
-    def cwnd_mean(self):
-        return sum(self.cwnd)/len(self.cwnd)
-
-    def mss_mean(self):
-        return sum(self.mss)/len(self.mss)
-
-    def rtt_mean(self):
-        return sum(self.rtt)/len(self.rtt)   
-
-    def pacing_rate_mean(self):
-        return sum(self.pacing_rate)/len(self.pacing_rate)
-
-    def sending_rate_mean(self):
-        return sum(self.sending_rate)/len(self.sending_rate) 
-
-    def data_rate_mean(self):
-        return sum(self.data_rate)/len(self.data_rate)
-
-    def load_data_rate(self):
-        sec = 1000
-        prev_sec = 0
-        self.data_rate.append((self.bytes_acked[0]*8)/((self.x[0]+1)/1000))
-        for i in range(1,len(self.x)):
-            if self.x[i] < sec:
-                self.data_rate.append((((self.bytes_acked[i]-self.bytes_acked[0])*8)/1000000)/((self.x[i]-self.x[0])/sec))
-            else:
-                prev_sec = next(j for j in range(prev_sec,len(self.x)) if self.x[j] > (self.x[i]-sec))
-                self.data_rate.append((((self.bytes_acked[i]-self.bytes_acked[prev_sec])*8)/1000000)/((self.x[i]-self.x[prev_sec])/sec))
-
-    def load_sending_rate(self):
-        for i in range(0,len(self.rtt)):
-           self.sending_rate[i] = ((self.cwnd[i]*self.mss[i]*8)/1000000)/(self.rtt[i]/1000)
+        self.load_from_csv()
 
     def mean_mbps_rate(self):
-        if self.is_rtr_data:
-            return (((self.bytes_sent[-1]-self.bytes_sent[0])*8)/1000000)/((self.x[-1]-self.x[0])/1000)
-        else:
-            return self.sending_rate_mean()
+        #Implémenté différemment
 
 
     def conv_to_bps(self,value):
@@ -136,172 +46,14 @@ class Measure:
             return float(value)
 
 
-    def load_from_csv(self):        
-        # Loading part. 
-        # See https://www.man7.org/linux/man-pages/man8/ss.8.html for details
-        # See `struct tcp_info` in /usr/include/linux/tcp.h for further details
-        csv_cca            = 0  # Constant
-        csv_wscale1        = 1  # <snd_wscale>
-        csv_wscale2        = 2  # <rcv_wscale>
-        csv_rto            = 3
-        csv_rtt            = 4  # average RTT (ms)
-        csv_rttvar         = 5  # mean deviation of RTT (RTTVAR) (ms)
-        csv_mss            = 6
-        csv_pmtu           = 7  # path MTU value
-        csv_rcvmss         = 8
-        csv_advmss         = 9  # Advertised MSS
-        csv_cwnd           = 10
-        csv_ssthresh       = 11
-        csv_bytes_sent     = 12
-        csv_bytes_acked    = 13
-        csv_segs_out       = 14
-        csv_segs_in        = 15
-        csv_data_segs_out  = 16
-        csv_send           = 17 # egress bps
-        csv_lastsnd        = 18 # time (ms) since the last packet sent
-        csv_lastrcv        = 19 # time (ms) since the last packet received
-        csv_pacing_rate    = 20 
-        csv_delivery_rate  = 21
-        csv_delivered      = 22
-        csv_busy           = 23 # Time (µs) busy sending data
-        #csv_unacked        =  # not parsed
-        csv_rcv_space      = 24
-        csv_rcv_thresh     = 25
-        csv_notsent        = 26
-        csv_minrtt         = 27
-        csv_timestamp      = 28
-
-        csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
-        self.x             = csv[:,csv_timestamp]
-        self.cwnd          = csv[:,csv_cwnd]
-        self.mss           = csv[:,csv_mss]
-        self.sending_rate  = np.divide(csv[:,csv_send],1000000) # Convert bps to Mbps
-        self.rtt           = csv[:,csv_rtt]
-        self.rttvar        = csv[:,csv_rttvar]
-        self.bytes_acked   = csv[:,csv_bytes_acked]
-        self.pacing_rate   = np.divide(csv[:,csv_pacing_rate],1000000) # Convert bps to Mbps
-        self.delivery_rate = csv[:,csv_delivery_rate]
-        self.delivered     = csv[:,csv_delivered]
-        self.lastsnd       = csv[:,csv_lastsnd]
-        self.lastrcv       = csv[:,csv_lastrcv]
-
-    def load_from_router_csv(self):
-        # Loading part. 
-        # See DualPi2 man page for details        
-        csv_bytes_sent     = 1  # Bytes sent
-        csv_pkt_sent       = 2  # Packets sent
-        csv_pkt_dropped    = 3  # Packet dropped
-        csv_pkt_overlimits = 4  # Packet overlimits
-        csv_pkt_requeued   = 5  # Packet requeued
-        csv_prob           = 6  # Probability 
-        csv_cdelay         = 7  # Delay on Classic queue 
-        csv_ldelay         = 8  # Delay on L4S queue 
-        csv_cpkts          = 9  # Packets in Classic queue
-        csv_lpkts          = 10  # Packets in L4S queue
-        csv_maxq           = 11 # Max packets in queue
-        csv_ecn_mark       = 12 # ECN marked packets
-        csv_step_mark      = 13 # ???
-        csv_timestamp      = 14 # Timestamp
-
-        csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
-        self.x             = csv[:,csv_timestamp] 
-        self.bytes_sent    = csv[:,csv_bytes_sent] 
-        self.pkt_sent      = np.array(csv[:,csv_pkt_sent])
-        self.pkt_dropped   = np.array(csv[:,csv_pkt_dropped])
-        self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
-        self.pkt_requeued  = csv[:,csv_pkt_requeued] 
-        self.prob          = csv[:,csv_prob]*100               # Convert fraction to %age
-        self.cdelay        = np.divide(csv[:,csv_cdelay],1000) # Convert us to ms
-        self.ldelay        = np.divide(csv[:,csv_ldelay],1000) # Convert us to ms
-        self.cpkts         = csv[:,csv_cpkts] 
-        self.lpkts         = csv[:,csv_lpkts] 
-        self.maxq          = csv[:,csv_maxq] 
-        self.ecn_mark      = np.array(csv[:,csv_ecn_mark])
-        self.step_mark     = csv[:,csv_step_mark] 
+    def load_from_csv(self):
+        #Implémenté différemment
 
     def add_matched_field(self,field,line):
         return "NaN," if not search(field,line) else search(field,line)[0]+","
 
     def decode_ss_line(self,line):
-        cca = 0
-        decoded_line  = ""
-        decoded_line += line.split()[cca]+","
-        decoded_line += self.add_matched_field('wscale:{} ',line)  # generate two fields !
-        decoded_line += self.add_matched_field('rto:{} ',line)
-        rtt_temp = self.add_matched_field('rtt:{} ',line)
-        decoded_line += rtt_temp.split("/")[0] + "," + rtt_temp.split("/")[1] if not rtt_temp == "NaN" else "NaN"
-        decoded_line += self.add_matched_field('mss:{} ',line)
-        decoded_line += self.add_matched_field('pmtu:{} ',line)
-        decoded_line += self.add_matched_field('rcvmss:{} ',line)
-        decoded_line += self.add_matched_field('advmss:{} ',line)
-        decoded_line += self.add_matched_field('cwnd:{} ',line)
-        decoded_line += self.add_matched_field('ssthresh:{} ',line)
-        decoded_line += self.add_matched_field('bytes_sent:{} ',line)
-        if "bytes_acked" in line:
-            decoded_line += str(int(self.add_matched_field('bytes_acked:{} ',line)[:-1])-self.bytes_acked_tare)+","
-        else:
-            decoded_line += "NaN,"
-        decoded_line += self.add_matched_field('segs_out:{} ',line)
-        decoded_line += self.add_matched_field('segs_in:{} ',line)
-        decoded_line += self.add_matched_field('data_segs_out:{} ',line)
-        decoded_line += str(self.conv_to_bps(self.add_matched_field('send {}bps ',line)[:-1]))+","
-        decoded_line += self.add_matched_field('lastsnd:{} ',line)
-        decoded_line += self.add_matched_field('lastrcv:{} ',line)
-        decoded_line += str(self.conv_to_bps(self.add_matched_field('pacing_rate {}bps ',line)[:-1]))+","
-        decoded_line += str(self.conv_to_bps(self.add_matched_field('delivery_rate {}bps ',line)[:-1]))+","
-        decoded_line += self.add_matched_field('delivered:{} ',line)
-        decoded_line += self.add_matched_field('busy:{}ms ',line)
-        decoded_line += self.add_matched_field('rcv_space:{} ',line)
-        decoded_line += self.add_matched_field('rcv_ssthresh:{} ',line)
-        decoded_line += self.add_matched_field('notsend:{} ',line) 
-        decoded_line += self.add_matched_field('minrtt:{}',line)
-
-        # Timestamp calculation
-        raw_ts = line.rstrip().split(" ")[-1]
-        h  = int(raw_ts.split(":")[0])
-        m  = int(raw_ts.split(":")[1])
-        s  = int(raw_ts.split(":")[2].split(".")[0])
-        ms = int(raw_ts.split(":")[2].split(".")[1])/1000
-        t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
-        td = t2 - self.timestamp
-        decoded_line += str(td)+","
-
-        return str(decoded_line)+"\n"
-
-    def decode_router_ss_line(self,line):
-        qdisc = line.split()[1]
-
-        decoded_line  = ""
-        decoded_line += qdisc+","
-        decoded_line += str(int(self.add_matched_field('Sent {} bytes',line)[:-1])-self.Bytes_sent_tare)+","
-        decoded_line += str(int(self.add_matched_field('bytes {} pkt',line)[:-1])-self.pkt_sent_tare)+","
-        decoded_line += str(int(self.add_matched_field('dropped {},',line)[:-1])-self.drop_tare)+","
-        decoded_line += self.add_matched_field('overlimits {} ',line)
-        decoded_line += self.add_matched_field('requeues {})',line)
-
-        if qdisc == "dualpi2":
-            decoded_line += self.add_matched_field('prob {} ',line)
-            decoded_line += self.add_matched_field('delay_c {}us ',line)
-            decoded_line += self.add_matched_field('delay_l {}us',line)
-            decoded_line += self.add_matched_field('pkts_in_c {} ',line)
-            decoded_line += self.add_matched_field('pkts_in_l {} ',line)
-            decoded_line += self.add_matched_field('maxq {}e',line)
-            decoded_line += str(int(self.add_matched_field('ecn_mark {} ',line)[:-1])-self.ecn_tare)+","
-            decoded_line += str(int(self.add_matched_field('step_marks {}c',line)[:-1])-self.step_mark_tare)+","
-        else:
-            decoded_line += ",,,,,,,,"
-
-        # Timestamp calculation
-        raw_ts = line.rstrip().split(" ")[-1]
-        h  = int(raw_ts.split(":")[0])
-        m  = int(raw_ts.split(":")[1])
-        s  = int(raw_ts.split(":")[2].split(".")[0])
-        ms = int(raw_ts.split(":")[2].split(".")[1])
-        t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
-        td = int(t2 - self.timestamp)
-        decoded_line += str(td)+","
-
-        return str(decoded_line)+"\n"
+        #Implémenté différemment
 
     def convert_raw_to_csv(self):
         data_exist = Path(self.filename).is_file()
@@ -467,3 +219,282 @@ class Measure:
             plt.plot(self.x, self.lastrcv, color='gold')
 
         plt.suptitle(title)
+
+class Endpoint(Measure):
+    def __init__(self, data_file = None):
+        super().__init__(data_file)
+        self.bytes_acked_tare = list()
+        self.cwnd             = list()
+        self.mss              = list()
+        self.rtt              = list()
+        self.rttvar           = list()
+        self.bytes_acked      = list()
+        self.delivered        = list()
+        self.sending_rate     = list()
+        self.pacing_rate      = list()
+        self.delivery_rate    = list()
+        self.data_rate        = list()
+        self.lastsnd          = list()
+        self.lastrcv          = list()
+        self.is_sender        = False
+
+    def load_data(self, rewrite_mode=False):
+        with open(self.filename, 'r') as f:
+            for line in f:
+                if "bytes_acked" in line:
+                    self.is_sender = True
+                else:
+                    self.is_sender = False
+                break
+
+        super().load_data()
+
+        if self.is_sender:
+            self.load_data_rate()
+
+    def cwnd_mean(self):
+        return sum(self.cwnd)/len(self.cwnd)
+
+    def mss_mean(self):
+        return sum(self.mss)/len(self.mss)
+
+    def rtt_mean(self):
+        return sum(self.rtt)/len(self.rtt)   
+
+    def pacing_rate_mean(self):
+        return sum(self.pacing_rate)/len(self.pacing_rate)
+
+    def sending_rate_mean(self):
+        return sum(self.sending_rate)/len(self.sending_rate) 
+
+    def data_rate_mean(self):
+        return sum(self.data_rate)/len(self.data_rate)
+
+    def load_data_rate(self):
+        sec = 1000
+        prev_sec = 0
+        self.data_rate.append((self.bytes_acked[0]*8)/((self.x[0]+1)/1000))
+        for i in range(1,len(self.x)):
+            if self.x[i] < sec:
+                self.data_rate.append((((self.bytes_acked[i]-self.bytes_acked[0])*8)/1000000)/((self.x[i]-self.x[0])/sec))
+            else:
+                prev_sec = next(j for j in range(prev_sec,len(self.x)) if self.x[j] > (self.x[i]-sec))
+                self.data_rate.append((((self.bytes_acked[i]-self.bytes_acked[prev_sec])*8)/1000000)/((self.x[i]-self.x[prev_sec])/sec))
+
+    def load_sending_rate(self):
+        for i in range(0,len(self.rtt)):
+           self.sending_rate[i] = ((self.cwnd[i]*self.mss[i]*8)/1000000)/(self.rtt[i]/1000)
+
+    def mean_mbps_rate(self):    
+            return self.sending_rate_mean()
+
+    def load_from_csv(self):
+        # Loading part. 
+        # See https://www.man7.org/linux/man-pages/man8/ss.8.html for details
+        # See `struct tcp_info` in /usr/include/linux/tcp.h for further details
+        csv_cca            = 0  # Constant
+        csv_wscale1        = 1  # <snd_wscale>
+        csv_wscale2        = 2  # <rcv_wscale>
+        csv_rto            = 3
+        csv_rtt            = 4  # average RTT (ms)
+        csv_rttvar         = 5  # mean deviation of RTT (RTTVAR) (ms)
+        csv_mss            = 6
+        csv_pmtu           = 7  # path MTU value
+        csv_rcvmss         = 8
+        csv_advmss         = 9  # Advertised MSS
+        csv_cwnd           = 10
+        csv_ssthresh       = 11
+        csv_bytes_sent     = 12
+        csv_bytes_acked    = 13
+        csv_segs_out       = 14
+        csv_segs_in        = 15
+        csv_data_segs_out  = 16
+        csv_send           = 17 # egress bps
+        csv_lastsnd        = 18 # time (ms) since the last packet sent
+        csv_lastrcv        = 19 # time (ms) since the last packet received
+        csv_pacing_rate    = 20 
+        csv_delivery_rate  = 21
+        csv_delivered      = 22
+        csv_busy           = 23 # Time (µs) busy sending data
+        #csv_unacked        =  # not parsed
+        csv_rcv_space      = 24
+        csv_rcv_thresh     = 25
+        csv_notsent        = 26
+        csv_minrtt         = 27
+        csv_timestamp      = 28
+
+        csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
+        self.x             = csv[:,csv_timestamp]
+        self.cwnd          = csv[:,csv_cwnd]
+        self.mss           = csv[:,csv_mss]
+        self.sending_rate  = np.divide(csv[:,csv_send],1000000) # Convert bps to Mbps
+        self.rtt           = csv[:,csv_rtt]
+        self.rttvar        = csv[:,csv_rttvar]
+        self.bytes_acked   = csv[:,csv_bytes_acked]
+        self.pacing_rate   = np.divide(csv[:,csv_pacing_rate],1000000) # Convert bps to Mbps
+        self.delivery_rate = csv[:,csv_delivery_rate]
+        self.delivered     = csv[:,csv_delivered]
+        self.lastsnd       = csv[:,csv_lastsnd]
+        self.lastrcv       = csv[:,csv_lastrcv]
+
+    def decode_ss_line(self,line):
+        cca = 0
+        decoded_line  = ""
+        decoded_line += line.split()[cca]+","
+        decoded_line += self.add_matched_field('wscale:{} ',line)  # generate two fields !
+        decoded_line += self.add_matched_field('rto:{} ',line)
+        rtt_temp = self.add_matched_field('rtt:{} ',line)
+        decoded_line += rtt_temp.split("/")[0] + "," + rtt_temp.split("/")[1] if not rtt_temp == "NaN" else "NaN"
+        decoded_line += self.add_matched_field('mss:{} ',line)
+        decoded_line += self.add_matched_field('pmtu:{} ',line)
+        decoded_line += self.add_matched_field('rcvmss:{} ',line)
+        decoded_line += self.add_matched_field('advmss:{} ',line)
+        decoded_line += self.add_matched_field('cwnd:{} ',line)
+        decoded_line += self.add_matched_field('ssthresh:{} ',line)
+        decoded_line += self.add_matched_field('bytes_sent:{} ',line)
+        if "bytes_acked" in line:
+            decoded_line += str(int(self.add_matched_field('bytes_acked:{} ',line)[:-1])-self.bytes_acked_tare)+","
+        else:
+            decoded_line += "NaN,"
+        decoded_line += self.add_matched_field('segs_out:{} ',line)
+        decoded_line += self.add_matched_field('segs_in:{} ',line)
+        decoded_line += self.add_matched_field('data_segs_out:{} ',line)
+        decoded_line += str(self.conv_to_bps(self.add_matched_field('send {}bps ',line)[:-1]))+","
+        decoded_line += self.add_matched_field('lastsnd:{} ',line)
+        decoded_line += self.add_matched_field('lastrcv:{} ',line)
+        decoded_line += str(self.conv_to_bps(self.add_matched_field('pacing_rate {}bps ',line)[:-1]))+","
+        decoded_line += str(self.conv_to_bps(self.add_matched_field('delivery_rate {}bps ',line)[:-1]))+","
+        decoded_line += self.add_matched_field('delivered:{} ',line)
+        decoded_line += self.add_matched_field('busy:{}ms ',line)
+        decoded_line += self.add_matched_field('rcv_space:{} ',line)
+        decoded_line += self.add_matched_field('rcv_ssthresh:{} ',line)
+        decoded_line += self.add_matched_field('notsend:{} ',line) 
+        decoded_line += self.add_matched_field('minrtt:{}',line)
+
+        # Timestamp calculation
+        raw_ts = line.rstrip().split(" ")[-1]
+        h  = int(raw_ts.split(":")[0])
+        m  = int(raw_ts.split(":")[1])
+        s  = int(raw_ts.split(":")[2].split(".")[0])
+        ms = int(raw_ts.split(":")[2].split(".")[1])/1000
+        t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
+        td = t2 - self.timestamp
+        decoded_line += str(td)+","
+
+        return str(decoded_line)+"\n"
+
+
+
+
+
+
+
+
+
+
+
+
+class Router(Measure):
+    def __init__(self, data_file = None):
+        super().__init__(data_file)
+        self.ecn_tare        = int()
+        self.drop_tare       = int()
+        self.step_mark_tare  = int()
+        self.Bytes_sent_tare = int()
+        self.pkt_sent_tare   = int()
+        self.bytes_sent      = list()
+        self.pkt_sent        = list()
+        self.pkt_dropped     = list()
+        self.pkt_overlimits  = list()
+        self.pkt_requeued    = list()
+        self.prob            = list()
+        self.cdelay          = list()
+        self.ldelay          = list()
+        self.cpkts           = list()
+        self.lpkts           = list()
+        self.maxq            = list()
+        self.ecn_mark        = list()
+        self.step_mark       = list()
+        self.AQM_is_L4S      = False
+        
+    def load_data(self, rewrite_mode=False):
+        with open(self.filename, 'r') as f:
+            for line in f:
+                if "dualpi2" in line:
+                    self.AQM_is_L4S = True
+                else:
+                    self.AQM_is_L4S = False
+                break
+        super().load_data()
+
+    def mean_mbps_rate(self):
+        return (((self.bytes_sent[-1]-self.bytes_sent[0])*8)/1000000)/((self.x[-1]-self.x[0])/1000)
+
+    def load_from_csv(self):
+        # Loading part. 
+        # See DualPi2 man page for details        
+        csv_bytes_sent     = 1  # Bytes sent
+        csv_pkt_sent       = 2  # Packets sent
+        csv_pkt_dropped    = 3  # Packet dropped
+        csv_pkt_overlimits = 4  # Packet overlimits
+        csv_pkt_requeued   = 5  # Packet requeued
+        csv_prob           = 6  # Probability 
+        csv_cdelay         = 7  # Delay on Classic queue 
+        csv_ldelay         = 8  # Delay on L4S queue 
+        csv_cpkts          = 9  # Packets in Classic queue
+        csv_lpkts          = 10  # Packets in L4S queue
+        csv_maxq           = 11 # Max packets in queue
+        csv_ecn_mark       = 12 # ECN marked packets
+        csv_step_mark      = 13 # ???
+        csv_timestamp      = 14 # Timestamp
+
+        csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
+        self.x             = csv[:,csv_timestamp] 
+        self.bytes_sent    = csv[:,csv_bytes_sent] 
+        self.pkt_sent      = np.array(csv[:,csv_pkt_sent])
+        self.pkt_dropped   = np.array(csv[:,csv_pkt_dropped])
+        self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
+        self.pkt_requeued  = csv[:,csv_pkt_requeued] 
+        self.prob          = csv[:,csv_prob]*100               # Convert fraction to %age
+        self.cdelay        = np.divide(csv[:,csv_cdelay],1000) # Convert us to ms
+        self.ldelay        = np.divide(csv[:,csv_ldelay],1000) # Convert us to ms
+        self.cpkts         = csv[:,csv_cpkts] 
+        self.lpkts         = csv[:,csv_lpkts] 
+        self.maxq          = csv[:,csv_maxq] 
+        self.ecn_mark      = np.array(csv[:,csv_ecn_mark])
+        self.step_mark     = csv[:,csv_step_mark]
+
+    def decode_ss_line(self,line):
+        qdisc = line.split()[1]
+
+        decoded_line  = ""
+        decoded_line += qdisc+","
+        decoded_line += str(int(self.add_matched_field('Sent {} bytes',line)[:-1])-self.Bytes_sent_tare)+","
+        decoded_line += str(int(self.add_matched_field('bytes {} pkt',line)[:-1])-self.pkt_sent_tare)+","
+        decoded_line += str(int(self.add_matched_field('dropped {},',line)[:-1])-self.drop_tare)+","
+        decoded_line += self.add_matched_field('overlimits {} ',line)
+        decoded_line += self.add_matched_field('requeues {})',line)
+
+        if qdisc == "dualpi2":
+            decoded_line += self.add_matched_field('prob {} ',line)
+            decoded_line += self.add_matched_field('delay_c {}us ',line)
+            decoded_line += self.add_matched_field('delay_l {}us',line)
+            decoded_line += self.add_matched_field('pkts_in_c {} ',line)
+            decoded_line += self.add_matched_field('pkts_in_l {} ',line)
+            decoded_line += self.add_matched_field('maxq {}e',line)
+            decoded_line += str(int(self.add_matched_field('ecn_mark {} ',line)[:-1])-self.ecn_tare)+","
+            decoded_line += str(int(self.add_matched_field('step_marks {}c',line)[:-1])-self.step_mark_tare)+","
+        else:
+            decoded_line += ",,,,,,,,"
+
+        # Timestamp calculation
+        raw_ts = line.rstrip().split(" ")[-1]
+        h  = int(raw_ts.split(":")[0])
+        m  = int(raw_ts.split(":")[1])
+        s  = int(raw_ts.split(":")[2].split(".")[0])
+        ms = int(raw_ts.split(":")[2].split(".")[1])
+        t2 = 60*60*1000*h+60*1000*m+1000*s+ms       
+        td = int(t2 - self.timestamp)
+        decoded_line += str(td)+","
+
+        return str(decoded_line)+"\n"
