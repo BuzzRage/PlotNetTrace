@@ -24,17 +24,20 @@ files["rtrvm_file"] = None
 
 verbose_mode  = False
 timecode_mode = False
+timefreq_mode = False
 special_mode  = False
 rewrite_mode  = False
 multiexp_mode = False
 
 for arg in sys.argv:
-    if arg in ["verbose","-v","timecode", "rewrite", "special", "multiexp"]:
+    if arg in ["verbose","-v","timecode", "rewrite", "timefreq", "special", "multiexp"]:
         args.remove(arg)
         if arg in ["verbose","-v"]:
             verbose_mode=True
         elif arg == "timecode":
             timecode_mode=True
+        elif arg == "timefreq":
+            timefreq_mode=True
         elif arg == "special":
             special_mode=True
         elif arg == "multiexp":
@@ -85,6 +88,8 @@ else:
 PlotNetTrace = Plot(date, timecode, files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
 if special_mode is True:
     PlotNetTrace.special_plot()
+elif timefreq_mode is True:
+    PlotNetTrace.timefreq_plot()
 elif multiexp_mode is True:
     PlotNetTrace.multiexp_plot(exp_path)
 else:

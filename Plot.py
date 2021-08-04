@@ -160,7 +160,7 @@ class Plot:
                     unknown_measure.plot_all()
             plt.show()
 
-    def special_plot(self):
+    def timefreq_plot(self):
         self.load_testbed_type()
 
         rtr_measure = NetTrace.Measure(self.files["rtr_file"])
@@ -181,8 +181,8 @@ class Plot:
         plt.grid()
 
         plt.subplot(r, c, 2)
-        plt.ylabel("RTT evolution (ms)")
-        plt.hist(ls_measure.rtt, bins=np.arange(min(ls_measure.rtt),max(ls_measure.rtt)), density=False)
+        plt.ylabel("RTT value occurrency")
+        plt.hist(ls_measure.rtt, bins=np.arange(min(ls_measure.rtt),max(ls_measure.rtt)), density=False, color='blue')
         plt.grid()
 
         plt.subplot(r, c, 3)
@@ -190,11 +190,11 @@ class Plot:
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
         plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_rate_mean()))
-        plt.legend(loc="lower left", prop={'size': 8})
+        plt.legend(loc="upper right", prop={'size': 8})
         plt.grid()
 
         plt.subplot(r, c, 4)
-        plt.ylabel("Sending rate (Mbps)")
+        plt.ylabel("Sending rate value occurrency")
         interval = np.arange(min(ls_measure.sending_rate),max(ls_measure.sending_rate),0.2)
         plt.hist(ls_measure.sending_rate, bins=interval, density=False, color='blue')
         plt.hist(ls_measure.data_rate, bins=np.arange(min(ls_measure.data_rate),max(ls_measure.data_rate),0.2), density=False, color='red')
@@ -208,8 +208,8 @@ class Plot:
         plt.grid()
 
         plt.subplot(r, c, 6)
-        plt.ylabel("lqueue delay (ms)")
-        plt.hist(rtr_measure.ldelay, bins=np.arange(min(rtr_measure.ldelay),max(rtr_measure.ldelay)), density=False)
+        plt.ylabel("lqueue delay value occurrency")
+        plt.hist(rtr_measure.ldelay, bins=np.arange(min(rtr_measure.ldelay),max(rtr_measure.ldelay)), density=False, color='blue')
         plt.grid()
 
         plt.show()
