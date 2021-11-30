@@ -273,9 +273,12 @@ class Plot:
 
         #experiences = {'000': None, '001': "1653", '010': "1712", '011': "1707", '100': None, '101': "1648", '110': "1740", '111': "1724"}
         #experiences = {'000': "1722", '001': "1725", '010': "1734", '011': "1731", '100': "1805", '101': "1746", '110': "1808", '111': "1749"}
-        experiences = {'U\u0304E\u0304+B\u0304+P\u0304': "1722", 'U\u0304E\u0304+B\u0304+P': "1725", 'U\u0304E\u0304+B+P\u0304': "1734", 'U\u0304E\u0304+B+B': "1731", 'UE+B\u0304+P\u0304': "1805", 'UE+B\u0304+P': "1746", 'UE+B+P\u0304': "1808", 'UE+B+P': "1749"}
+        #experiences = {'U\u0304E\u0304+B\u0304+P\u0304': "1722", 'U\u0304E\u0304+B\u0304+P': "1725", 'U\u0304E\u0304+B+P\u0304': "1734", 'U\u0304E\u0304+B+B': "1731", 'UE+B\u0304+P\u0304': "1805", 'UE+B\u0304+P': "1746", 'UE+B+P\u0304': "1808", 'UE+B+P': "1749"}
         #experiences = {'001': "1653", '010': "1712", '011': "1707", '101': "1648", '110': "1740", '111': "1724"}
         #rtr_data    = {experiences[0]: rtr[0], experiences[1]: rtr[1], experiences[2]: rtr[2], experiences[3]: rtr[3], experiences[4]: rtr[4], experiences[5]: rtr[5]}
+        
+        experiences = {'Normal': "1612", 'Unresponsive \nECN': "1746", 'Bursts': "1734", 'No pacing': "1722"}
+        
         rtr_data    = dict()
         lflow_data  = dict()
         
@@ -286,53 +289,64 @@ class Plot:
                 rtr_data[exp].load_data(self.rewriteCSV)
                 lflow_data[exp].load_data(self.rewriteCSV)
                 
-        r = 3
+        r = 2
         c = 3
         rotat_val = 15
         fig = plt.figure()
         
         plt.subplot(r, c, 1)
         plt.boxplot([lflow_data[x].rtt for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("RTT")
+        plt.ylabel("(a) RTT (ms)")
+        plt.ylim(ymin=0)
         plt.xticks(rotation=rotat_val)
         plt.grid()
         
         plt.subplot(r, c, 2)
         plt.boxplot([lflow_data[x].sending_rate for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("Sending rate")
+        plt.ylabel("(b) Sending rate \n(Mbps)")
+        plt.ylim(ymin=0)
         plt.xticks(rotation=rotat_val)
         plt.grid()
         
+        #plt.subplot(r, c, 3)
+        #plt.boxplot([lflow_data[x].rttvar for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
+        #plt.ylabel("Mean deviation of RTT")
+        #plt.xticks(rotation=rotat_val)
+        #plt.grid()
+
+#Scaling:         
+#top=0.995,
+#bottom=0.54,
+#left=0.03,
+#right=0.61,
+#hspace=0.36,
+#wspace=0.315
+        
         plt.subplot(r, c, 3)
-        plt.boxplot([lflow_data[x].rttvar for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("Mean deviation of RTT")
+        plt.boxplot([rtr_data[x].ldelay for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
+        plt.ylabel("(c) Queuing delay of \nLL queue (ms)")
         plt.xticks(rotation=rotat_val)
         plt.grid()
         
         plt.subplot(r, c, 4)
-        plt.boxplot([rtr_data[x].ldelay for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("Low latency queue")
+        plt.boxplot([rtr_data[x].prob for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
+        plt.ylabel("(d) Marking probability (%)")
         plt.xticks(rotation=rotat_val)
         plt.grid()
         
         plt.subplot(r, c, 5)
-        plt.boxplot([rtr_data[x].prob for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("Marking probability")
+        plt.boxplot([rtr_data[x].pkt_dropped for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
+        plt.ylabel("(e) Dropped packets")
         plt.xticks(rotation=rotat_val)
         plt.grid()
         
         plt.subplot(r, c, 6)
-        plt.boxplot([rtr_data[x].pkt_dropped for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("Dropped packets")
-        plt.xticks(rotation=rotat_val)
-        plt.grid()
-        
-        plt.subplot(r, c, 7)
         plt.boxplot([rtr_data[x].ecn_mark for x in experiences.keys()], labels = experiences.keys(), showfliers=False)
-        plt.ylabel("Marked packets")
+        plt.ylabel("(f) Marked packets")
         plt.xticks(rotation=rotat_val)
         plt.grid()
         
+        plt.gcf().subplots_adjust(left=0.03,bottom=0.54,right=0.61,top=0.995,wspace=0.315,hspace=0.36)
         plt.show()
 
         
