@@ -71,13 +71,9 @@ def timefreq_plot(filename):
     
 args   = list(sys.argv)
 
-if(len(args) != 0):
+if(len(args) > 1):
     filename = args[1]
 else:
-    #filename = "data/detection/1722-rtr"
-    filename = "data/detection/1731-rtr"
-    #filename = "data/detection/1746-rtr"
-    #filename = "data/detection/1612-rtr"
-    #filename = "data/detection/0726-1553-rtr"
+    filename = "data/0840-rtr.raw"
 
 timefreq_plot(filename)
