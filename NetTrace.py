@@ -38,8 +38,10 @@ class Measure:
         self.Bytes_sent_tare = int()
         self.pkt_sent_tare   = int()
         self.bytes_sent      = list()
+        self.bytes_sent_t    = list()
         self.pkt_sent        = list()
         self.pkt_dropped     = list()
+        self.pkt_dropped_t   = list()
         self.pkt_overlimits  = list()
         self.pkt_requeued    = list()
         self.prob            = list()
@@ -49,7 +51,9 @@ class Measure:
         self.lpkts           = list()
         self.maxq            = list()
         self.ecn_mark        = list()
+        self.ecn_mark_t      = list()
         self.step_mark       = list()
+        self.step_mark_t     = list()
         self.AQM_is_L4S      = False
 
     def load_data(self, rewrite_mode=False):
@@ -205,9 +209,13 @@ class Measure:
 
         csv = np.genfromtxt(self.filename+".csv", delimiter=",", skip_header=1)
         self.x             = csv[:,csv_timestamp] 
-        self.bytes_sent    = csv[:,csv_bytes_sent] 
+        self.bytes_sent    = csv[:,csv_bytes_sent]
+        self.bytes_sent_t  = np.diff(self.bytes_sent)          # Bytes_sent since last timestamp
+        self.bytes_sent_t  = np.insert(self.bytes_sent_t,0,0)  # First item set to zero (not the case IRL)
         self.pkt_sent      = np.array(csv[:,csv_pkt_sent])
         self.pkt_dropped   = np.array(csv[:,csv_pkt_dropped])
+        self.pkt_dropped_t = np.diff(self.pkt_dropped)
+        self.pkt_dropped_t = np.insert(self.pkt_dropped_t,0,0)
         self.pkt_overlimits= csv[:,csv_pkt_overlimits] 
         self.pkt_requeued  = csv[:,csv_pkt_requeued] 
         self.prob          = csv[:,csv_prob]*100               # Convert fraction to %age
@@ -217,7 +225,11 @@ class Measure:
         self.lpkts         = csv[:,csv_lpkts] 
         self.maxq          = csv[:,csv_maxq] 
         self.ecn_mark      = np.array(csv[:,csv_ecn_mark])
-        self.step_mark     = csv[:,csv_step_mark] 
+        self.ecn_mark_t    = np.diff(self.ecn_mark)
+        self.ecn_mark_t    = np.insert(self.ecn_mark_t,0,0)
+        self.step_mark     = csv[:,csv_step_mark]
+        self.step_mark_t   = np.diff(self.step_mark)
+        self.step_mark_t   = np.insert(self.step_mark_t,0,0)
 
     def add_matched_field(self,field,line):
         return "NaN," if not search(field,line) else search(field,line)[0]+","
