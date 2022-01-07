@@ -21,6 +21,7 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 
 ## TODO
 * Implement statistics on aggregated measurments
+* Improve histogram by centering and reducing data
 * Improve usage simplicity ( file handling )
 * Do all data treatment on loading  (no treatments on csv writing)
 * Check if more tare value are needed (in order to parse csv header to load tare values)
