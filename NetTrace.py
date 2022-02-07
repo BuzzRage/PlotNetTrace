@@ -75,7 +75,11 @@ class Measure:
                         self.is_sender = False
                     break
 
-        f = self.filename+".csv"
+        if ".csv" in self.filename:
+            f = self.filename
+        else:
+            f = self.filename+".csv"
+            
         file_exist = Path(f).is_file()
         if (file_exist is not True) or (rewrite_mode is True):
             self.convert_raw_to_csv()
@@ -368,7 +372,8 @@ class Measure:
                         csv_file.write(self.decode_ss_line(l))
 
     def plot_all(self, title = "Visualisation de la mesure"):
-        self.load_data()
+        if len(self.x) == 0:
+            self.load_data()
         plt.figure(num=self.filename)
 
         if self.is_rtr_data and self.AQM_is_L4S:
@@ -377,7 +382,7 @@ class Measure:
             plt.subplot(r, c, 1)
             plt.xlabel("time (in RTT)")
             plt.ylabel("Bytes sent (Average rate: {:.2f} Mbps)".format(self.mean_mbps_rate()))
-            plt.plot(self.x, self.bytes_sent)
+            plt.plot(self.x, self.bytes_sent_t)
 
             plt.subplot(r, c, 2)
             plt.ylabel("Queue occupation (pkts)")
@@ -398,12 +403,12 @@ class Measure:
 
             plt.subplot(r, c, 5)
             plt.ylabel("Dropped Packets")
-            plt.plot(self.x, self.pkt_dropped, color='r')
+            plt.plot(self.x, self.pkt_dropped_t, color='r')
 
             plt.subplot(r, c, 6)
             plt.ylabel("ECN Marked packets")
-            plt.plot(self.x, self.step_mark, color='#80B280', label='step marks')
-            plt.plot(self.x, self.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
+            plt.plot(self.x, self.step_mark_t, color='#80B280', label='step marks')
+            plt.plot(self.x, self.ecn_mark_t, color='gold', label='aqm marks (PI² + kp)')
             plt.legend()
 
         elif self.is_rtr_data and not self.AQM_is_L4S:
