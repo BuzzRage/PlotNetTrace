@@ -37,24 +37,27 @@ class Measure:
         self.step_mark_tare  = int()
         self.Bytes_sent_tare = int()
         self.pkt_sent_tare   = int()
-        self.bytes_sent      = list()
-        self.bytes_sent_t    = list()
+        self.prob            = list()
         self.pkt_sent        = list()
-        self.pkt_dropped     = list()
-        self.pkt_dropped_t   = list()
         self.pkt_overlimits  = list()
         self.pkt_requeued    = list()
-        self.prob            = list()
+        self.maxq            = list()
         self.cdelay          = list()
         self.ldelay          = list()
+        self.AQM_is_L4S      = False
+        self.bytes_sent      = list()
+        self.pkt_dropped     = list()
         self.cpkts           = list()
         self.lpkts           = list()
-        self.maxq            = list()
         self.ecn_mark        = list()
-        self.ecn_mark_t      = list()
         self.step_mark       = list()
+        self.bytes_sent_t    = list()
+        self.pkt_dropped_t   = list()
+        self.cpkts_t         = list()
+        self.lpkts_t         = list()
+        self.ecn_mark_t      = list()
         self.step_mark_t     = list()
-        self.AQM_is_L4S      = False
+        self.qoccupation     = list()
 
     def load_data(self, rewrite_mode=False):
 
@@ -225,8 +228,12 @@ class Measure:
         self.prob          = csv[:,csv_prob]*100               # Convert fraction to %age
         self.cdelay        = np.divide(csv[:,csv_cdelay],1000) # Convert us to ms
         self.ldelay        = np.divide(csv[:,csv_ldelay],1000) # Convert us to ms
-        self.cpkts         = csv[:,csv_cpkts] 
+        self.cpkts         = csv[:,csv_cpkts]
+        self.cpkts_t       = np.diff(self.cpkts)
+        self.cpkts_t       = np.insert(self.cpkts_t,0,0)
         self.lpkts         = csv[:,csv_lpkts] 
+        self.lpkts_t       = np.diff(self.lpkts)
+        self.lpkts_t       = np.insert(self.lpkts_t,0,0)
         self.maxq          = csv[:,csv_maxq] 
         self.ecn_mark      = np.array(csv[:,csv_ecn_mark])
         self.ecn_mark_t    = np.diff(self.ecn_mark)
@@ -234,6 +241,7 @@ class Measure:
         self.step_mark     = csv[:,csv_step_mark]
         self.step_mark_t   = np.diff(self.step_mark)
         self.step_mark_t   = np.insert(self.step_mark_t,0,0)
+        self.qoccupation   = np.divide((self.cpkts_t+self.lpkts_t), 10000)*100 # Sum of both queue divided by packet limits (default to 10000p)
 
     def add_matched_field(self,field,line):
         return "NaN," if not search(field,line) else search(field,line)[0]+","

@@ -63,10 +63,8 @@ class Plot:
             plt.subplot(r, c, 1)
             plt.ylabel("cwnd evolution (MSS)")
             if self.l_flows is not True:
-                plt.plot(cc_measure.x, cc_measure.cwnd, color='darkorange', label='Classic Client')
                 plt.plot(cs_measure.x, cs_measure.cwnd, color='gold', label='Classic Server')
             if self.c_flows is not True:
-                plt.plot(lc_measure.x, lc_measure.cwnd, color='darkblue', label='LL Client')
                 plt.plot(ls_measure.x, ls_measure.cwnd, color='cyan', label='LL Server')
             if self.complete is True:
                 plt.plot(atk_measure.x, atk_measure.cwnd, color='r', label='atk Client')
@@ -75,10 +73,8 @@ class Plot:
             plt.subplot(r, c, 2)
             plt.ylabel("RTT evolution (ms)")
             if self.l_flows is not True:
-                plt.plot(cc_measure.x, cc_measure.rtt, color='darkorange', label='Classic Client')
                 plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
             if self.c_flows is not True:
-                plt.plot(lc_measure.x, lc_measure.rtt, color='darkblue', label='LL Client')
                 plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
             if self.complete is True:
                 plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
@@ -92,25 +88,31 @@ class Plot:
                 plt.plot(cs_measure.x, cs_measure.data_rate, color='red', label='CS data rate (mean: {:.2f} Mbps)'.format(cs_measure.data_rate_mean()))
 
             if self.c_flows is not True:
-                plt.plot(lc_measure.x, lc_measure.sending_rate, color='darkblue', label='LL Client (mean: {:.2f} Mbps)'.format(lc_measure.mean_mbps_rate()))
                 plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
                 plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_rate_mean()))
             if self.complete is True:
                 plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
-            plt.legend(bbox_to_anchor=(1,1), loc="upper left", prop={'size': 6})
+            plt.legend(loc="lower right", prop={'size': 6})
 
 
             if rtr_measure.AQM_is_L4S is True:
-                plt.subplot(r, c, 4)
-                plt.ylabel("Queue occupation (pkts)")
-                plt.plot(rtr_measure.x, rtr_measure.cpkts, color='darkorange', label='Classic pkts')
-                plt.plot(rtr_measure.x, rtr_measure.lpkts, color='cyan', label='L4S pkts')
-                plt.legend()
+                ax1 = plt.subplot(r, c, 4)
+                plt.ylabel("Queue occupation (pkts) {}".format(len(rtr_measure.cpkts_t)))
+                plot1 = ax1.plot(rtr_measure.x, rtr_measure.cpkts_t, color='darkorange', label='Classic pkts')
+                plot2 = ax1.plot(rtr_measure.x, rtr_measure.lpkts_t, color='cyan', label='L4S pkts')
+                
+                ax2 = ax1.twinx() 
+                plot3 = ax2.plot(rtr_measure.x, rtr_measure.qoccupation, color='red', label='Saturation ratio')
+                ax2.tick_params(axis ='y', labelcolor = 'black') 
+                
+                plots = plot1 + plot2 + plot3
+                labels = [l.get_label() for l in plots]
+                plt.legend(plots, labels, loc=0)
 
                 plt.subplot(r, c, 5)
                 plt.ylabel("Queue delay (ms)")
-                plt.plot(rtr_measure.x, rtr_measure.cdelay, color='darkorange', label='Classic delay')
-                plt.plot(rtr_measure.x, rtr_measure.ldelay, color='cyan', label='L4S delay')
+                plt.plot(rtr_measure.x, rtr_measure.cdelay, '.', color='darkorange', label='Classic delay')
+                plt.plot(rtr_measure.x, rtr_measure.ldelay, '.', color='cyan', label='L4S delay')
                 plt.yscale('log')
                 plt.legend()
 
@@ -119,21 +121,29 @@ class Plot:
                 plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
 
                 plt.subplot(r, c, 7)
-                plt.ylabel("Packets sent (Average rate: {:.2f} Mbps )".format(rtr_measure.mean_mbps_rate()))
-                plt.plot(rtr_measure.x, rtr_measure.pkt_sent, color='green')
+                plt.ylabel("Bytes sent (Average rate: {:.2f} Mbps )".format(rtr_measure.mean_mbps_rate()))
+                plt.plot(rtr_measure.x, rtr_measure.bytes_sent_t, color='green')
 
                 plt.subplot(r, c, 8)
-                plt.ylabel("Dropped Packets")
-                plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r')
+                plt.ylabel("Dropped Packets (Total: {})".format(rtr_measure.pkt_dropped[-1]))
+                plt.plot(rtr_measure.x, rtr_measure.pkt_dropped_t, color='r')
 
                 plt.subplot(r, c, 9)
-                plt.ylabel("ECN Marked packets")
-                plt.plot(rtr_measure.x, rtr_measure.step_mark, color='#80B280', label='step marks')
-                plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
+                plt.ylabel("ECN Marked packets\n Total: {} ECN marks\n {} step marks".format(rtr_measure.ecn_mark[-1], rtr_measure.step_mark[-1])) 
+                plt.plot(rtr_measure.x, rtr_measure.ecn_mark_t, color='gold', label='aqm marks (PI² + kp)')
+                plt.plot(rtr_measure.x, rtr_measure.step_mark_t, color='#80B280', label='step marks')
                 plt.legend()
 
                 plt.suptitle("AQM=DuaplPI2, Timecode: "+self.date+" "+self.timecode)
                 fig.supxlabel("time (in ms)")
+                plt.gcf().subplots_adjust(
+                    left=0.045,
+                    bottom=0.06,
+                    right=0.99,
+                    top=0.95,
+                    wspace=0.220,
+                    hspace=0.20
+                )
                 plt.show()
 
             else:
@@ -211,6 +221,7 @@ class Plot:
         plt.ylabel("lqueue delay value occurrency")
         plt.hist(rtr_measure.ldelay, bins=np.arange(min(rtr_measure.ldelay),max(rtr_measure.ldelay)), density=False, color='blue')
         plt.grid()
+
 
         plt.show()
         
