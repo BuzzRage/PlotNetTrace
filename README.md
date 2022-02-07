@@ -25,6 +25,7 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * Improve usage simplicity ( file handling )
 * Do all data treatment on loading  (no treatments on csv writing)
 * Check if more tare value are needed (in order to parse csv header to load tare values)
+* Retrieve packet limits configuration value in csv header to calculate saturation ratio (currently hardcoded with defualt value)
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
 * Improve verbose mode if "-v" provided
 * Combine raw input file with packet captured to get more stats using `scapy`
