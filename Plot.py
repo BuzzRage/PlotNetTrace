@@ -97,7 +97,7 @@ class Plot:
 
             if rtr_measure.AQM_is_L4S is True:
                 ax1 = plt.subplot(r, c, 4)
-                plt.ylabel("Queue occupation (pkts) {}".format(len(rtr_measure.cpkts_t)))
+                plt.ylabel("Queue occupation (pkts)")
                 plot1 = ax1.plot(rtr_measure.x, rtr_measure.cpkts_t, color='darkorange', label='Classic pkts')
                 plot2 = ax1.plot(rtr_measure.x, rtr_measure.lpkts_t, color='cyan', label='L4S pkts')
                 
