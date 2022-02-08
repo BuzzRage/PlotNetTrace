@@ -20,20 +20,21 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * `parse`
 
 ## TODO
-* Implement statistics on aggregated measurments
-* Improve histogram by centering and reducing data
-* Improve usage simplicity ( file handling )
-* Do all data treatment on loading  (no treatments on csv writing)
-* Check if more tare value are needed (in order to parse csv header to load tare values)
-* Retrieve packet limits configuration value in csv header to calculate saturation ratio (currently hardcoded with default value)
+* Usage:        Improve usage simplicity ( file handling )
+* Usage:        Improve verbose mode if "-v" provided
+* Usage:        Provide better documentation and usage message
+* Usage:        Add config file to store infos for data location (input and output files path)
+* Data Loading: Do all data treatment on loading  (no treatments on csv writing)
+* CSV Header:   Check if more tare value are needed (in order to parse csv header to load tare values)
+* CSV Header:   Retrieve packet limits configuration value in csv header to calculate queue occupation ratio (currently hardcoded with default value)
+* CSV Header:   Retrieve max rate configuration value in csv header to calculate link utilization (instant Mbps / max_rate)
+* NetTrace.py:  Create a class router and a class endpoint that both implements attributes of Measure class
+* NetTrace.py:  Change add_matched_field() to not return ','
+* NetTrace.py:  Synchronize measurments (provide a common timestamp when writing raw data ?)
+* NetTrace.py:  Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and goes back to 0 )
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
-* Improve verbose mode if "-v" provided
 * Combine raw input file with packet captured to get more stats using `scapy`
 * Check calculation of data_rate() for endpoints
-* Add config file to store infos for data location (input and output files path)
-* NetTrace.py: Create a class router and a class endpoint that both implements attributes of Measure class
-* NetTrace.py: Change add_matched_field() to not return ','
-* NetTrace.py: Synchronize measurments (provide a common timestamp when writing raw data ?)
-* NetTrace.py: Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and goes back to 0 )
-* Provide better documentation and usage message
 * Start to dev detection tools
+* Implement statistics on aggregated measurments
+* Improve histogram by centering and reducing data
