@@ -6,26 +6,27 @@ import NetTrace
 
 # This file contains Plotting functions
 class Plot:
-    def __init__(self, date, timecode, rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, rtrvm_file, rewrite_mode=False):
+    def __init__(self, date, timecode, rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, uf_file, rtrvm_file, maxrate=10, rewrite_mode=False):
         self.date       = date
         self.timecode   = timecode
-        self.files      = {"rtr_file":rtr_file, "atk_file":atk_file, "cc_file":cc_file, "lc_file":lc_file, "cs_file":cs_file, "ls_file":ls_file, "rtrvm_file":rtrvm_file}
+        self.files      = {"rtr_file":rtr_file, "atk_file":atk_file, "cc_file":cc_file, "lc_file":lc_file, "cs_file":cs_file, "ls_file":ls_file, "uf_file":uf_file, "rtrvm_file":rtrvm_file}
         self.complete   = False
-        self.c_flows = False
+        self.c_flows    = False
         self.l_flows    = False
         self.downlink   = False
+        self.maxrate    = maxrate
         self.rewriteCSV = rewrite_mode
-        self.suffix     = ["rtr","atk","cc","lc","cs","ls","rtrvm"]
+        self.suffix     = ["rtr","atk","cc","lc","cs","ls","uf","rtrvm"]
     def load_testbed_type(self):
         complete = True
         
         for node in self.suffix[:-1]:
             if self.files[node+"_file"] == None: complete = False
             
-        self.complete   = complete
-        self.c_flows = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] == None) else False
-        self.l_flows    = True if (self.files["rtr_file"] != None and self.files["cc_file"] == None and self.files["cs_file"] == None and self.files["lc_file"] != None and self.files["ls_file"] != None) else False
-        self.downlink   = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] != None and self.files["ls_file"] != None and self.complete is False) else False
+        self.complete  = complete
+        self.c_flows   = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] == None) else False
+        self.l_flows   = True if (self.files["rtr_file"] != None and self.files["cc_file"] == None and self.files["cs_file"] == None and self.files["lc_file"] != None and self.files["ls_file"] != None) else False
+        self.downlink  = True if (self.files["rtr_file"] != None and self.files["cc_file"] != None and self.files["cs_file"] != None and self.files["lc_file"] != None and self.files["ls_file"] != None and self.complete is False) else False
     
     def visualize(self):
         self.load_testbed_type()
@@ -45,6 +46,11 @@ class Plot:
                 ls_measure = NetTrace.Measure(self.files["ls_file"])
                 lc_measure.load_data(self.rewriteCSV)
                 ls_measure.load_data(self.rewriteCSV)
+                
+                if self.files["uf_file"] != None:
+                    uf_measure = NetTrace.Measure(self.files["uf_file"])
+                    uf_measure.load_data()
+                    uf_measure.pacing_rate *= 1000000
             
             if self.complete is True:
                 atk_measure = NetTrace.Measure(self.files["atk_file"])
@@ -76,6 +82,7 @@ class Plot:
                 plt.plot(cs_measure.x, cs_measure.rtt, color='gold', label='Classic Server')
             if self.c_flows is not True:
                 plt.plot(ls_measure.x, ls_measure.rtt, color='cyan', label='LL Server')
+                plt.ylim([0,100])
             if self.complete is True:
                 plt.plot(atk_measure.x, atk_measure.rtt, color='r', label='atk')
             plt.legend()
@@ -90,6 +97,9 @@ class Plot:
             if self.c_flows is not True:
                 plt.plot(ls_measure.x, ls_measure.sending_rate, color='cyan', label='LL Server (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
                 plt.plot(ls_measure.x, ls_measure.data_rate, color='green', label='LS data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_rate_mean()))
+                if self.files["uf_file"] != None:
+                    plt.plot(uf_measure.x, uf_measure.pacing_rate, label="Débit instantané (moyenne: {:.2f} Mbps)".format(uf_measure.pacing_rate_mean()), color='grey')
+                    plt.plot(uf_measure.x, uf_measure.data_rate, label='Débit sur 1sec (moyenne: {:.2f} Mbps)'.format(uf_measure.data_rate_mean()), color='darkorange')
             if self.complete is True:
                 plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
             plt.legend(loc="lower right", prop={'size': 6})
@@ -233,11 +243,15 @@ class Plot:
         rtr_measure.load_data(self.rewriteCSV)
         ls_measure.load_data(self.rewriteCSV)
 
+        if self.files["uf_file"] != None:
+            uf_measure = NetTrace.Measure(self.files["uf_file"])
+            uf_measure.load_data()
+            uf_measure.pacing_rate *= 1000000
 
         #Visualization part
         fig = plt.figure()
-        r=3
-        c=2
+        r=2
+        c=3
 
         plt.subplot(r, c, 1)
         plt.ylabel("RTT evolution (ms)")
@@ -255,6 +269,9 @@ class Plot:
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
         plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_rate_mean()))
+        if self.files["uf_file"] != None:
+            plt.plot(uf_measure.x, uf_measure.pacing_rate, label="Débit instantané (moyenne: {:.2f} Mbps)".format(uf_measure.pacing_rate_mean()), color='grey')
+            plt.plot(uf_measure.x, uf_measure.data_rate, label='Débit sur 1sec (moyenne: {:.2f} Mbps)'.format(uf_measure.data_rate_mean()), color='darkorange')
         plt.legend(loc="upper right", prop={'size': 8})
         plt.grid()
 
@@ -272,8 +289,8 @@ class Plot:
 
         plt.subplot(r, c, 6)
         plt.ylabel("ECN Marked packets")
-        plt.plot(rtr_measure.x, rtr_measure.step_mark, color='#80B280', label='step marks')
-        plt.plot(rtr_measure.x, rtr_measure.ecn_mark, color='gold', label='aqm marks (PI² + kp)')
+        plt.plot(rtr_measure.x, rtr_measure.ecn_mark_t, color='gold', label='aqm marks (PI² + kp)')
+        plt.plot(rtr_measure.x, rtr_measure.step_mark_t, color='#80B280', label='step marks')
         plt.legend()
         plt.grid()
         

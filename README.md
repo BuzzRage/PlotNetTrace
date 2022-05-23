@@ -31,7 +31,7 @@ qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms 
 * NetTrace.py:  Create a class router and a class endpoint that both implements attributes of Measure class
 * NetTrace.py:  Change add_matched_field() to not return ','
 * NetTrace.py:  Synchronize measurments (provide a common timestamp when writing raw data ?)
-* NetTrace.py:  Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and goes back to 0 )
+* NetTrace.py:  Correct Data rate artefacts + loop problem ( above max of bytes_acked value in ss, it seems to overflow and it goes back to 0 )
 * Change "rtr" into "bm" (baremetal) and "rtrvm" into "vm" (Virtual Machine)
 * Combine raw input file with packet captured to get more stats using `scapy`
 * Check calculation of data_rate() for endpoints
