@@ -9,7 +9,7 @@ from Plot import *
 args   = list(sys.argv)
 ipath  = 'data/'
 opath  = 'output/'
-suffix = ["rtr","atk","cc","lc","cs","ls","rtrvm"]
+suffix = ["rtr","atk","cc","lc","cs","ls","uf","rtrvm"]
 
 date                = ""
 timecode            = ""
@@ -20,6 +20,7 @@ files["cc_file"]    = None
 files["lc_file"]    = None
 files["cs_file"]    = None
 files["ls_file"]    = None
+files["uf_file"]    = None
 files["rtrvm_file"] = None
 
 verbose_mode  = False
@@ -85,7 +86,7 @@ else:
     
 
 
-PlotNetTrace = Plot(date, timecode, files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["rtrvm_file"], rewrite_mode)
+PlotNetTrace = Plot(date, timecode, files["rtr_file"], files["atk_file"], files["cc_file"], files["lc_file"], files["cs_file"], files["ls_file"], files["uf_file"], files["rtrvm_file"], rewrite_mode)
 if special_mode is True:
     PlotNetTrace.special_plot()
 elif timefreq_mode is True:
