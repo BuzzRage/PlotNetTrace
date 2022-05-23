@@ -58,6 +58,7 @@ class Measure:
         self.ecn_mark_t      = list()
         self.step_mark_t     = list()
         self.qoccupation     = list()
+        self.maxrate         = float()
 
     def load_data(self, rewrite_mode=False):
 
@@ -242,6 +243,7 @@ class Measure:
         self.step_mark_t   = np.diff(self.step_mark)
         self.step_mark_t   = np.insert(self.step_mark_t,0,0)
         self.qoccupation   = np.divide((self.cpkts_t+self.lpkts_t), 10000)*100 # Sum of both queue divided by packet limits (default to 10000p)
+        self.maxrate       = np.ceil(self.mean_mbps_rate())*(1+20/100)
 
     def add_matched_field(self,field,line):
         return "NaN," if not search(field,line) else search(field,line)[0]+","

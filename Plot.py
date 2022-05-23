@@ -6,7 +6,7 @@ import NetTrace
 
 # This file contains Plotting functions
 class Plot:
-    def __init__(self, date, timecode, rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, uf_file, rtrvm_file, maxrate=10, rewrite_mode=False):
+    def __init__(self, date, timecode, rtr_file, atk_file, cc_file, lc_file, cs_file, ls_file, uf_file, rtrvm_file, rewrite_mode=False):
         self.date       = date
         self.timecode   = timecode
         self.files      = {"rtr_file":rtr_file, "atk_file":atk_file, "cc_file":cc_file, "lc_file":lc_file, "cs_file":cs_file, "ls_file":ls_file, "uf_file":uf_file, "rtrvm_file":rtrvm_file}
@@ -14,7 +14,6 @@ class Plot:
         self.c_flows    = False
         self.l_flows    = False
         self.downlink   = False
-        self.maxrate    = maxrate
         self.rewriteCSV = rewrite_mode
         self.suffix     = ["rtr","atk","cc","lc","cs","ls","uf","rtrvm"]
     def load_testbed_type(self):
@@ -101,7 +100,8 @@ class Plot:
                     plt.plot(uf_measure.x, uf_measure.pacing_rate, label="Débit instantané (moyenne: {:.2f} Mbps)".format(uf_measure.pacing_rate_mean()), color='grey')
                     plt.plot(uf_measure.x, uf_measure.data_rate, label='Débit sur 1sec (moyenne: {:.2f} Mbps)'.format(uf_measure.data_rate_mean()), color='darkorange')
             if self.complete is True:
-                plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk')
+                plt.plot(atk_measure.x, atk_measure.sending_rate, color='r', label='atk') 
+            plt.ylim([0,rtr_measure.maxrate])
             plt.legend(loc="lower right", prop={'size': 6})
 
 
@@ -129,10 +129,11 @@ class Plot:
                 plt.subplot(r, c, 6)
                 plt.ylabel("Marking probability (%)")
                 plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
+                plt.ylim([0,100])
 
                 plt.subplot(r, c, 7)
-                plt.ylabel("Bytes sent (Average rate: {:.2f} Mbps )".format(rtr_measure.mean_mbps_rate()))
-                plt.plot(rtr_measure.x, rtr_measure.bytes_sent_t, color='green')
+                plt.ylabel("Bits sent (Average rate: {:.2f} Mbps )".format(rtr_measure.mean_mbps_rate()))
+                plt.plot(rtr_measure.x, rtr_measure.bytes_sent_t*8, color='green')
 
                 plt.subplot(r, c, 8)
                 plt.ylabel("Dropped Packets (Total: {})".format(rtr_measure.pkt_dropped[-1]))
@@ -257,14 +258,10 @@ class Plot:
         plt.ylabel("RTT evolution (ms)")
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.rtt, color='green')
-        plt.grid()
-
-        plt.subplot(r, c, 2)
-        plt.ylabel("Marking probability (%)")
-        plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
+        plt.ylim([0,100])
         plt.grid()
         
-        plt.subplot(r, c, 3)
+        plt.subplot(r, c, 2)
         plt.ylabel("Sending rate (Mbps)")
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
@@ -273,6 +270,13 @@ class Plot:
             plt.plot(uf_measure.x, uf_measure.pacing_rate, label="Débit instantané (moyenne: {:.2f} Mbps)".format(uf_measure.pacing_rate_mean()), color='grey')
             plt.plot(uf_measure.x, uf_measure.data_rate, label='Débit sur 1sec (moyenne: {:.2f} Mbps)'.format(uf_measure.data_rate_mean()), color='darkorange')
         plt.legend(loc="upper right", prop={'size': 8})
+        plt.ylim([0,rtr_measure.maxrate])
+        plt.grid()
+
+        plt.subplot(r, c, 3)
+        plt.ylabel("Marking probability (%)")
+        plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
+        plt.ylim([0,100])
         plt.grid()
 
         plt.subplot(r, c, 4)
