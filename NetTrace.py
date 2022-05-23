@@ -400,8 +400,8 @@ class Measure:
 
             plt.subplot(r, c, 3)
             plt.ylabel("Queue delay")
-            plt.plot(self.x, self.cdelay, color='darkorange', label='Classic delay')
-            plt.plot(self.x, self.ldelay, color='cyan', label='L4S delay')
+            plt.plot(self.x, self.ldelay, '.',color='cyan', label='L4S delay')
+            plt.plot(self.x, self.cdelay, '.', color='darkorange', label='Classic delay')
             plt.yscale('log')
             plt.legend()
 
@@ -415,8 +415,8 @@ class Measure:
 
             plt.subplot(r, c, 6)
             plt.ylabel("ECN Marked packets")
-            plt.plot(self.x, self.step_mark_t, color='#80B280', label='step marks')
             plt.plot(self.x, self.ecn_mark_t, color='gold', label='aqm marks (PI² + kp)')
+            plt.plot(self.x, self.step_mark_t, color='#80B280', label='step marks')
             plt.legend()
 
         elif self.is_rtr_data and not self.AQM_is_L4S:
