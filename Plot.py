@@ -255,14 +255,14 @@ class Plot:
         c=3
 
         plt.subplot(r, c, 1)
-        plt.ylabel("RTT evolution (ms)")
+        plt.ylabel("(a) RTT evolution (ms)")
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.rtt, color='green')
-        plt.ylim([0,100])
+        plt.ylim([-5,100])
         plt.grid()
         
         plt.subplot(r, c, 2)
-        plt.ylabel("Sending rate (Mbps)")
+        plt.ylabel("(b) Sending rate (Mbps)")
         plt.xlabel("time (in ms)")
         plt.plot(ls_measure.x, ls_measure.sending_rate, color='blue', label='egress rate (mean: {:.2f} Mbps)'.format(ls_measure.mean_mbps_rate()))
         plt.plot(ls_measure.x, ls_measure.data_rate, color='red', label='data rate (mean: {:.2f} Mbps)'.format(ls_measure.data_rate_mean()))
@@ -270,34 +270,42 @@ class Plot:
             plt.plot(uf_measure.x, uf_measure.pacing_rate, label="Débit instantané (moyenne: {:.2f} Mbps)".format(uf_measure.pacing_rate_mean()), color='grey')
             plt.plot(uf_measure.x, uf_measure.data_rate, label='Débit sur 1sec (moyenne: {:.2f} Mbps)'.format(uf_measure.data_rate_mean()), color='darkorange')
         plt.legend(loc="upper right", prop={'size': 8})
-        plt.ylim([0,rtr_measure.maxrate])
+        plt.ylim([-1*rtr_measure.maxrate*(5/100),rtr_measure.maxrate])
         plt.grid()
 
         plt.subplot(r, c, 3)
-        plt.ylabel("Marking probability (%)")
+        plt.ylabel("(c) Marking probability (%)")
         plt.plot(rtr_measure.x, rtr_measure.prob, color='darkblue')
-        plt.ylim([0,100])
+        plt.ylim([-5,100])
         plt.grid()
 
         plt.subplot(r, c, 4)
-        plt.ylabel("Dropped Packets")
-        plt.plot(rtr_measure.x, rtr_measure.pkt_dropped, color='r')
+        plt.ylabel("(d) Dropped Packets (Total: {})".format(rtr_measure.pkt_dropped[-1]))
+        plt.plot(rtr_measure.x, rtr_measure.pkt_dropped_t, color='r')
         plt.grid()
         
         plt.subplot(r, c, 5)
-        plt.ylabel("lqueue delay (ms)")
+        plt.ylabel("(e) queue delay (ms)")
         plt.plot(rtr_measure.x, rtr_measure.ldelay, '.', color='green')
+        plt.plot(rtr_measure.x, rtr_measure.cdelay, '.', color='darkorange')
         plt.yscale('log')
         plt.xlabel("time (in ms)")
         plt.grid()
 
         plt.subplot(r, c, 6)
-        plt.ylabel("ECN Marked packets")
+        plt.ylabel("(f) ECN Marked packets")
         plt.plot(rtr_measure.x, rtr_measure.ecn_mark_t, color='gold', label='aqm marks (PI² + kp)')
         plt.plot(rtr_measure.x, rtr_measure.step_mark_t, color='#80B280', label='step marks')
         plt.legend()
         plt.grid()
         
+        plt.gcf().subplots_adjust(  top=0.979,
+                                    bottom=0.06,
+                                    left=0.045,
+                                    right=0.992,
+                                    hspace=0.14,
+                                    wspace=0.14
+                                 )
         plt.show()
 
 
